@@ -203,7 +203,7 @@ function page(options = {}) {
         async register(url) { registrations.push(url); return { scope, active: {} }; },
     };
     const window = {
-        location: { href: scope }, document: { currentScript: { src: scope + 'coi-serviceworker.js?v=20261016-load1' } },
+        location: { href: scope }, document: { currentScript: { src: scope + 'coi-serviceworker.js?v=20261016-probe1' } },
         sessionStorage: { getItem: key => storage.get(key) || null, setItem: (key, value) => storage.set(key, value), removeItem: key => storage.delete(key) },
         crossOriginIsolated: options.isolated !== false, isSecureContext: true,
         coi: { shouldRegister: () => options.register !== false, coepDegrade: () => options.degrade === true, quiet: true, doReload: () => { reloads++; } },
@@ -215,7 +215,7 @@ function page(options = {}) {
 test('an already isolated returning visitor registers the new own-worker version without reloading', async () => {
     const p = page();
     await Promise.resolve();
-    assert.deepEqual(p.registrations, [scope + 'coi-serviceworker.js?v=20261016-load1']);
+    assert.deepEqual(p.registrations, [scope + 'coi-serviceworker.js?v=20261016-probe1']);
     p.handlers.get('controllerchange')();
     assert.equal(p.reloads, 0);
 });
