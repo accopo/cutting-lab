@@ -390,11 +390,11 @@ function renderResultContext() {
   const r=job.result,isStale=stale(),valid=r.validation?.pass;
   container.classList.toggle("stale",!!isStale);container.classList.toggle("invalid",valid===false&&!job.preview);
   const messages=[];
-  if(isStale)messages.push("当前参数已变化；上方指标与排料结果仍属于上次任务。");
-  else messages.push(`结果：${job.problem.name} · ${ROTATIONS[job.problem.settings.rotation]} · ${OBJECTIVES[job.problem.settings.objective]}`);
+  if(isStale)messages.push("参数已修改；当前布局与读数来自上次计算，请重新运行。");
+  else messages.push(`${job.preview?"中间方案":valid?"布局已验证":"结果需检查"} · ${r.metrics.placed_pieces} / ${r.metrics.required_pieces} 片 · ${ROTATIONS[job.problem.settings.rotation]} · ${OBJECTIVES[job.problem.settings.objective]}`);
   if(job.preview)messages.push(job.status==="cancelled"?"已停止；保留最近收到的真实中间方案，尚非最终求解结论。":"正在查看真实中间方案；完整需求与最终校验以任务结果为准。");else if(!valid)messages.push("几何校验未通过。");else if(!r.full&&job.problem.settings.objective!=="knapsack")messages.push("时限内未排满全部需求。");
-  if(r.warnings?.length)messages.push(r.warnings.join("；"));
   container.replaceChildren(node("span",{text:messages.join(" ")}));
+  if(r.warnings?.length)container.append(node("details",{class:"result-notes"},[node("summary",{text:"求解说明"}),node("div",{class:"result-notes-body"},r.warnings.map(warning=>node("p",{text:warning})))]));
   container.append(node("div",{class:"action-row"},[
     node("button",{type:"button",text:"结果 JSON",onclick:()=>download(`${safeName(job.problem.name)}_结果.json`,JSON.stringify(job,null,2))}),
     node("button",{type:"button",text:"排布 CSV",onclick:()=>exportPlacementCSV(job)})
