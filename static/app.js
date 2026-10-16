@@ -452,7 +452,7 @@ async function pollJob() {
     state.activeJob=job;
     text("run-status",`${jobPhase(job)} · 已用 ${fmt(job.elapsed_s,1)} 秒${job.status==="queued"&&!job.progress?.state?"（等待当前任务）":""}`);
     if(state.view==="live"||displayJob()?.id===job.id)text("canvas-live-status",`${jobPhase(job)} · ${fmt(job.elapsed_s,1)} 秒`);
-    if(state.view==="live"&&!state.progress.snapshots.length)$("canvas-empty").querySelector("p").textContent=["loading","loading-wasm"].includes(job.progress?.state)?"首次使用正在加载计算引擎，准备完成后才开始搜索。":"收到引擎实际生成的布局后，这里会自动更新。";
+    if(state.view==="live"&&!state.progress.snapshots.length)$("canvas-empty").querySelector("p").textContent=["loading","loading-wasm"].includes(job.progress?.state)?(job.progress?.loading_message||"首次使用正在加载计算引擎，准备完成后才开始搜索。"):"收到引擎实际生成的布局后，这里会自动更新。";
     state.progress.ingest(job);syncRunButtons();
     if(["completed","failed","cancelled"].includes(job.status)) {
       state.activeJob=null;state.cancelRequested=false;syncRunButtons();
@@ -615,7 +615,7 @@ async function boot() {
   state.progress=createProgressTracker("process",frame=>{if(state.view!=="live")return;const previous=state.viewBox?{...state.viewBox}:null;const hadFrame=!!state.baseView;renderMetrics();renderCanvas();if(previous&&hadFrame&&frame?.preserveView){state.viewBox=previous;applyView();}$("canvas-stage").classList.remove("fresh-frame");requestAnimationFrame(()=>$("canvas-stage").classList.add("fresh-frame"));});
   try {
     const [health,catalog]=await Promise.all([api("/api/health"),api("/api/catalog")]);state.catalog=catalog;
-    $("connection").classList.add("ok");$("connection").replaceChildren(node("i"),document.createTextNode(health.runtime==="browser"||health.runtime==="wasm"||String(health.runtime||"").includes("browser")?"浏览器引擎就绪":"本地原生引擎在线"));text("engine-version",`PackingSolver ${health.engine_version||""}`);
+    $("connection").classList.add("ok");$("connection").replaceChildren(node("i"),document.createTextNode(health.runtime==="browser"||health.runtime==="wasm"||String(health.runtime||"").includes("browser")?"浏览器计算 · 按需加载":"本地原生引擎在线"));text("engine-version",`PackingSolver ${health.engine_version||""}`);
     populateIndustries();renderTools();await loadDataset(catalog.datasets.find(d=>d.id==="shirts")?.id||catalog.datasets[0]?.id);await refreshHistory();
     const active=state.history.find(j=>["running","queued"].includes(j.status)&&j.engine!=="box");if(active){state.activeJob=active;state.view="live";state.progress.begin(active,state.problem);syncRunButtons();renderCanvas();pollJob();}
   }catch(error){$("connection").classList.add("error");$("connection").replaceChildren(node("i"),document.createTextNode("本地服务未连接"));alertError(error.message);}

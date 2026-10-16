@@ -7,7 +7,7 @@ Original application code is MIT licensed except `static/solver-worker.js`, whic
 | PackingSolver browser runtime | commit `649fd65233ee93f50b69871f197779ace46db9f5`; official workflow `38660278943` | MIT, `static/vendor/packingsolver/LICENSE` |
 | PackingSolver build dependencies | fixed upstream source references | `static/vendor/packingsolver/dependency-licenses/` and manifest |
 | Three.js and OrbitControls | 0.180.0 | MIT, `static/vendor/three-0.180.0/LICENSE` |
-| coi-serviceworker | 0.1.7, commit `7b1d2a092d0d2dd2b7270b6f12f13605de26f214` | MIT, `static/vendor/coi-serviceworker/LICENSE` |
+| coi-serviceworker | 0.1.7 with Cutting Lab verified engine caching, bounded network retries and update recovery; upstream commit `7b1d2a092d0d2dd2b7270b6f12f13605de26f214` | MIT, `static/vendor/coi-serviceworker/LICENSE` |
 | polygon-clipping | 0.15.7 | MIT and bundled dependency notices retained in its vendor directory |
 | robust-predicates | 3.0.2 | Unlicense, retained in its vendor directory |
 | rectpack selection / splitting rules | 0.2.2, JavaScript ports in solver-worker.js | Apache-2.0, `static/vendor/rectpack-LICENSE` |

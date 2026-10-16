@@ -102,7 +102,7 @@ async function poll3(){
     const j=await request('/api/jobs/'+encodeURIComponent(active.id));if(state3.active?.id!==active.id)return;
     state3.active={...active,...j,submitted:active.submitted,viewRevision:active.viewRevision};updateControls();
     byId('box-status').textContent=`${window.CuttingLab.jobPhase(j)} · 已用 ${format(j.elapsed_s)} 秒`;
-    const waiting=byId('box-stage').querySelector('.box-waiting p');if(waiting)waiting.textContent=['loading','loading-wasm'].includes(j.progress?.state)?'首次使用正在加载计算引擎，准备完成后才开始搜索。':'收到引擎实际生成的三维布局后，这里会自动更新。';
+    const waiting=byId('box-stage').querySelector('.box-waiting p');if(waiting)waiting.textContent=['loading','loading-wasm'].includes(j.progress?.state)?(j.progress?.loading_message||'首次使用正在加载计算引擎，准备完成后才开始搜索。'):'收到引擎实际生成的三维布局后，这里会自动更新。';
     if(!state3.progress.jobId)state3.progress.begin(j,j.submitted_problem||active.submitted||j.problem);state3.progress.ingest({...j,submitted_problem:j.submitted_problem||active.submitted||j.problem});
     if(['completed','failed','cancelled'].includes(j.status)){
       if(!j.submitted_problem)j.submitted_problem=active.submitted;

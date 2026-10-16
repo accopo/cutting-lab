@@ -37,6 +37,8 @@ jobs:
         run: |
           node tests/browser_wasm.test.cjs
           node tests/browser_runtime.test.cjs
+          node --test tests/browser_loader.test.cjs
+          node --test tests/browser_serviceworker.test.cjs
           node tests/browser_baseline.test.cjs
           node --test tests/browser_geometry.test.cjs
       - name: Audit public inputs and assemble static application

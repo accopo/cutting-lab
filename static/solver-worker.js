@@ -9,6 +9,16 @@
 })(typeof globalThis !== 'undefined' ? globalThis : self, function () {
   'use strict';
   const COMMIT = '649fd65233ee93f50b69871f197779ace46db9f5';
+  const ENGINE_VERSION = COMMIT.slice(0,12);
+  function engineURL(name,base,attempt=0){const u=new URL('vendor/packingsolver/'+name,base);u.searchParams.set('v',ENGINE_VERSION);if(attempt)u.searchParams.set('retry',attempt);return u.href;}
+  // Keep pthread boot synchronous: Emscripten installs its message queue while
+  // importing, before the parent's initial load message can be delivered.
+  function importEngineScript(importer,base){let last;for(let attempt=0;attempt<3;attempt++){try{importer(engineURL('packingsolver.js',base,attempt));return;}catch(e){last=e;if(!['NetworkError','TypeError'].includes(e.name))break;}}
+    throw Error('计算引擎脚本 packingsolver.js 加载失败。请再次点击运行；若仍失败，按 Ctrl+F5 刷新页面或使用本地版。详细原因：'+(last?.message||last));}
+  async function fetchEngineAsset(fetcher,base,name,signal){const controller=new AbortController(),abort=()=>controller.abort();if(signal?.aborted)abort();else signal?.addEventListener('abort',abort,{once:true});const timer=setTimeout(abort,45000);
+    try{const r=await fetcher(engineURL(name,base),{signal:controller.signal,cache:'no-cache'});if(!r.ok)throw Error('HTTP '+r.status);const bytes=new Uint8Array(await r.arrayBuffer());if(name.endsWith('.wasm')&&(bytes.length<8||bytes[0]!==0||bytes[1]!==97||bytes[2]!==115||bytes[3]!==109))throw Error('收到的文件不是 WebAssembly 模块');if(name.endsWith('.js')&&!/javascript|ecmascript/i.test(r.headers.get('content-type')||''))throw Error('收到的文件不是 JavaScript 脚本');return bytes;}
+    catch(e){if(signal?.aborted)throw Error('引擎加载已停止。');throw Error('计算引擎文件 '+name+' 加载失败（'+(e.name==='AbortError'?'下载超时':e.message)+'）。请再次点击运行；若仍失败，按 Ctrl+F5 刷新或使用本地版。');}
+    finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}}
   const BASELINES = ['shelf','ffd-1d','bfd-1d','rectpack-maxrects','rectpack-skyline'];
   const KERF = ['onedimensional-kerf','ffd-1d','bfd-1d'];
   const clone = x => JSON.parse(JSON.stringify(x));
@@ -107,7 +117,7 @@
     else throw Error('未实现的浏览器基线路线。');
     const result=makeResult(p,bins,{algorithm:e,runtime:'javascript'},(performance.now()-start)/1000);await onResult(clone(result));return result;
   }
-  return {COMMIT,BASELINES,KERF,clone,area,bounds,nativeInstance,csv,parseCertificate,makeResult,checked,objectiveValue,better,baseline};
+  return {COMMIT,ENGINE_VERSION,engineURL,importEngineScript,fetchEngineAsset,BASELINES,KERF,clone,area,bounds,nativeInstance,csv,parseCertificate,makeResult,checked,objectiveValue,better,baseline};
 });
 
 // This file also loads as a normal script for certificate adaptation. Only a
@@ -115,15 +125,27 @@
 if(typeof importScripts==='function'&&typeof document==='undefined'){
   // Emscripten 6 pthread workers reuse self.location.href (this adapter).
   // Forward these workers directly to the untouched official pthread loader.
-  if(self.name==='em-pthread'){importScripts('vendor/packingsolver/packingsolver.js');}
+  if(self.name==='em-pthread'){self.CuttingSolverCore.importEngineScript(url=>importScripts(url),self.location.href);}
   else {
   importScripts('vendor/robust-predicates-3.0.2/orient2d.js','vendor/polygon-clipping-0.15.7/polygon-clipping.umd.js','vendor/cutting-geometry.js');
-  const core=self.CuttingSolverCore;let modulePromise=null,session=null,pollTimer=null,job=null,stopped=false,busy=false;
+  const core=self.CuttingSolverCore;let modulePromise=null,session=null,pollTimer=null,job=null,stopped=false,busy=false,loadController=null;
   const send=x=>self.postMessage(x);
-  async function loadWasm(){if(!self.crossOriginIsolated||typeof SharedArrayBuffer==='undefined')throw Error('真实 WASM 求解需要跨源隔离与 SharedArrayBuffer；请等待隔离重载或使用本地版。');if(!modulePromise){importScripts('vendor/packingsolver/packingsolver.js');modulePromise=PackingSolver({mainScriptUrlOrBlob:new URL('vendor/packingsolver/packingsolver.js',self.location.href).href,locateFile:name=>new URL('vendor/packingsolver/'+name,self.location.href).href,onAbort:reason=>send({type:'error',jobId:job?.id,error:'WASM 中止：'+reason})});}return modulePromise;}
+  async function loadWasm(){
+    if(!self.crossOriginIsolated||typeof SharedArrayBuffer==='undefined')throw Error('浏览器计算环境尚未准备好。请刷新页面完成隔离加载；建议使用最新版 Chrome 或 Edge，也可使用本地版。');
+    if(!modulePromise){loadController=new AbortController();modulePromise=(async()=>{
+      send({type:'loading',jobId:job.id,message:'正在下载并校验计算引擎（约 7.6 MB）；网络中断时会自动重试。'});
+      // Warm the verified service-worker cache before 32 pthreads import the
+      // same script, and download WASM explicitly so HTTP errors are legible.
+      const [,wasmBinary]=await Promise.all(['packingsolver.js','packingsolver.wasm'].map(name=>core.fetchEngineAsset(fetch.bind(self),self.location.href,name,loadController.signal)));
+      if(stopped)throw Error('引擎加载已停止。');
+      core.importEngineScript(url=>importScripts(url),self.location.href);
+      send({type:'loading',jobId:job.id,message:'引擎文件已就绪，正在初始化计算线程…'});
+      return PackingSolver({wasmBinary,mainScriptUrlOrBlob:core.engineURL('packingsolver.js',self.location.href),locateFile:name=>core.engineURL(name,self.location.href),onAbort:reason=>send({type:'error',jobId:job?.id,error:'计算引擎初始化失败：'+reason+'。请重新运行或使用本地版。'})});
+    })().catch(e=>{loadController.abort();modulePromise=null;throw e;});}return modulePromise;
+  }
   function cleanup(){if(pollTimer)clearInterval(pollTimer);pollTimer=null;if(session){session.delete();session=null;}busy=false;job=null;}
   function parsed(message){const result=core.checked(job.problem,core.parseCertificate(job.problem,message.certificate,message.output,Number(message.output?.Time)||0),CuttingGeometry);return {...message,result};}
-  self.onmessage=async event=>{const m=event.data;if(m.type==='stop'){stopped=true;if(session)session.stop();return;}if(m.type!=='solve')return;if(busy){send({type:'error',jobId:m.jobId,error:'已有求解任务正在运行。'});return;}busy=true;stopped=false;job={id:m.jobId,problem:CuttingGeometry.normalize(m.problem)};
+  self.onmessage=async event=>{const m=event.data;if(m.type==='stop'){stopped=true;loadController?.abort();if(session)session.stop();return;}if(m.type!=='solve')return;if(busy){send({type:'error',jobId:m.jobId,error:'已有求解任务正在运行。'});return;}busy=true;stopped=false;job={id:m.jobId,problem:CuttingGeometry.normalize(m.problem)};
     try{const p=job.problem;if(core.BASELINES.includes(p.settings.engine)){send({type:'started',jobId:m.jobId,problemType:p.kind,source:'javascript-constructive-state'});const result=await core.baseline(p,raw=>{const result=core.checked(p,raw,CuttingGeometry);send({type:'solution',jobId:m.jobId,result,output:{Time:result.elapsed_s,Solution:result.solver_statistics},source:'javascript-constructive-state'});},()=>stopped);send({type:'done',jobId:m.jobId,result:core.checked(p,result,CuttingGeometry),source:'javascript-constructive-state',stopped});cleanup();return;}
       send({type:'loading',jobId:m.jobId});const mod=await loadWasm();if(stopped){send({type:'done',jobId:m.jobId,stopped:true});cleanup();return;}const native=core.nativeInstance(p);send({type:'started',jobId:m.jobId,native_instance:native.instance,problemType:native.problemType});session=new mod.Session();const error=session.start(native.problemType,JSON.stringify(native.instance),JSON.stringify(native.parameters));if(error)throw Error(JSON.parse(error).error||error);
       pollTimer=setInterval(()=>{try{const message=JSON.parse(session.poll());for(const s of message.solutions||[]){try{send({type:'solution',jobId:m.jobId,...parsed(s),source:'wasm-session-callback'});}catch(error){send({type:'candidate-error',jobId:m.jobId,error:error.message,output:s.output,certificate:s.certificate});}}if(message.done){const r=message.result;if(r.error)throw Error(r.error);send({type:'done',jobId:m.jobId,...parsed(r),stopped});cleanup();}}catch(error){send({type:'error',jobId:m.jobId,error:error.message});cleanup();}},100);
