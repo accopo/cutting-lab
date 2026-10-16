@@ -1,0 +1,29 @@
+name: Prepare official solver runtime
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download pinned upstream build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$(gh api repos/fontanf/packingsolver/actions/runs/38660278943 --jq .head_sha)" = "649fd65233ee93f50b69871f197779ace46db9f5"
+          gh run download 38660278943 --repo fontanf/packingsolver --name site --dir /tmp/upstream-site
+          test -s /tmp/upstream-site/packingsolver.wasm
+          cp /tmp/upstream-site/packingsolver.js static/vendor/packingsolver/
+          cp /tmp/upstream-site/packingsolver.wasm static/vendor/packingsolver/
+          cp /tmp/upstream-site/packingsolver_worker.js static/vendor/packingsolver/
+          cd static/vendor/packingsolver
+          sha256sum packingsolver.js packingsolver.wasm packingsolver_worker.js > SHA256SUMS
+      - name: Commit verified runtime assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add static/vendor/packingsolver
+          git diff --cached --quiet || git commit -m "Vendor official PackingSolver WASM at pinned upstream commit"
+          git push

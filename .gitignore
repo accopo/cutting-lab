@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+jobs/
+*.log
+server_state.json
+.env
+.env.*
+!.env.example
+node_modules/
+*.zip
+.DS_Store
+Thumbs.db
+.codex/
+qa/*_output/
