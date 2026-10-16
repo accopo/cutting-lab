@@ -1,0 +1,1800 @@
+{
+  "problem": {
+    "id": "bar-stock-kerf",
+    "name": "型材 · 6 米逐件锯缝下料",
+    "industry": "bars",
+    "kind": "onedimensional",
+    "unit": "mm",
+    "description": "合成教学示例：3 mm 逐件尾部锯缝，末件也预留一刀；不含端头修边、夹持余量与余料库存。可与相同约束的 FFD/BFD 基线比较。",
+    "source": {
+      "label": "本地合成教学示例",
+      "kind": "synthetic",
+      "note": "为演示该行业约束而构造的尺寸与轮廓，不代表工厂订单或真实生产纸样。",
+      "derived": false,
+      "scenario_label": "原始实例参数"
+    },
+    "stock": {
+      "width": 6000,
+      "height": 1,
+      "copies": 30
+    },
+    "items": [
+      {
+        "id": 0,
+        "name": "型材 1700 mm",
+        "length": 1700,
+        "quantity": 5,
+        "profit": 5,
+        "allowed_rotations": [
+          0
+        ],
+        "effective_rotations": [
+          0
+        ],
+        "polygon": [
+          [
+            0,
+            0
+          ],
+          [
+            1700,
+            0
+          ],
+          [
+            1700,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": 1,
+        "name": "型材 1350 mm",
+        "length": 1350,
+        "quantity": 7,
+        "profit": 4,
+        "allowed_rotations": [
+          0
+        ],
+        "effective_rotations": [
+          0
+        ],
+        "polygon": [
+          [
+            0,
+            0
+          ],
+          [
+            1350,
+            0
+          ],
+          [
+            1350,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": 2,
+        "name": "型材 950 mm",
+        "length": 950,
+        "quantity": 8,
+        "profit": 3,
+        "allowed_rotations": [
+          0
+        ],
+        "effective_rotations": [
+          0
+        ],
+        "polygon": [
+          [
+            0,
+            0
+          ],
+          [
+            950,
+            0
+          ],
+          [
+            950,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": 3,
+        "name": "型材 650 mm",
+        "length": 650,
+        "quantity": 10,
+        "profit": 2,
+        "allowed_rotations": [
+          0
+        ],
+        "effective_rotations": [
+          0
+        ],
+        "polygon": [
+          [
+            0,
+            0
+          ],
+          [
+            650,
+            0
+          ],
+          [
+            650,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": 4,
+        "name": "型材 420 mm",
+        "length": 420,
+        "quantity": 6,
+        "profit": 1,
+        "allowed_rotations": [
+          0
+        ],
+        "effective_rotations": [
+          0
+        ],
+        "polygon": [
+          [
+            0,
+            0
+          ],
+          [
+            420,
+            0
+          ],
+          [
+            420,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    ],
+    "settings": {
+      "engine": "onedimensional-kerf",
+      "objective": "bins",
+      "rotation": "none",
+      "custom_angles": [
+        0,
+        180
+      ],
+      "spacing": 0,
+      "edge": 0,
+      "kerf": 3,
+      "time_limit": 1,
+      "stages": 3,
+      "first_cut": "vertical"
+    },
+    "defects": [],
+    "effective_stock_copies": 30
+  },
+  "native": {
+    "problemType": "onedimensional",
+    "instance": {
+      "objective": "bin-packing",
+      "bin_types": [
+        {
+          "length": 6000,
+          "copies": 30
+        }
+      ],
+      "item_types": [
+        {
+          "length": 1703,
+          "copies": 5,
+          "profit": 5
+        },
+        {
+          "length": 1353,
+          "copies": 7,
+          "profit": 4
+        },
+        {
+          "length": 953,
+          "copies": 8,
+          "profit": 3
+        },
+        {
+          "length": 653,
+          "copies": 10,
+          "profit": 2
+        },
+        {
+          "length": 423,
+          "copies": 6,
+          "profit": 1
+        }
+      ]
+    },
+    "parameters": {
+      "time_limit": 1,
+      "verbosity_level": 0,
+      "optimization_mode": "anytime"
+    }
+  },
+  "raw": {
+    "certificate": "TYPE,ID,COPIES,BIN,X,LX\nBIN,0,1,0,0,6000\nITEM,0,1,0,0,1703\nITEM,0,1,0,1703,1703\nITEM,0,1,0,3406,1703\nITEM,4,1,0,5109,423\nITEM,4,1,0,5532,423\nBIN,0,1,1,0,6000\nITEM,0,1,1,0,1703\nITEM,0,1,1,1703,1703\nITEM,2,1,1,3406,953\nITEM,2,1,1,4359,953\nITEM,3,1,1,5312,653\nBIN,0,2,2,0,6000\nITEM,1,2,2,0,1353\nITEM,1,2,2,1353,1353\nITEM,1,2,2,2706,1353\nITEM,2,2,2,4059,953\nITEM,2,2,2,5012,953\nBIN,0,1,3,0,6000\nITEM,1,1,3,0,1353\nITEM,2,1,3,1353,953\nITEM,3,1,3,2306,653\nITEM,3,1,3,2959,653\nITEM,3,1,3,3612,653\nITEM,3,1,3,4265,653\nITEM,3,1,3,4918,653\nITEM,4,1,3,5571,423\nBIN,0,1,4,0,6000\nITEM,2,1,4,0,953\nITEM,3,1,4,953,653\nITEM,3,1,4,1606,653\nITEM,3,1,4,2259,653\nITEM,3,1,4,2912,653\nITEM,4,1,4,3565,423\nITEM,4,1,4,3988,423\nITEM,4,1,4,4411,423\n",
+    "output": {
+      "BinPackingBound": 6,
+      "IsProvenInfeasible": false,
+      "KnapsackBound": null,
+      "Solution": {
+        "BinCost": 36000,
+        "BinLength": 36000,
+        "FullWaste": 1322,
+        "FullWastePercentage": 0.036722222222222226,
+        "ItemLength": 34678,
+        "ItemNestedLength": 34678,
+        "ItemProfit": 103,
+        "NumberOfBins": 6,
+        "NumberOfItems": 36,
+        "Waste": 156,
+        "WastePercentage": 0.0044783831888384916
+      },
+      "Time": 0.00129024,
+      "VariableSizedBinPackingBound": 0
+    }
+  },
+  "result": {
+    "engine": "onedimensional-kerf",
+    "objective": "bins",
+    "elapsed_s": 0.00129024,
+    "full": true,
+    "feasible": true,
+    "units": "mm",
+    "metrics": {
+      "required_pieces": 36,
+      "placed_pieces": 36,
+      "bin_count": 6,
+      "utilization_percent": 96.02777777777777,
+      "profit": 103,
+      "used_length": null,
+      "total_item_area": 34570,
+      "total_item_length": 34570,
+      "kerf_loss_length": 108,
+      "occupied_length": 34678,
+      "total_stock_length": 36000,
+      "unused_length": 1322
+    },
+    "bins": [
+      {
+        "index": 0,
+        "width": 6000,
+        "height": 1,
+        "items": [
+          {
+            "id": 0,
+            "name": "型材 1700 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                0
+              ],
+              [
+                1700,
+                0
+              ],
+              [
+                1700,
+                1
+              ],
+              [
+                0,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "型材 1700 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1703,
+                0
+              ],
+              [
+                3403,
+                0
+              ],
+              [
+                3403,
+                1
+              ],
+              [
+                1703,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "型材 1700 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                3406,
+                0
+              ],
+              [
+                5106,
+                0
+              ],
+              [
+                5106,
+                1
+              ],
+              [
+                3406,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 4,
+            "name": "型材 420 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                5109,
+                0
+              ],
+              [
+                5529,
+                0
+              ],
+              [
+                5529,
+                1
+              ],
+              [
+                5109,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 4,
+            "name": "型材 420 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                5532,
+                0
+              ],
+              [
+                5952,
+                0
+              ],
+              [
+                5952,
+                1
+              ],
+              [
+                5532,
+                1
+              ]
+            ]
+          }
+        ],
+        "defects": [],
+        "cuts": [
+          {
+            "item_index": 0,
+            "item_id": 0,
+            "model": "per-piece-tail-kerf",
+            "start": 1700,
+            "end": 1703,
+            "width": 3,
+            "x1": 1701.5,
+            "y1": 0,
+            "x2": 1701.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 1,
+            "item_id": 0,
+            "model": "per-piece-tail-kerf",
+            "start": 3403,
+            "end": 3406,
+            "width": 3,
+            "x1": 3404.5,
+            "y1": 0,
+            "x2": 3404.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 2,
+            "item_id": 0,
+            "model": "per-piece-tail-kerf",
+            "start": 5106,
+            "end": 5109,
+            "width": 3,
+            "x1": 5107.5,
+            "y1": 0,
+            "x2": 5107.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 3,
+            "item_id": 4,
+            "model": "per-piece-tail-kerf",
+            "start": 5529,
+            "end": 5532,
+            "width": 3,
+            "x1": 5530.5,
+            "y1": 0,
+            "x2": 5530.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 4,
+            "item_id": 4,
+            "model": "per-piece-tail-kerf",
+            "start": 5952,
+            "end": 5955,
+            "width": 3,
+            "x1": 5953.5,
+            "y1": 0,
+            "x2": 5953.5,
+            "y2": 1,
+            "stage": 1
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "width": 6000,
+        "height": 1,
+        "items": [
+          {
+            "id": 0,
+            "name": "型材 1700 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                0
+              ],
+              [
+                1700,
+                0
+              ],
+              [
+                1700,
+                1
+              ],
+              [
+                0,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "型材 1700 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1703,
+                0
+              ],
+              [
+                3403,
+                0
+              ],
+              [
+                3403,
+                1
+              ],
+              [
+                1703,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "型材 950 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                3406,
+                0
+              ],
+              [
+                4356,
+                0
+              ],
+              [
+                4356,
+                1
+              ],
+              [
+                3406,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "型材 950 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                4359,
+                0
+              ],
+              [
+                5309,
+                0
+              ],
+              [
+                5309,
+                1
+              ],
+              [
+                4359,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "型材 650 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                5312,
+                0
+              ],
+              [
+                5962,
+                0
+              ],
+              [
+                5962,
+                1
+              ],
+              [
+                5312,
+                1
+              ]
+            ]
+          }
+        ],
+        "defects": [],
+        "cuts": [
+          {
+            "item_index": 0,
+            "item_id": 0,
+            "model": "per-piece-tail-kerf",
+            "start": 1700,
+            "end": 1703,
+            "width": 3,
+            "x1": 1701.5,
+            "y1": 0,
+            "x2": 1701.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 1,
+            "item_id": 0,
+            "model": "per-piece-tail-kerf",
+            "start": 3403,
+            "end": 3406,
+            "width": 3,
+            "x1": 3404.5,
+            "y1": 0,
+            "x2": 3404.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 2,
+            "item_id": 2,
+            "model": "per-piece-tail-kerf",
+            "start": 4356,
+            "end": 4359,
+            "width": 3,
+            "x1": 4357.5,
+            "y1": 0,
+            "x2": 4357.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 3,
+            "item_id": 2,
+            "model": "per-piece-tail-kerf",
+            "start": 5309,
+            "end": 5312,
+            "width": 3,
+            "x1": 5310.5,
+            "y1": 0,
+            "x2": 5310.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 4,
+            "item_id": 3,
+            "model": "per-piece-tail-kerf",
+            "start": 5962,
+            "end": 5965,
+            "width": 3,
+            "x1": 5963.5,
+            "y1": 0,
+            "x2": 5963.5,
+            "y2": 1,
+            "stage": 1
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "width": 6000,
+        "height": 1,
+        "items": [
+          {
+            "id": 1,
+            "name": "型材 1350 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                0
+              ],
+              [
+                1350,
+                0
+              ],
+              [
+                1350,
+                1
+              ],
+              [
+                0,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "型材 1350 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1353,
+                0
+              ],
+              [
+                2703,
+                0
+              ],
+              [
+                2703,
+                1
+              ],
+              [
+                1353,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "型材 1350 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                2706,
+                0
+              ],
+              [
+                4056,
+                0
+              ],
+              [
+                4056,
+                1
+              ],
+              [
+                2706,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "型材 950 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                4059,
+                0
+              ],
+              [
+                5009,
+                0
+              ],
+              [
+                5009,
+                1
+              ],
+              [
+                4059,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "型材 950 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                5012,
+                0
+              ],
+              [
+                5962,
+                0
+              ],
+              [
+                5962,
+                1
+              ],
+              [
+                5012,
+                1
+              ]
+            ]
+          }
+        ],
+        "defects": [],
+        "cuts": [
+          {
+            "item_index": 0,
+            "item_id": 1,
+            "model": "per-piece-tail-kerf",
+            "start": 1350,
+            "end": 1353,
+            "width": 3,
+            "x1": 1351.5,
+            "y1": 0,
+            "x2": 1351.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 1,
+            "item_id": 1,
+            "model": "per-piece-tail-kerf",
+            "start": 2703,
+            "end": 2706,
+            "width": 3,
+            "x1": 2704.5,
+            "y1": 0,
+            "x2": 2704.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 2,
+            "item_id": 1,
+            "model": "per-piece-tail-kerf",
+            "start": 4056,
+            "end": 4059,
+            "width": 3,
+            "x1": 4057.5,
+            "y1": 0,
+            "x2": 4057.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 3,
+            "item_id": 2,
+            "model": "per-piece-tail-kerf",
+            "start": 5009,
+            "end": 5012,
+            "width": 3,
+            "x1": 5010.5,
+            "y1": 0,
+            "x2": 5010.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 4,
+            "item_id": 2,
+            "model": "per-piece-tail-kerf",
+            "start": 5962,
+            "end": 5965,
+            "width": 3,
+            "x1": 5963.5,
+            "y1": 0,
+            "x2": 5963.5,
+            "y2": 1,
+            "stage": 1
+          }
+        ]
+      },
+      {
+        "index": 3,
+        "width": 6000,
+        "height": 1,
+        "items": [
+          {
+            "id": 1,
+            "name": "型材 1350 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                0
+              ],
+              [
+                1350,
+                0
+              ],
+              [
+                1350,
+                1
+              ],
+              [
+                0,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "型材 1350 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1353,
+                0
+              ],
+              [
+                2703,
+                0
+              ],
+              [
+                2703,
+                1
+              ],
+              [
+                1353,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "型材 1350 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                2706,
+                0
+              ],
+              [
+                4056,
+                0
+              ],
+              [
+                4056,
+                1
+              ],
+              [
+                2706,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "型材 950 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                4059,
+                0
+              ],
+              [
+                5009,
+                0
+              ],
+              [
+                5009,
+                1
+              ],
+              [
+                4059,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "型材 950 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                5012,
+                0
+              ],
+              [
+                5962,
+                0
+              ],
+              [
+                5962,
+                1
+              ],
+              [
+                5012,
+                1
+              ]
+            ]
+          }
+        ],
+        "defects": [],
+        "cuts": [
+          {
+            "item_index": 0,
+            "item_id": 1,
+            "model": "per-piece-tail-kerf",
+            "start": 1350,
+            "end": 1353,
+            "width": 3,
+            "x1": 1351.5,
+            "y1": 0,
+            "x2": 1351.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 1,
+            "item_id": 1,
+            "model": "per-piece-tail-kerf",
+            "start": 2703,
+            "end": 2706,
+            "width": 3,
+            "x1": 2704.5,
+            "y1": 0,
+            "x2": 2704.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 2,
+            "item_id": 1,
+            "model": "per-piece-tail-kerf",
+            "start": 4056,
+            "end": 4059,
+            "width": 3,
+            "x1": 4057.5,
+            "y1": 0,
+            "x2": 4057.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 3,
+            "item_id": 2,
+            "model": "per-piece-tail-kerf",
+            "start": 5009,
+            "end": 5012,
+            "width": 3,
+            "x1": 5010.5,
+            "y1": 0,
+            "x2": 5010.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 4,
+            "item_id": 2,
+            "model": "per-piece-tail-kerf",
+            "start": 5962,
+            "end": 5965,
+            "width": 3,
+            "x1": 5963.5,
+            "y1": 0,
+            "x2": 5963.5,
+            "y2": 1,
+            "stage": 1
+          }
+        ]
+      },
+      {
+        "index": 4,
+        "width": 6000,
+        "height": 1,
+        "items": [
+          {
+            "id": 1,
+            "name": "型材 1350 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                0
+              ],
+              [
+                1350,
+                0
+              ],
+              [
+                1350,
+                1
+              ],
+              [
+                0,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "型材 950 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1353,
+                0
+              ],
+              [
+                2303,
+                0
+              ],
+              [
+                2303,
+                1
+              ],
+              [
+                1353,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "型材 650 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                2306,
+                0
+              ],
+              [
+                2956,
+                0
+              ],
+              [
+                2956,
+                1
+              ],
+              [
+                2306,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "型材 650 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                2959,
+                0
+              ],
+              [
+                3609,
+                0
+              ],
+              [
+                3609,
+                1
+              ],
+              [
+                2959,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "型材 650 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                3612,
+                0
+              ],
+              [
+                4262,
+                0
+              ],
+              [
+                4262,
+                1
+              ],
+              [
+                3612,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "型材 650 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                4265,
+                0
+              ],
+              [
+                4915,
+                0
+              ],
+              [
+                4915,
+                1
+              ],
+              [
+                4265,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "型材 650 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                4918,
+                0
+              ],
+              [
+                5568,
+                0
+              ],
+              [
+                5568,
+                1
+              ],
+              [
+                4918,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 4,
+            "name": "型材 420 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                5571,
+                0
+              ],
+              [
+                5991,
+                0
+              ],
+              [
+                5991,
+                1
+              ],
+              [
+                5571,
+                1
+              ]
+            ]
+          }
+        ],
+        "defects": [],
+        "cuts": [
+          {
+            "item_index": 0,
+            "item_id": 1,
+            "model": "per-piece-tail-kerf",
+            "start": 1350,
+            "end": 1353,
+            "width": 3,
+            "x1": 1351.5,
+            "y1": 0,
+            "x2": 1351.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 1,
+            "item_id": 2,
+            "model": "per-piece-tail-kerf",
+            "start": 2303,
+            "end": 2306,
+            "width": 3,
+            "x1": 2304.5,
+            "y1": 0,
+            "x2": 2304.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 2,
+            "item_id": 3,
+            "model": "per-piece-tail-kerf",
+            "start": 2956,
+            "end": 2959,
+            "width": 3,
+            "x1": 2957.5,
+            "y1": 0,
+            "x2": 2957.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 3,
+            "item_id": 3,
+            "model": "per-piece-tail-kerf",
+            "start": 3609,
+            "end": 3612,
+            "width": 3,
+            "x1": 3610.5,
+            "y1": 0,
+            "x2": 3610.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 4,
+            "item_id": 3,
+            "model": "per-piece-tail-kerf",
+            "start": 4262,
+            "end": 4265,
+            "width": 3,
+            "x1": 4263.5,
+            "y1": 0,
+            "x2": 4263.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 5,
+            "item_id": 3,
+            "model": "per-piece-tail-kerf",
+            "start": 4915,
+            "end": 4918,
+            "width": 3,
+            "x1": 4916.5,
+            "y1": 0,
+            "x2": 4916.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 6,
+            "item_id": 3,
+            "model": "per-piece-tail-kerf",
+            "start": 5568,
+            "end": 5571,
+            "width": 3,
+            "x1": 5569.5,
+            "y1": 0,
+            "x2": 5569.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 7,
+            "item_id": 4,
+            "model": "per-piece-tail-kerf",
+            "start": 5991,
+            "end": 5994,
+            "width": 3,
+            "x1": 5992.5,
+            "y1": 0,
+            "x2": 5992.5,
+            "y2": 1,
+            "stage": 1
+          }
+        ]
+      },
+      {
+        "index": 5,
+        "width": 6000,
+        "height": 1,
+        "items": [
+          {
+            "id": 2,
+            "name": "型材 950 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                0
+              ],
+              [
+                950,
+                0
+              ],
+              [
+                950,
+                1
+              ],
+              [
+                0,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "型材 650 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                953,
+                0
+              ],
+              [
+                1603,
+                0
+              ],
+              [
+                1603,
+                1
+              ],
+              [
+                953,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "型材 650 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1606,
+                0
+              ],
+              [
+                2256,
+                0
+              ],
+              [
+                2256,
+                1
+              ],
+              [
+                1606,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "型材 650 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                2259,
+                0
+              ],
+              [
+                2909,
+                0
+              ],
+              [
+                2909,
+                1
+              ],
+              [
+                2259,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "型材 650 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                2912,
+                0
+              ],
+              [
+                3562,
+                0
+              ],
+              [
+                3562,
+                1
+              ],
+              [
+                2912,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 4,
+            "name": "型材 420 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                3565,
+                0
+              ],
+              [
+                3985,
+                0
+              ],
+              [
+                3985,
+                1
+              ],
+              [
+                3565,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 4,
+            "name": "型材 420 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                3988,
+                0
+              ],
+              [
+                4408,
+                0
+              ],
+              [
+                4408,
+                1
+              ],
+              [
+                3988,
+                1
+              ]
+            ]
+          },
+          {
+            "id": 4,
+            "name": "型材 420 mm",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                4411,
+                0
+              ],
+              [
+                4831,
+                0
+              ],
+              [
+                4831,
+                1
+              ],
+              [
+                4411,
+                1
+              ]
+            ]
+          }
+        ],
+        "defects": [],
+        "cuts": [
+          {
+            "item_index": 0,
+            "item_id": 2,
+            "model": "per-piece-tail-kerf",
+            "start": 950,
+            "end": 953,
+            "width": 3,
+            "x1": 951.5,
+            "y1": 0,
+            "x2": 951.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 1,
+            "item_id": 3,
+            "model": "per-piece-tail-kerf",
+            "start": 1603,
+            "end": 1606,
+            "width": 3,
+            "x1": 1604.5,
+            "y1": 0,
+            "x2": 1604.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 2,
+            "item_id": 3,
+            "model": "per-piece-tail-kerf",
+            "start": 2256,
+            "end": 2259,
+            "width": 3,
+            "x1": 2257.5,
+            "y1": 0,
+            "x2": 2257.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 3,
+            "item_id": 3,
+            "model": "per-piece-tail-kerf",
+            "start": 2909,
+            "end": 2912,
+            "width": 3,
+            "x1": 2910.5,
+            "y1": 0,
+            "x2": 2910.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 4,
+            "item_id": 3,
+            "model": "per-piece-tail-kerf",
+            "start": 3562,
+            "end": 3565,
+            "width": 3,
+            "x1": 3563.5,
+            "y1": 0,
+            "x2": 3563.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 5,
+            "item_id": 4,
+            "model": "per-piece-tail-kerf",
+            "start": 3985,
+            "end": 3988,
+            "width": 3,
+            "x1": 3986.5,
+            "y1": 0,
+            "x2": 3986.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 6,
+            "item_id": 4,
+            "model": "per-piece-tail-kerf",
+            "start": 4408,
+            "end": 4411,
+            "width": 3,
+            "x1": 4409.5,
+            "y1": 0,
+            "x2": 4409.5,
+            "y2": 1,
+            "stage": 1
+          },
+          {
+            "item_index": 7,
+            "item_id": 4,
+            "model": "per-piece-tail-kerf",
+            "start": 4831,
+            "end": 4834,
+            "width": 3,
+            "x1": 4832.5,
+            "y1": 0,
+            "x2": 4832.5,
+            "y2": 1,
+            "stage": 1
+          }
+        ]
+      }
+    ],
+    "solver_statistics": {
+      "BinCost": 36000,
+      "BinLength": 36000,
+      "FullWaste": 1322,
+      "FullWastePercentage": 0.036722222222222226,
+      "ItemLength": 34678,
+      "ItemNestedLength": 34678,
+      "ItemProfit": 103,
+      "NumberOfBins": 6,
+      "NumberOfItems": 36,
+      "Waste": 156,
+      "WastePercentage": 0.0044783831888384916
+    },
+    "raw_output": {
+      "BinPackingBound": 6,
+      "IsProvenInfeasible": false,
+      "KnapsackBound": null,
+      "Solution": {
+        "BinCost": 36000,
+        "BinLength": 36000,
+        "FullWaste": 1322,
+        "FullWastePercentage": 0.036722222222222226,
+        "ItemLength": 34678,
+        "ItemNestedLength": 34678,
+        "ItemProfit": 103,
+        "NumberOfBins": 6,
+        "NumberOfItems": 36,
+        "Waste": 156,
+        "WastePercentage": 0.0044783831888384916
+      },
+      "Time": 0.00129024,
+      "VariableSizedBinPackingBound": 0
+    },
+    "engine_version": "wasm-649fd65233ee",
+    "config": {
+      "engine": "onedimensional-kerf",
+      "objective": "bins",
+      "settings": {
+        "engine": "onedimensional-kerf",
+        "objective": "bins",
+        "rotation": "none",
+        "custom_angles": [
+          0,
+          180
+        ],
+        "spacing": 0,
+        "edge": 0,
+        "kerf": 3,
+        "time_limit": 1,
+        "stages": 3,
+        "first_cut": "vertical"
+      },
+      "stock": {
+        "width": 6000,
+        "height": 1,
+        "copies": 30
+      },
+      "effective_stock_copies": 30
+    },
+    "warnings": [
+      "真实浏览器 WebAssembly 限时求解；不保证全局最优。",
+      "独立数值几何校验不等同于工业加工、局部承重或稳定性证明。",
+      "逐件尾部锯缝模型，末件也预留一刀。"
+    ],
+    "validation": {
+      "pass": true,
+      "geometry_pass": true,
+      "full_demand": true,
+      "errors": [],
+      "placed_counts": {
+        "0": 5,
+        "1": 7,
+        "2": 8,
+        "3": 10,
+        "4": 6
+      },
+      "required_counts": {
+        "0": 5,
+        "1": 7,
+        "2": 8,
+        "3": 10,
+        "4": 6
+      },
+      "minimum_item_clearance": 3,
+      "minimum_defect_clearance": null,
+      "coordinate_tolerance": 0.00006,
+      "area_tolerance": "max(1e-8, original_piece_area * 1e-7)",
+      "checks": [
+        "source geometry",
+        "quantity",
+        "bounds",
+        "overlap",
+        "allowed angles",
+        "spacing",
+        "defects",
+        "original finished length",
+        "integer coordinates",
+        "tail kerf per piece",
+        "last-piece kerf",
+        "occupied interval bounds",
+        "occupied interval overlap",
+        "cut certificate correspondence"
+      ],
+      "scope": "独立几何校验；不等同于加工可制造性或全局最优证明。",
+      "kerf_validation": {
+        "pass": true,
+        "errors": [],
+        "model": "per-piece-tail-kerf",
+        "kerf_loss_length": 108,
+        "checks": [
+          "original finished length",
+          "integer coordinates",
+          "tail kerf per piece",
+          "last-piece kerf",
+          "occupied interval bounds",
+          "occupied interval overlap",
+          "cut certificate correspondence"
+        ],
+        "scope": "保守逐件锯缝模型：每件成品尾部都预留一刀，末件也计锯缝；不含端头修边、夹持余量、斜切与余料库存。"
+      }
+    }
+  }
+}

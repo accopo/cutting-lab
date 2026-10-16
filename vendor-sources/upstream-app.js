@@ -1,0 +1,1845 @@
+// PackingSolver web page: the projects of each problem type ('projects.js'),
+// stored in the browser. The instance of a project is built in a form (or
+// opened from a JSON file), solved in a Web Worker ('packingsolver_worker.js'),
+// and its solutions are shown as they are found.
+
+import * as irregularForm from "./irregular_form.js";
+import * as form from "./form.js";
+import * as projects from "./projects.js";
+import * as paste from "./paste.js";
+import * as results from "./results.js";
+import * as viewerSolution from "./viewer/solution.js";
+import {createViewer} from "./viewer/viewer.js";
+import {format} from "./results.js";
+import {
+    openDimension,
+    BOX_ROTATIONS,
+    binColumns,
+    itemColumns,
+    UNLIMITED_STAGES,
+    INSTANCE_PARAMETERS,
+    parameterForced,
+    cuttingCostRows,
+    OBJECTIVES,
+    defaultResource,
+    newItemRow,
+} from "./form.js";
+
+// Table of the cutting costs: fixed and variable costs of each row.
+function cuttingCostsInput(values) {
+    const container = document.createElement("div");
+    container.className = "cutting-costs";
+    const table = document.createElement("table");
+    const header = table.createTHead().insertRow();
+    for (const text of ["", "Fixed", "Variable"]) {
+        const th = document.createElement("th");
+        th.textContent = text;
+        header.appendChild(th);
+    }
+    const body = table.createTBody();
+    cuttingCostRows(values).forEach(([label, title], i) => {
+        values.cutting_costs[i] = values.cutting_costs[i] || {fixed: "", variable: ""};
+        const tr = body.insertRow();
+        const th = document.createElement("th");
+        th.textContent = label;
+        th.title = title;
+        tr.appendChild(th);
+        for (const key of ["fixed", "variable"]) {
+            const input = numberInput(values.cutting_costs[i][key], `${label} ${key} cost`,
+                (value) => { values.cutting_costs[i][key] = value; }, "0");
+            // The costs are integers in the library.
+            input.step = "1";
+            tr.insertCell().appendChild(input);
+        }
+    });
+    container.appendChild(table);
+    // With an unlimited number of stages, the stages with a cost.
+    if (UNLIMITED_STAGES(values)) {
+        const buttons = document.createElement("div");
+        const add = document.createElement("button");
+        add.type = "button";
+        add.textContent = "Add a stage";
+        add.addEventListener("click", () => {
+            ++values.cutting_costs_stages;
+            renderInstanceParameters();
+        });
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.textContent = "Remove the last stage";
+        remove.disabled = (values.cutting_costs_stages <= 1);
+        remove.addEventListener("click", () => {
+            --values.cutting_costs_stages;
+            values.cutting_costs.length = values.cutting_costs_stages + 1;
+            renderInstanceParameters();
+        });
+        buttons.append(add, remove);
+        container.appendChild(buttons);
+    }
+    return container;
+}
+
+function renderInstanceParameters() {
+    const container = $("instance-parameters");
+    container.replaceChildren();
+    const values = state.instanceParameters;
+    const parameters = (INSTANCE_PARAMETERS[problemType()] || [])
+        .filter((parameter) => parameterShown(parameter, values));
+    container.hidden = (parameters.length === 0);
+    // A label and an input for each parameter: the two columns of the grid
+    // of the objective.
+    for (const parameter of parameters) {
+        const label = document.createElement("label");
+        label.htmlFor = "instance-parameter-" + parameter.key;
+        label.textContent = parameter.label;
+        const onChange = () => {
+            if (parameter.structural) {
+                renderInstanceParameters();
+                renderForm();
+            }
+            scheduleFormCheck();
+        };
+        let input;
+        let cell;
+        if (parameter.type === "select") {
+            input = document.createElement("select");
+            for (const [value, text] of parameter.options) {
+                const option = document.createElement("option");
+                option.value = value;
+                option.textContent = text;
+                input.appendChild(option);
+            }
+            const forced = parameterForced(parameter, values);
+            input.value = (forced !== undefined)? forced: values[parameter.key];
+            input.disabled = (forced !== undefined);
+            input.addEventListener("change", () => { values[parameter.key] = input.value; onChange(); });
+        } else if (parameter.type === "checkbox") {
+            input = document.createElement("input");
+            input.type = "checkbox";
+            input.checked = values[parameter.key];
+            input.addEventListener("change", () => { values[parameter.key] = input.checked; });
+        } else if (parameter.type === "ids") {
+            input = document.createElement("input");
+            input.type = "text";
+            input.placeholder = parameter.placeholder || "";
+            input.value = values[parameter.key];
+            input.addEventListener("input", () => { values[parameter.key] = input.value; scheduleFormCheck(); });
+        } else if (parameter.type === "cutting-costs") {
+            cell = cuttingCostsInput(values);
+            label.removeAttribute("for");
+        } else {
+            input = document.createElement("input");
+            input.type = "number";
+            input.min = parameter.integer? "1": "0";
+            input.step = (parameter.integer || parameter.wholeNumber)? "1": "any";
+            input.placeholder = parameter.placeholder || "";
+            input.value = values[parameter.key];
+            input.addEventListener("input", () => { values[parameter.key] = input.value; onChange(); });
+            if (parameter.unlimited) {
+                // The number, and a checkbox which disables it.
+                const key = "unlimited_" + parameter.key;
+                if (values[key]) {
+                    input.disabled = true;
+                    input.value = "";
+                    input.placeholder = "unlimited";
+                }
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = values[key];
+                checkbox.title = "Unlimited";
+                checkbox.setAttribute("aria-label", "Unlimited " + parameter.label.toLowerCase());
+                checkbox.addEventListener("change", () => {
+                    values[key] = checkbox.checked;
+                    renderInstanceParameters();
+                    scheduleFormCheck();
+                });
+                cell = document.createElement("div");
+                cell.className = "unlimited";
+                cell.append(input, checkbox);
+            }
+        }
+        if (input !== undefined)
+            input.id = label.htmlFor;
+        (cell || input).dataset.key = parameter.key;
+        container.append(label, cell || input);
+    }
+    lockForm();
+}
+
+// The examples can't be modified: the fields and the buttons of their form are
+// disabled, except the "More" buttons ('details-toggle'), which show the
+// details of the rows. The controls disabled this way ('data-locked') are
+// enabled again for the other projects.
+function lockForm() {
+    const locked = (state.current !== null && state.current.example);
+    for (const element of $("form-fields").querySelectorAll("input, select, textarea, button")) {
+        if (element.classList.contains("details-toggle"))
+            continue;
+        if (locked && !element.disabled) {
+            element.disabled = true;
+            element.dataset.locked = "";
+        } else if (!locked && element.dataset.locked !== undefined) {
+            element.disabled = false;
+            delete element.dataset.locked;
+        }
+    }
+}
+
+// Fill the objectives of a problem type.
+function renderObjectives(problemType) {
+    const select = $("objective");
+    select.replaceChildren();
+    for (const [value, label, types] of OBJECTIVES) {
+        if (types !== undefined && !types.includes(problemType))
+            continue;
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = label;
+        select.appendChild(option);
+    }
+}
+
+const $ = (id) => document.getElementById(id);
+
+// The functions of the form which depend on the page: the objective, the
+// parameters of the instance and the rows of the page.
+const parameterShown = (parameter, values) => form.parameterShown(parameter, values, $("objective").value);
+const addInstanceParameters = (instanceObject) => form.addInstanceParameters(
+    instanceObject, problemType(), state.instanceParameters, $("objective").value);
+const columnShown = (column) => form.columnShown(column, $("objective").value, state.instanceParameters);
+const unlimitedAllowed = (column) => form.unlimitedAllowed(column, $("objective").value);
+const unlimitedValue = (row, column) => form.unlimitedValue(row, column, $("objective").value);
+const resourceConsumptions = (resource) => form.resourceConsumptions(resource, state.itemTypes);
+const newBinRow = (type) => form.newBinRow(type, $("objective").value);
+const formInstance = () => form.toInstance(problemType(), {
+    objective: $("objective").value,
+    instanceParameters: state.instanceParameters,
+    binTypes: state.binTypes,
+    itemTypes: state.itemTypes,
+});
+
+const state = {
+    // Rows of the bin and item type tables: objects mapping column keys to
+    // values.
+    binTypes: [],
+    itemTypes: [],
+    worker: null,
+    running: false,
+    // Objective of the instance being solved, and its number of items ('null'
+    // if unlimited).
+    objective: null,
+    totalItems: null,
+    // Solution shown ('{output, certificate, objective}').
+    last: null,
+    // The visualizer of the solution shown ('viewer/viewer.js'), and its
+    // project.
+    viewer: null,
+    viewerProject: null,
+    plotTimer: null,
+    formCheckTimer: null,
+    // Values of the parameters of the instance ('INSTANCE_PARAMETERS').
+    instanceParameters: {},
+    startTime: 0,
+    // Time limit of the optimization, in seconds ('null' if none).
+    timeLimit: null,
+    // Description of the best solution of the optimization ('null' if none).
+    best: null,
+    // Timer updating the status while solving.
+    statusTimer: null,
+    // Whether the results were scrolled into view during the optimization,
+    // and whether they will be once the solution is drawn.
+    resultsRevealed: false,
+    revealPending: false,
+    // The projects of all the problem types ('projects.js'), the project
+    // opened, and the project being solved ('null' if none).
+    projects: [],
+    current: null,
+    solvingProject: null,
+    // Where the projects are stored ('projects.openStore').
+    store: null,
+    // Projects waiting to be saved: id -> '{project, timer}'.
+    saveTimers: new Map(),
+    // The history of the form of each project, for undo and redo: id ->
+    // '{entries, index}' (see 'recordHistory').
+    histories: new Map(),
+    // Timer recording the form in the history, after a modification.
+    historyTimer: null,
+};
+
+/////////////////////////////////////////////////////////////////////////////
+// Instance form
+/////////////////////////////////////////////////////////////////////////////
+
+function problemType() {
+    return $("problem-type").value;
+}
+
+
+function numberInput(value, label, onInput, placeholder = "") {
+    const input = document.createElement("input");
+    input.type = "number";
+    input.min = "0";
+    input.step = "any";
+    input.value = value;
+    input.placeholder = placeholder;
+    input.setAttribute("aria-label", label);
+    input.addEventListener("input", () => onInput(input.value));
+    return input;
+}
+
+// Cell of a column of type "rotations": a checkbox for each rotation.
+function rotationsCell(row, column) {
+    const cell = document.createElement("div");
+    const rotations = column.rotations || BOX_ROTATIONS;
+    // The 6 rotations of box on 2 lines, the 2 of boxstacks one above the
+    // other.
+    cell.className = (rotations.length <= 2)? "checkboxes single-column": "checkboxes";
+    for (const rotation of rotations) {
+        const label = document.createElement("label");
+        label.className = "inline";
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.checked = row[column.key].includes(rotation);
+        input.addEventListener("change", () => {
+            row[column.key] = rotations.filter((r) => (r === rotation)?
+                input.checked: row[column.key].includes(r));
+        });
+        label.append(input, rotation);
+        cell.appendChild(label);
+    }
+    return cell;
+}
+
+// Cell of a column of type "trims": the trim of each side.
+function trimsCell(row, column) {
+    const cell = document.createElement("div");
+    cell.className = "dimensions";
+    for (const [side, letter] of [["left", "L"], ["right", "R"], ["bottom", "B"], ["top", "T"]]) {
+        const label = document.createElement("label");
+        label.className = "inline";
+        label.append(letter, numberInput(row[column.key][side] || "", `${side} trim`,
+            (value) => { row[column.key][side] = value; }, "0"));
+        cell.appendChild(label);
+    }
+    return cell;
+}
+
+// Cell of a column of type "defects": a list of rectangles.
+function defectsCell(row, column) {
+    const cell = document.createElement("div");
+    cell.className = "placed-shapes";
+    const defects = row[column.key];
+    defects.forEach((defect, i) => {
+        const line = document.createElement("div");
+        line.className = "dimensions";
+        for (const [key, letter] of [["x", "X"], ["y", "Y"], ["width", "W"], ["height", "H"]]) {
+            const label = document.createElement("label");
+            label.className = "inline";
+            label.append(letter, numberInput(defect[key], `defect ${key}`,
+                (value) => { defect[key] = value; }));
+            line.appendChild(label);
+        }
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.textContent = "×";
+        remove.title = "Remove the defect";
+        remove.addEventListener("click", () => { defects.splice(i, 1); renderForm(); });
+        line.appendChild(remove);
+        cell.appendChild(line);
+    });
+    return cell;
+}
+
+
+// Input of a number, checkbox or select field of a row.
+function fieldInput(row, column) {
+    if (column.type === "select") {
+        const select = document.createElement("select");
+        select.setAttribute("aria-label", column.label);
+        for (const [value, text] of column.options) {
+            const option = document.createElement("option");
+            option.value = value;
+            option.textContent = text;
+            select.appendChild(option);
+        }
+        select.value = row[column.key];
+        select.addEventListener("change", () => { row[column.key] = select.value; });
+        return select;
+    }
+    const input = document.createElement("input");
+    // A list of ids: "1, 2, 3".
+    input.type = (column.type === "ids")? "text": column.type;
+    input.setAttribute("aria-label", column.label);
+    if (column.type === "checkbox") {
+        input.checked = Boolean(row[column.key]);
+        input.addEventListener("change", () => {
+            row[column.key] = input.checked;
+            if (column.structural)
+                renderForm();
+        });
+    } else if (column.type === "ids") {
+        input.value = row[column.key];
+        input.placeholder = column.placeholder || "";
+        input.className = "ids";
+        input.addEventListener("input", () => { row[column.key] = input.value; });
+    } else {
+        input.min = "0";
+        input.step = column.integer? "1": "any";
+        input.value = row[column.key];
+        if (column.optional)
+            input.placeholder = column.placeholder || "default";
+        input.addEventListener("input", () => { row[column.key] = input.value; });
+    }
+    return input;
+}
+
+
+
+// Cell of a number column which can be unlimited: the number, and a checkbox
+// which disables it (its header says so).
+function unlimitedCell(row, column) {
+    const cell = document.createElement("div");
+    cell.className = "unlimited";
+    const input = fieldInput(row, column);
+    const key = "unlimited_" + column.key;
+    if (row[key]) {
+        input.disabled = true;
+        input.value = "";
+        input.placeholder = "unlimited";
+    }
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = Boolean(row[key]);
+    checkbox.title = "Unlimited";
+    checkbox.setAttribute("aria-label", `Unlimited ${column.label.toLowerCase()}`);
+    checkbox.addEventListener("change", () => {
+        row[key] = checkbox.checked;
+        renderForm();
+    });
+    cell.append(input, checkbox);
+    return cell;
+}
+
+// Line, below a row of a table, with the fields of its details.
+function addDetailsLine(body, numberOfColumns, row, rowIndex, detailsColumns) {
+    const tr = body.insertRow();
+    tr.className = "details-line";
+    tr.dataset.row = String(rowIndex);
+    const cell = tr.insertCell();
+    cell.colSpan = numberOfColumns;
+    const fields = document.createElement("div");
+    fields.className = "details";
+    for (const column of detailsColumns) {
+        if (column.rowShown !== undefined && !column.rowShown(row))
+            continue;
+        const label = document.createElement("label");
+        label.className = "inline";
+        label.dataset.key = column.key;
+        label.append(column.label, fieldInput(row, column));
+        fields.appendChild(label);
+    }
+    cell.appendChild(fields);
+}
+
+// Rows whose details line is open.
+const openDetails = new WeakSet();
+
+function renderTable(table, columns, rows) {
+    table.replaceChildren();
+    const header = table.createTHead().insertRow();
+    // The defects are on a line below their row, the details on another one.
+    const defectsColumn = columns.find((column) => column.type === "defects");
+    const resourcesColumn = columns.find((column) => column.type === "resources");
+    const detailsColumns = columns.filter((column) => column.details && columnShown(column));
+    columns = columns.filter(
+        (column) => column.type !== "defects" && column.type !== "resources"
+            && !column.details && columnShown(column));
+    // The id of each row: its position, from 0, as in the C++ code.
+    const idHeader = document.createElement("th");
+    idHeader.textContent = "Id";
+    header.appendChild(idHeader);
+    for (const column of columns) {
+        const th = document.createElement("th");
+        th.textContent = column.label;
+        if (unlimitedAllowed(column)) {
+            const note = document.createElement("span");
+            note.className = "header-note";
+            note.textContent = "(or unlimited)";
+            th.append(document.createElement("br"), note);
+        }
+        header.appendChild(th);
+    }
+    header.appendChild(document.createElement("th"));
+    const body = table.createTBody();
+    rows.forEach((row, rowIndex) => {
+        const tr = body.insertRow();
+        // The row and the column of each field, for its errors.
+        tr.dataset.row = String(rowIndex);
+        const id = tr.insertCell();
+        id.className = "row-id";
+        id.textContent = String(rowIndex);
+        for (const column of columns) {
+            const cell = tr.insertCell();
+            cell.dataset.key = column.key;
+            if (column.type === "rotations") {
+                cell.appendChild(rotationsCell(row, column));
+                continue;
+            }
+            if (column.type === "trims") {
+                cell.appendChild(trimsCell(row, column));
+                continue;
+            }
+            if (unlimitedAllowed(column)) {
+                cell.appendChild(unlimitedCell(row, column));
+                continue;
+            }
+            // A single copy of the bin for the open dimension objectives.
+            if (column.singleForOpenDimension && openDimension($("objective").value)) {
+                const input = fieldInput(row, column);
+                input.disabled = true;
+                input.title = "A single bin for the open dimension objectives";
+                cell.appendChild(input);
+                continue;
+            }
+            cell.appendChild(fieldInput(row, column));
+        }
+        const buttons = tr.insertCell();
+        buttons.className = "row-buttons";
+        // The defects are on a line below the row if it has some; the button
+        // to add one is on the row.
+        if (defectsColumn !== undefined) {
+            const add = document.createElement("button");
+            add.type = "button";
+            add.textContent = "Add a defect";
+            add.addEventListener("click", () => {
+                row[defectsColumn.key].push({x: "", y: "", width: "", height: ""});
+                renderForm();
+            });
+            buttons.appendChild(add);
+        }
+        // Same for the resources.
+        if (resourcesColumn !== undefined) {
+            const add = document.createElement("button");
+            add.type = "button";
+            add.textContent = "Add a resource";
+            add.addEventListener("click", () => {
+                row[resourcesColumn.key].push(defaultResource());
+                renderForm();
+            });
+            buttons.appendChild(add);
+        }
+        if (detailsColumns.length > 0) {
+            const more = document.createElement("button");
+            more.type = "button";
+            // Enabled for the examples too (see 'lockForm').
+            more.className = "details-toggle";
+            // Marked if a field of the details is invalid.
+            more.dataset.details = detailsColumns.map((column) => column.key).join(" ");
+            const open = openDetails.has(row);
+            more.textContent = open? "Less": "More";
+            more.setAttribute("aria-expanded", String(open));
+            // A mark if a field of the details isn't at its default value.
+            const modified = detailsColumns.filter(
+                (column) => JSON.stringify(row[column.key]) !== JSON.stringify(column.value));
+            if (modified.length > 0) {
+                more.classList.add("modified");
+                more.title = "Set: " + modified.map((column) => column.label.toLowerCase()).join(", ");
+            }
+            more.addEventListener("click", () => {
+                if (openDetails.has(row))
+                    openDetails.delete(row);
+                else
+                    openDetails.add(row);
+                renderForm();
+            });
+            buttons.appendChild(more);
+        }
+        const actions = rowActions(rows);
+        const duplicate = document.createElement("button");
+        duplicate.type = "button";
+        duplicate.textContent = "Duplicate";
+        duplicate.addEventListener("click", () => actions.duplicate(rowIndex));
+        buttons.appendChild(duplicate);
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.textContent = "Remove";
+        remove.addEventListener("click", () => actions.remove(rowIndex));
+        buttons.appendChild(remove);
+        if (openDetails.has(row) && detailsColumns.length > 0)
+            addDetailsLine(body, columns.length + 2, row, rowIndex, detailsColumns);
+        if (defectsColumn !== undefined && row[defectsColumn.key].length > 0) {
+            addDefectsLine(body, columns.length + 2, defectsCell(row, defectsColumn), "Defects",
+                rowIndex, defectsColumn.key);
+        }
+        if (resourcesColumn !== undefined && row[resourcesColumn.key].length > 0) {
+            addDefectsLine(body, columns.length + 2, resourcesCell(row, resourcesColumn), "Resources",
+                rowIndex, resourcesColumn.key);
+        }
+    });
+}
+
+// The actions of the buttons of the rows of a table: duplicate a row (below
+// it), remove a row.
+function rowActions(rows) {
+    return {
+        duplicate: (rowIndex) => {
+            rows.splice(rowIndex + 1, 0, form.duplicateRow(rows[rowIndex], state.itemTypes));
+            renderForm();
+        },
+        remove: (rowIndex) => {
+            rows.splice(rowIndex, 1);
+            renderForm();
+        },
+    };
+}
+
+// Line, below a row of a table, with the defects of the row (or its
+// resources: column 'key').
+function addDefectsLine(body, numberOfColumns, defects, text, rowIndex, key) {
+    const tr = body.insertRow();
+    tr.className = "placed-shapes-line";
+    tr.dataset.row = String(rowIndex);
+    tr.dataset.key = key;
+    const cell = tr.insertCell();
+    cell.colSpan = numberOfColumns;
+    const label = document.createElement("span");
+    label.className = "placed-shapes-label";
+    label.textContent = text;
+    cell.append(label, defects);
+}
+
+
+
+// Cell of a column of type "resources": a line for each resource, then a line
+// for each of its consumptions.
+function resourcesCell(row, column) {
+    const cell = document.createElement("div");
+    cell.className = "placed-shapes";
+    const resources = row[column.key];
+    const labelled = (text, element) => {
+        const label = document.createElement("label");
+        label.className = "inline";
+        label.append(text, element);
+        return label;
+    };
+    const button = (text, title, onClick) => {
+        const element = document.createElement("button");
+        element.type = "button";
+        element.textContent = text;
+        if (title)
+            element.title = title;
+        element.addEventListener("click", onClick);
+        return element;
+    };
+    resources.forEach((resource, i) => {
+        resource.consumptions = resourceConsumptions(resource);
+        const name = `resource ${i}`;
+        const line = document.createElement("div");
+        line.className = "dimensions resource";
+        line.appendChild(labelled("Capacity", numberInput(resource.capacity, `${name} capacity`,
+            (value) => { resource.capacity = value; })));
+        const penalize = document.createElement("input");
+        penalize.type = "checkbox";
+        penalize.checked = resource.penalize;
+        penalize.setAttribute("aria-label", `${name} penalize`);
+        penalize.addEventListener("change", () => { resource.penalize = penalize.checked; renderForm(); });
+        line.appendChild(labelled("Penalize", penalize));
+        // Exceeding the capacity is allowed, at this cost.
+        if (resource.penalize) {
+            line.appendChild(labelled("Penalty", numberInput(resource.penalty, `${name} penalty`,
+                (value) => { resource.penalty = value; }, "0")));
+        }
+        line.appendChild(button("Add a consumption", "", () => {
+            // The first item type without a consumption.
+            const used = resource.consumptions.map((consumption) => consumption.itemRow);
+            const itemRow = state.itemTypes.find((r) => !used.includes(r)) || state.itemTypes[0];
+            resource.consumptions.push({itemRow, values: ""});
+            renderForm();
+        }));
+        line.appendChild(button("×", "Remove the resource", () => { resources.splice(i, 1); renderForm(); }));
+        cell.appendChild(line);
+        resource.consumptions.forEach((consumption, j) => {
+            const consumptionLine = document.createElement("div");
+            consumptionLine.className = "dimensions consumption-line";
+            // The id of the item type (its position, from 0, as in the "Id"
+            // column).
+            const itemTypeId = document.createElement("input");
+            itemTypeId.type = "number";
+            itemTypeId.min = "0";
+            itemTypeId.max = String(state.itemTypes.length - 1);
+            itemTypeId.step = "1";
+            itemTypeId.className = "item-type-id";
+            itemTypeId.value = (consumption.itemRow !== null)? String(state.itemTypes.indexOf(consumption.itemRow)): "";
+            itemTypeId.setAttribute("aria-label", `${name} consumption ${j} item type id`);
+            itemTypeId.addEventListener("input", () => {
+                const id = Number(itemTypeId.value);
+                consumption.itemRow = (itemTypeId.value !== "" && Number.isInteger(id)
+                        && id >= 0 && id < state.itemTypes.length)?
+                    state.itemTypes[id]: null;
+            });
+            consumptionLine.appendChild(labelled("Item type", itemTypeId));
+            const values = document.createElement("input");
+            values.type = "text";
+            values.className = "vertices";
+            values.spellcheck = false;
+            values.placeholder = "e.g. 2, or 1, 2, 3 for the successive copies";
+            values.title = "The consumption of each copy, or of the successive copies "
+                + "(the last value for the next copies)";
+            values.value = consumption.values;
+            values.setAttribute("aria-label", `${name} consumption ${j}`);
+            values.addEventListener("input", () => { consumption.values = values.value; });
+            consumptionLine.appendChild(labelled("Consumption", values));
+            consumptionLine.appendChild(button("×", "Remove the consumption", () => {
+                resource.consumptions.splice(j, 1);
+                renderForm();
+            }));
+            cell.appendChild(consumptionLine);
+        });
+    });
+    return cell;
+}
+
+function renderForm() {
+    const type = problemType();
+    const irregular = (type === "irregular");
+    // A single bin for the open dimension objectives.
+    delete $("add-bin-type").dataset.locked;
+    $("add-bin-type").disabled = openDimension($("objective").value);
+    $("file-items").hidden = !irregular;
+    // Rows are pasted in the tables, except for irregular.
+    for (const hint of document.querySelectorAll(".paste-hint"))
+        hint.hidden = irregular;
+    if (irregular) {
+        const objective = $("objective").value;
+        irregularForm.renderTable($("bin-types"), state.binTypes, false, objective,
+            scheduleFormCheck, renderForm, state.itemTypes, rowActions(state.binTypes));
+        irregularForm.renderTable($("item-types"), state.itemTypes, true, objective,
+            scheduleFormCheck, renderForm, [], rowActions(state.itemTypes));
+    } else {
+        renderTable($("bin-types"), binColumns(type), state.binTypes);
+        renderTable($("item-types"), itemColumns(type), state.itemTypes);
+    }
+    lockForm();
+    scheduleFormCheck();
+}
+
+// Errors of the form, shown as the values are typed: the first one below the
+// form, and the invalid fields highlighted, with their error as tooltip (for
+// the irregular form, the shape of each row is drawn in its thumbnail
+// instead).
+function scheduleFormCheck() {
+    clearTimeout(state.formCheckTimer);
+    state.formCheckTimer = setTimeout(checkForm, 300);
+}
+
+function checkForm() {
+    try {
+        formInstance();
+        $("form-error").textContent = "";
+    } catch (error) {
+        $("form-error").textContent = "Error: " + error.message;
+    }
+    const type = problemType();
+    const objective = $("objective").value;
+    const parameterErrors = form.parameterErrors(type, state.instanceParameters, objective);
+    for (const element of $("instance-parameters").querySelectorAll("[data-key]"))
+        markInvalid(element, parameterErrors[element.dataset.key]);
+    if (type === "irregular")
+        return;
+    const formObject = {objective, instanceParameters: state.instanceParameters,
+        binTypes: state.binTypes, itemTypes: state.itemTypes};
+    for (const [table, kind, rows] of [[$("bin-types"), "bin", state.binTypes], [$("item-types"), "item", state.itemTypes]]) {
+        const errors = rows.map((row) => form.rowErrors(type, kind, row, formObject));
+        for (const element of table.querySelectorAll("[data-key]")) {
+            const rowIndex = Number(element.closest("tr").dataset.row);
+            markInvalid(element, (errors[rowIndex] || {})[element.dataset.key]);
+        }
+        // The "More" button of a row with an invalid field in its details.
+        for (const button of table.querySelectorAll("button[data-details]")) {
+            const rowErrors = errors[Number(button.closest("tr").dataset.row)] || {};
+            const message = button.dataset.details.split(" ").map((key) => rowErrors[key])
+                .find((m) => m !== undefined);
+            button.classList.toggle("invalid", message !== undefined);
+            button.setAttribute("aria-invalid", String(message !== undefined));
+        }
+    }
+}
+
+// Highlight a field of the form if it is invalid ('message' undefined
+// otherwise), with its error as tooltip. For the line of the defects or of
+// the resources of a row, its label.
+function markInvalid(element, message) {
+    const invalid = (message !== undefined);
+    element.classList.toggle("invalid", invalid);
+    if (element.matches("tr")) {
+        const label = element.querySelector(".placed-shapes-label");
+        if (label !== null)
+            label.title = invalid? message: "";
+        return;
+    }
+    const inputs = element.matches("input, select")?
+        [element]: [...element.querySelectorAll("input:not([type=checkbox]), select")];
+    for (const input of inputs) {
+        input.setAttribute("aria-invalid", String(invalid));
+        // The error in place of the tooltip of the field, if any.
+        if (input.dataset.title === undefined)
+            input.dataset.title = input.title;
+        input.title = invalid? message: input.dataset.title;
+    }
+}
+
+// Add an item type for each part of a DXF or SVG file. The initial item type is
+// replaced if it wasn't modified.
+async function loadFileItems(file) {
+    try {
+        const {parts, units, warnings} = await irregularForm.readShapeFile(file);
+        if (parts.length === 0)
+            throw new Error(`no closed contour found in ${file.name}.`);
+        const untouched = JSON.stringify(irregularForm.defaultItemRow());
+        if (state.itemTypes.length === 1 && JSON.stringify(state.itemTypes[0]) === untouched)
+            state.itemTypes = [];
+        for (const part of parts)
+            state.itemTypes.push({...irregularForm.defaultItemRow(), shape: "file", file: part});
+        $("file-items-status").classList.remove("error-text");
+        $("file-items-status").textContent =
+            `Added ${parts.length} item type${(parts.length > 1)? "s": ""} from ${file.name}`
+            + ((units !== null)? ` (${units})`: "") + "."
+            + ((warnings.length > 0)? ` Warnings: ${warnings.join("; ")}.`: "");
+        renderForm();
+    } catch (error) {
+        $("file-items-status").classList.add("error-text");
+        $("file-items-status").textContent = "Error: " + error.message;
+    }
+}
+
+// Highlight the example of the selected problem type.
+function updateGallery() {
+    for (const button of document.querySelectorAll("#gallery button"))
+        button.setAttribute("aria-pressed", String(button.dataset.problemType === problemType()));
+}
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Projects
+/////////////////////////////////////////////////////////////////////////////
+
+const PROBLEM_TYPES = ["rectangleguillotine", "rectangle", "box", "boxstacks", "onedimensional", "irregular"];
+
+// The last problem type and the last project of each problem type, to open
+// them again when the page is reloaded or the problem type changed.
+function remember(key, value) {
+    try {
+        localStorage.setItem("packingsolver." + key, value);
+    } catch (error) {
+        // Not remembered.
+    }
+}
+
+function remembered(key) {
+    try {
+        return localStorage.getItem("packingsolver." + key);
+    } catch (error) {
+        return null;
+    }
+}
+
+// The form and the parameters of the current project, from the page. The
+// form of an example isn't modified.
+function syncCurrent() {
+    const project = state.current;
+    if (project === null)
+        return;
+    if (!project.example) {
+        project.form = {
+            objective: $("objective").value,
+            instanceParameters: state.instanceParameters,
+            binTypes: state.binTypes,
+            itemTypes: state.itemTypes,
+        };
+    }
+    project.parameters = {
+        optimizationMode: $("optimization-mode").value,
+        timeLimit: $("time-limit").value,
+    };
+}
+
+// Save a project at most every 500 ms.
+function scheduleSave(project = state.current) {
+    if (project === null || state.saveTimers.has(project.id))
+        return;
+    state.saveTimers.set(project.id, {
+        project,
+        timer: setTimeout(() => saveProject(project), 500),
+    });
+}
+
+async function saveProject(project) {
+    const pending = state.saveTimers.get(project.id);
+    if (pending !== undefined) {
+        clearTimeout(pending.timer);
+        state.saveTimers.delete(project.id);
+    }
+    if (project === state.current)
+        syncCurrent();
+    // Removed in the meantime.
+    if (!state.projects.includes(project))
+        return;
+    try {
+        await state.store.save(project);
+    } catch (error) {
+        console.error(error);
+        $("storage-note").textContent = "The projects couldn't be saved in this browser: " + error.message;
+        $("storage-note").classList.add("error-text");
+    }
+}
+
+// Save the projects waiting to be saved, when the page is left.
+function flushSaves() {
+    for (const {project} of [...state.saveTimers.values()])
+        saveProject(project);
+}
+
+function projectNames(problemType, except = null) {
+    return state.projects
+        .filter((p) => p.problemType === problemType && p !== except)
+        .map((p) => p.name);
+}
+
+function addProject(project) {
+    state.projects.push(project);
+    saveProject(project);
+    openProject(project);
+}
+
+function openProject(project) {
+    if (state.current !== null && state.current !== project)
+        saveProject(state.current);
+    state.current = project;
+    remember("problemType", project.problemType);
+    remember("project." + project.problemType, project.id);
+    $("problem-type").value = project.problemType;
+    updateGallery();
+    renderObjectives(project.problemType);
+    $("objective").value = project.form.objective;
+    state.instanceParameters = project.form.instanceParameters;
+    state.binTypes = project.form.binTypes;
+    state.itemTypes = project.form.itemTypes;
+    $("optimization-mode").value = project.parameters.optimizationMode;
+    $("time-limit").value = project.parameters.timeLimit;
+    for (const id of ["form-error", "file-items-status", "download-instance-error", "load-json-error", "paste-status"])
+        $(id).textContent = "";
+    $("form-ignored").hidden = true;
+    // The results of the optimization aren't scrolled into view anymore.
+    state.revealPending = false;
+    renderProjectList();
+    renderProjectHeader();
+    renderInstanceParameters();
+    renderForm();
+    renderResults();
+    // After rendering, which completes the rows.
+    if (!state.histories.has(project.id))
+        state.histories.set(project.id, {entries: [formSnapshot()], index: 0});
+    updateHistoryButtons();
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// Paste
+/////////////////////////////////////////////////////////////////////////////
+
+// Cells pasted in a table ('kind' "bin" or "item"), copied from a spreadsheet
+// or lines of a CSV file (see 'paste.js'). A single value is pasted in its
+// field as usual.
+function onTablePaste(event, kind) {
+    if (problemType() === "irregular" || state.current.example)
+        return;
+    const parsed = paste.parsePastedText(event.clipboardData.getData("text/plain"));
+    if (!paste.severalCells(parsed))
+        return;
+    event.preventDefault();
+    // The cell where the cells are pasted: a field of a row (not of its
+    // details, defects or resources).
+    const cell = event.target.closest("td[data-key]");
+    const tr = (cell === null)? null: cell.closest("tr");
+    const inRow = (tr !== null && tr.className === "" && tr.dataset.row !== undefined);
+    const type = problemType();
+    const rows = (kind === "bin")? state.binTypes: state.itemTypes;
+    const result = paste.pasteRows(type, kind, rows, parsed, {
+        objective: $("objective").value,
+        instanceParameters: state.instanceParameters,
+        newRow: () => (kind === "bin")? newBinRow(type): newItemRow(type),
+        startRow: inRow? Number(tr.dataset.row): null,
+        startColumn: inRow? cell.dataset.key: null,
+    });
+    const status = $("paste-status");
+    if (result === null) {
+        status.textContent = "To paste cells without a header row, click the cell of the table where the first one goes.";
+        return;
+    }
+    const plural = (n, word) => `${n} ${word}${(n !== 1)? "s": ""}`;
+    const parts = [`Pasted ${plural(result.rows, "row")}`
+        + ((result.added > 0)? ` (${plural(result.added, "new row")}${result.replaced? ", replacing the default row": ""})`: "")
+        + "."];
+    if (result.ignoredColumns.length > 0)
+        parts.push(`Ignored columns: ${result.ignoredColumns.join(", ")}.`);
+    if (result.ignoredCells > 0)
+        parts.push(`${plural(result.ignoredCells, "cell")} not pasted (beyond the table, or in a field which can't be pasted).`);
+    if (result.errors.length > 0)
+        parts.push(`Not pasted: ${result.errors.join(" ")}`);
+    status.textContent = parts.join(" ");
+    renderForm();
+    scheduleHistory();
+    scheduleSave();
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// Undo and redo
+/////////////////////////////////////////////////////////////////////////////
+
+// The history of the form of a project: copies of the form ('entries'), the
+// one shown being 'entries[index]'. It is kept in memory only.
+const MAXIMUM_HISTORY_LENGTH = 100;
+
+// A copy of the form of the page, with the references between its rows
+// (e.g. the item type of a resource consumption), and its content as a string
+// to compare it.
+function formSnapshot() {
+    const snapshot = structuredClone({
+        objective: $("objective").value,
+        instanceParameters: state.instanceParameters,
+        binTypes: state.binTypes,
+        itemTypes: state.itemTypes,
+    });
+    return {form: snapshot, key: JSON.stringify(snapshot)};
+}
+
+// Record the form in the history of the current project, after a
+// modification: at once for a click or a change, after 'delay' ms for the
+// characters typed, so that a value typed is a single step.
+function scheduleHistory(delay = 0) {
+    clearTimeout(state.historyTimer);
+    state.historyTimer = setTimeout(recordHistory, delay);
+}
+
+function recordHistory() {
+    clearTimeout(state.historyTimer);
+    state.historyTimer = null;
+    const project = state.current;
+    const history = (project === null)? undefined: state.histories.get(project.id);
+    if (history === undefined || project.example)
+        return;
+    const snapshot = formSnapshot();
+    if (snapshot.key === history.entries[history.index].key)
+        return;
+    // The entries which could be redone are replaced.
+    history.entries.splice(history.index + 1);
+    history.entries.push(snapshot);
+    if (history.entries.length > MAXIMUM_HISTORY_LENGTH)
+        history.entries.shift();
+    history.index = history.entries.length - 1;
+    updateHistoryButtons();
+}
+
+function undo() {
+    moveInHistory(-1);
+}
+
+function redo() {
+    moveInHistory(1);
+}
+
+function moveInHistory(step) {
+    const project = state.current;
+    if (project === null || project.example)
+        return;
+    // The modification being typed first.
+    if (state.historyTimer !== null)
+        recordHistory();
+    const history = state.histories.get(project.id);
+    const index = history.index + step;
+    if (index < 0 || index >= history.entries.length)
+        return;
+    history.index = index;
+    const restored = structuredClone(history.entries[index].form);
+    $("objective").value = restored.objective;
+    state.instanceParameters = restored.instanceParameters;
+    state.binTypes = restored.binTypes;
+    state.itemTypes = restored.itemTypes;
+    renderInstanceParameters();
+    renderForm();
+    scheduleSave();
+    updateHistoryButtons();
+}
+
+function updateHistoryButtons() {
+    const project = state.current;
+    const history = state.histories.get(project.id);
+    for (const id of ["undo-button", "redo-button"])
+        $(id).hidden = project.example;
+    $("undo-button").disabled = (history === undefined || history.index === 0);
+    $("redo-button").disabled = (history === undefined || history.index === history.entries.length - 1);
+}
+
+// Open the last project opened of a problem type, its example otherwise.
+function openProblemType(problemType) {
+    const id = remembered("project." + problemType);
+    const ofType = projects.projectsOfType(state.projects, problemType);
+    openProject(ofType.find((p) => p.id === id) || ofType[0]);
+}
+
+// The examples of the problem type, then its other projects.
+function renderProjectList() {
+    const ofType = projects.projectsOfType(state.projects, problemType());
+    const examples = ofType.filter((project) => project.example);
+    const others = ofType.filter((project) => !project.example);
+    renderProjectButtons($("example-list"), examples);
+    renderProjectButtons($("project-list"), others);
+    $("examples-count").textContent = `(${examples.length})`;
+    $("no-projects").hidden = (others.length > 0);
+}
+
+function renderProjectButtons(list, listed) {
+    list.replaceChildren();
+    for (const project of listed) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.setAttribute("aria-current", String(project === state.current));
+        const name = document.createElement("span");
+        name.textContent = project.name;
+        button.appendChild(name);
+        if (project === state.solvingProject) {
+            const span = document.createElement("span");
+            span.className = "project-tag solving";
+            span.textContent = "Solving";
+            button.appendChild(span);
+        }
+        button.addEventListener("click", () => openProject(project));
+        const item = document.createElement("li");
+        item.appendChild(button);
+        list.appendChild(item);
+        // The current project is shown in a list which scrolls (the
+        // examples), without scrolling the page.
+        if (project === state.current) {
+            if (item.offsetTop < list.scrollTop)
+                list.scrollTop = item.offsetTop;
+            else if (item.offsetTop + item.offsetHeight > list.scrollTop + list.clientHeight)
+                list.scrollTop = item.offsetTop + item.offsetHeight - list.clientHeight;
+        }
+    }
+}
+
+function renderProjectHeader() {
+    const project = state.current;
+    $("project-name").textContent = project.name;
+    $("project-name").hidden = false;
+    $("project-name-input").hidden = true;
+    $("rename-project").disabled = project.example;
+    $("delete-project").disabled = project.example || project === state.solvingProject;
+    $("delete-project").title = (project === state.solvingProject)? "Stop the optimization to delete the project": "";
+    $("example-note").hidden = !project.example;
+}
+
+// Rename the current project, in an input in place of its name.
+function startRename() {
+    const input = $("project-name-input");
+    input.value = state.current.name;
+    $("project-name").hidden = true;
+    input.hidden = false;
+    input.focus();
+    input.select();
+}
+
+function endRename(commit) {
+    const input = $("project-name-input");
+    if (input.hidden)
+        return;
+    const project = state.current;
+    const name = input.value.trim();
+    if (commit && name !== "" && name !== project.name) {
+        project.name = projects.uniqueName(name, projectNames(project.problemType, project));
+        saveProject(project);
+        renderProjectList();
+    }
+    renderProjectHeader();
+}
+
+function duplicateProject() {
+    syncCurrent();
+    const project = state.current;
+    addProject(projects.duplicateProject(project,
+        projects.uniqueName(project.name + " (copy)", projectNames(project.problemType))));
+}
+
+async function deleteProject() {
+    const project = state.current;
+    if (project.example || project === state.solvingProject)
+        return;
+    if (!confirm(`Delete the project "${project.name}"?`))
+        return;
+    const pending = state.saveTimers.get(project.id);
+    if (pending !== undefined) {
+        clearTimeout(pending.timer);
+        state.saveTimers.delete(project.id);
+    }
+    state.projects.splice(state.projects.indexOf(project), 1);
+    state.histories.delete(project.id);
+    state.current = null;
+    openProject(projects.projectsOfType(state.projects, project.problemType)[0]);
+    try {
+        await state.store.remove(project.id);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function newProject() {
+    const type = problemType();
+    addProject(projects.newProject(type, projects.uniqueName("New project", projectNames(type))));
+}
+
+// A new project from an instance in the JSON format, named after the file,
+// with the fields which the solver doesn't read listed.
+async function loadJsonFile(file) {
+    const type = problemType();
+    let opened;
+    try {
+        let json;
+        try {
+            json = JSON.parse(await file.text());
+        } catch (error) {
+            throw new Error("invalid JSON: " + error.message);
+        }
+        opened = projects.projectFromInstance(type,
+            projects.uniqueName(projects.nameFromFileName(file.name), projectNames(type)), json);
+    } catch (error) {
+        $("load-json-error").textContent = "Error: " + error.message;
+        return;
+    }
+    addProject(opened.project);
+    $("form-ignored").textContent = "Ignored fields (not read by the solver): " + opened.ignored.join(", ") + ".";
+    $("form-ignored").hidden = (opened.ignored.length === 0);
+}
+
+// The examples of the documentation (see 'scripts/web_examples.py'), none if
+// they can't be loaded.
+async function loadDocExamples() {
+    try {
+        const response = await fetch("examples.json");
+        if (!response.ok)
+            throw new Error(`${response.status} ${response.statusText}`);
+        return await response.json();
+    } catch (error) {
+        console.error("examples.json: " + error.message);
+        return {};
+    }
+}
+
+// A zip file with the projects of the current problem type, except its
+// example: their forms, their instances and their solutions (see
+// 'projects.exportFiles').
+async function exportProjects() {
+    syncCurrent();
+    const type = problemType();
+    const status = $("import-projects-status");
+    status.classList.remove("error-text");
+    const {files, count} = projects.exportFiles(state.projects, type);
+    if (count === 0) {
+        status.textContent = "No projects to export (the example isn't exported).";
+        return;
+    }
+    const zip = new JSZip();
+    for (const [path, content] of Object.entries(files))
+        zip.file(path, content);
+    const content = await zip.generateAsync({type: "blob", compression: "DEFLATE"});
+    const date = new Date().toISOString().slice(0, 10);
+    download(`packingsolver_${type}_projects_${date}.zip`, "application/zip", content);
+    status.textContent = `Exported ${count} project${(count > 1)? "s": ""}.`;
+}
+
+// Add the projects of an exported zip file.
+async function importProjectsFile(file) {
+    const status = $("import-projects-status");
+    let imported;
+    try {
+        let zip;
+        try {
+            zip = await JSZip.loadAsync(file);
+        } catch (error) {
+            throw new Error("not a zip file.");
+        }
+        const files = {};
+        for (const entry of Object.values(zip.files)) {
+            if (!entry.dir)
+                files[entry.name] = await entry.async("string");
+        }
+        imported = projects.importFiles(files, state.projects, PROBLEM_TYPES);
+    } catch (error) {
+        status.classList.add("error-text");
+        status.textContent = "Error: " + error.message;
+        return;
+    }
+    for (const project of imported) {
+        state.projects.push(project);
+        saveProject(project);
+    }
+    renderProjectList();
+    // The number of projects of each problem type, named as in the select.
+    const counts = PROBLEM_TYPES
+        .map((type) => [type, imported.filter((p) => p.problemType === type).length])
+        .filter(([, count]) => count > 0)
+        .map(([type, count]) => `${count} ${$("problem-type").querySelector(`option[value="${type}"]`).textContent}`);
+    status.classList.remove("error-text");
+    status.textContent = `Imported ${imported.length} project${(imported.length !== 1)? "s": ""}`
+        + ((counts.length > 0)? `: ${counts.join(", ")}.`: ".");
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// Solving
+/////////////////////////////////////////////////////////////////////////////
+
+function setStatus(text, isError = false) {
+    $("status").textContent = text;
+    $("status").classList.toggle("error", isError);
+}
+
+function setRunning(running) {
+    state.running = running;
+    $("solve").disabled = running || state.worker === null;
+    $("stop").disabled = !running;
+    clearInterval(state.statusTimer);
+    state.statusTimer = null;
+    if (running) {
+        updateSolvingStatus();
+        state.statusTimer = setInterval(updateSolvingStatus, 200);
+    }
+}
+
+// Status while solving: the project solved if it isn't the current one, the
+// elapsed time, out of the time limit, and the best solution found so far.
+function updateSolvingStatus() {
+    const seconds = (performance.now() - state.startTime) / 1000;
+    const project = state.solvingProject;
+    let text = (project !== null && project !== state.current)?
+        `Solving "${project.name}"...`: "Solving...";
+    text += ` ${seconds.toFixed(1)} s`;
+    if (state.timeLimit !== null)
+        text += ` / ${format(state.timeLimit)} s`;
+    if (state.best !== null)
+        text += ` · best: ${state.best}`;
+    setStatus(text);
+}
+
+// When the first solution of the optimization is shown, scroll so that the
+// top of the window is at the beginning of the results. Only once, not to
+// fight the user scrolling elsewhere. Once the solution is drawn (see
+// 'plot'): before, the page may not be high enough to scroll that far.
+function revealResults() {
+    if (!state.resultsRevealed)
+        state.revealPending = true;
+}
+
+// Scroll to the results, if requested by 'revealResults': at once (not
+// smoothly), so that the next solutions can't stop it halfway.
+function revealPendingResults() {
+    if (!state.revealPending)
+        return;
+    state.revealPending = false;
+    state.resultsRevealed = true;
+    $("results").scrollIntoView({block: "start"});
+}
+
+// Redraw an element without moving the page: its height is kept while it is
+// redrawn (an asynchronous redraw may empty it for a moment, which would
+// shorten the page and scroll it up).
+async function redrawInPlace(element, redraw) {
+    element.style.minHeight = `${element.offsetHeight}px`;
+    try {
+        await redraw();
+    } finally {
+        element.style.minHeight = "";
+    }
+}
+
+function solve() {
+    syncCurrent();
+    let instanceObject;
+    try {
+        instanceObject = formInstance();
+    } catch (error) {
+        setStatus("Error: " + error.message, true);
+        return;
+    }
+    const parameters = {optimization_mode: $("optimization-mode").value};
+    const timeLimit = $("time-limit").value;
+    if (timeLimit !== "")
+        parameters.time_limit = Number(timeLimit);
+
+    // The solution and the progress of the optimization are those of the
+    // project, even if another project is opened in the meantime.
+    const project = state.current;
+    project.result = null;
+    project.progress = [];
+    state.solvingProject = project;
+    state.objective = instanceObject.objective;
+    state.totalItems = results.totalItems(instanceObject);
+    state.startTime = performance.now();
+    state.timeLimit = (parameters.time_limit !== undefined)? parameters.time_limit: null;
+    state.best = null;
+    state.resultsRevealed = false;
+    state.revealPending = false;
+    renderResults();
+    renderProjectList();
+    renderProjectHeader();
+    saveProject(project);
+
+    setRunning(true);
+    state.worker.postMessage({
+        type: "solve",
+        problemType: project.problemType,
+        instance: instanceObject,
+        parameters,
+    });
+}
+
+// Short description of a solution, from its JSON output.
+function describeSolution(output, objective) {
+    const solution = output.Solution;
+    const parts = [`${solution.NumberOfItems} items`];
+    if (solution.NumberOfBins !== undefined)
+        parts.push(`${solution.NumberOfBins} bins`);
+    if (objective === "knapsack" && solution.ItemProfit !== undefined)
+        parts.push(`profit ${format(solution.ItemProfit)}`);
+    if (objective === "variable-sized-bin-packing" && solution.BinCost !== undefined)
+        parts.push(`cost ${format(solution.BinCost)}`);
+    if (objective === "bin-packing-with-leftovers" && solution.LeftoverValue !== undefined)
+        parts.push(`leftover ${format(solution.LeftoverValue)}`);
+    if (objective === "bin-packing-cutting-cost" && solution.CuttingCost !== undefined)
+        parts.push(`cost ${format(solution.CuttingCost)}`);
+    // The used length along the open dimension ('Width' and 'Height' for
+    // rectangleguillotine).
+    const lengths = {
+        "open-dimension-x": [solution.XMax, solution.Width],
+        "open-dimension-y": [solution.YMax, solution.Height],
+        "open-dimension-z": [solution.ZMax],
+    };
+    if (objective in lengths) {
+        const length = lengths[objective].find((value) => value !== undefined);
+        if (length !== undefined)
+            parts.push(`length ${format(length)}`);
+    }
+    if (objective === "open-dimension-xy" && solution.OpenDimensionXYArea !== undefined)
+        parts.push(`area ${format(solution.OpenDimensionXYArea)}`);
+    return parts.join(", ");
+}
+
+function describeBound(output, objective) {
+    const key = results.BOUNDS[objective];
+    if (key === undefined || output[key] === undefined || output[key] === null)
+        return "";
+    return format(output[key]);
+}
+
+function addProgressRow(line) {
+    const row = $("progress").tBodies[0].insertRow();
+    row.insertCell().textContent = line.time.toFixed(3);
+    row.insertCell().textContent = line.solution;
+    row.insertCell().textContent = line.bound;
+}
+
+// The solution and the progress of the current project.
+function renderResults() {
+    const project = state.current;
+    $("progress").tBodies[0].replaceChildren();
+    for (const line of project.progress)
+        addProgressRow(line);
+    $("summary").replaceChildren();
+    clearPlot();
+    Plotly.purge($("progress-chart"));
+    state.last = null;
+    if (project.result === null) {
+        $("results").hidden = true;
+        return;
+    }
+    showResult(project.result);
+}
+
+// Show a solution of the current project ('{output, certificate,
+// objective}').
+function showResult(result) {
+    state.last = result;
+    $("results").hidden = false;
+    $("download-certificate").textContent = (state.current.problemType === "irregular")?
+        "Download the certificate (JSON)": "Download the certificate (CSV)";
+    renderSummary(result);
+    schedulePlot();
+}
+
+// The key numbers of a solution, a tile each.
+function renderSummary(result) {
+    const tiles = results.summaryTiles(result).map(({label, value, note}) => {
+        const tile = document.createElement("div");
+        tile.className = "stat-tile";
+        const labelElement = document.createElement("div");
+        labelElement.className = "stat-label";
+        labelElement.textContent = label;
+        const valueElement = document.createElement("div");
+        valueElement.className = "stat-value";
+        valueElement.textContent = value;
+        tile.append(labelElement, valueElement);
+        if (note !== undefined) {
+            const noteElement = document.createElement("div");
+            noteElement.className = "stat-note";
+            noteElement.textContent = note;
+            tile.appendChild(noteElement);
+        }
+        return tile;
+    });
+    $("summary").replaceChildren(...tiles);
+}
+
+// The colors of the page, for the charts: they follow its light or dark
+// mode.
+function chartColors() {
+    const style = getComputedStyle(document.documentElement);
+    const color = (name) => style.getPropertyValue(name).trim();
+    return {accent: color("--accent"), muted: color("--muted"), text: color("--text"), grid: color("--border")};
+}
+
+// The chart of the progress of the optimization of the current project.
+async function plotProgress() {
+    const project = state.current;
+    const figure = (project.result === null)?
+        null: results.progressFigure(project.progress, project.result, chartColors());
+    $("progress-chart").hidden = (figure === null);
+    if (figure === null) {
+        Plotly.purge($("progress-chart"));
+        return;
+    }
+    await redrawInPlace($("progress-chart"), () => Plotly.react(
+        $("progress-chart"), figure.data, figure.layout, {responsive: true, displayModeBar: false}));
+}
+
+// Plotting a solution can take a while: at most once every 500 ms.
+function schedulePlot() {
+    if (state.plotTimer !== null)
+        return;
+    state.plotTimer = setTimeout(async () => {
+        state.plotTimer = null;
+        await plot();
+    }, 500);
+}
+
+// The drawing of the solution: the visualizer ('viewer/').
+function clearPlot() {
+    $("plot").replaceChildren();
+    $("plot").classList.remove("viewer");
+    state.viewer = null;
+}
+
+async function plot() {
+    try {
+        await plotSolution();
+    } finally {
+        revealPendingResults();
+    }
+}
+
+async function plotSolution() {
+    try {
+        await plotProgress();
+    } catch (error) {
+        console.error(error);
+    }
+    const result = state.last;
+    if (result === null || result.output.Solution.NumberOfItems === 0)
+        return;
+    const type = state.current.problemType;
+    try {
+        const solution = viewerSolution.readSolution(result.certificate, type);
+        // The bin shown is kept when the solution of the project is updated.
+        const selected = (state.viewer !== null && state.viewerProject === state.current)?
+            state.viewer.selected(): 0;
+        // Drawn again without moving the page.
+        const scroll = window.scrollY;
+        state.viewer = createViewer($("plot"), solution, {selected});
+        state.viewerProject = state.current;
+        if (window.scrollY !== scroll)
+            window.scrollTo(0, scroll);
+    } catch (error) {
+        console.error(error);
+        setStatus("Error while drawing the solution: " + error.message, true);
+    }
+}
+
+function onWorkerMessage(event) {
+    const message = event.data;
+    const project = state.solvingProject;
+    if (message.type === "ready") {
+        setRunning(false);
+        setStatus("Ready.");
+    } else if (message.type === "solution") {
+        if (project === null)
+            return;
+        const line = {
+            time: message.output.Time,
+            solution: describeSolution(message.output, state.objective),
+            bound: describeBound(message.output, state.objective),
+            // For the chart of the progress.
+            value: results.objectiveValue(message.output, state.objective),
+            boundValue: results.boundValue(message.output, state.objective),
+        };
+        project.progress.push(line);
+        if (project === state.current) {
+            addProgressRow(line);
+            // A bound alone changes the chart.
+            if (project.result !== null)
+                schedulePlot();
+        }
+        if (message.output.Solution.NumberOfItems > 0) {
+            project.result = {output: message.output, certificate: message.certificate,
+                objective: state.objective, totalItems: state.totalItems};
+            state.best = line.solution;
+            if (project === state.current) {
+                showResult(project.result);
+                revealResults();
+            }
+            if (state.running)
+                updateSolvingStatus();
+        }
+        scheduleSave(project);
+    } else if (message.type === "done") {
+        setRunning(false);
+        state.solvingProject = null;
+        if (project !== null) {
+            project.result = {output: message.output, certificate: message.certificate,
+                objective: state.objective, totalItems: state.totalItems};
+            saveProject(project);
+            if (project === state.current) {
+                showResult(project.result);
+                revealResults();
+            }
+        }
+        renderProjectList();
+        renderProjectHeader();
+        const seconds = (performance.now() - state.startTime) / 1000;
+        setStatus(((project !== null && project !== state.current)? `"${project.name}": done`: "Done")
+            + ` in ${seconds.toFixed(1)} s.`);
+    } else if (message.type === "error") {
+        setRunning(false);
+        state.solvingProject = null;
+        renderProjectList();
+        renderProjectHeader();
+        setStatus("Error: " + message.error, true);
+    }
+}
+
+function download(name, type, content) {
+    const url = URL.createObjectURL(new Blob([content], {type}));
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = name;
+    link.click();
+    URL.revokeObjectURL(url);
+}
+
+// Download the instance of the form, in the JSON format, named after the
+// project.
+function downloadInstance() {
+    let instanceObject;
+    try {
+        instanceObject = formInstance();
+    } catch (error) {
+        $("download-instance-error").textContent = "Error: " + error.message;
+        return;
+    }
+    $("download-instance-error").textContent = "";
+    download(`${state.current.name}.json`, "application/json",
+        JSON.stringify(instanceObject, null, 4) + "\n");
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// Initialization
+/////////////////////////////////////////////////////////////////////////////
+
+async function init() {
+    // Some fields are only shown for some objectives.
+    $("objective").addEventListener("change", () => {
+        // A single bin for the open dimension objectives.
+        if (openDimension($("objective").value) && state.binTypes.length > 0) {
+            state.binTypes.splice(1);
+            state.binTypes[0].copies = 1;
+            state.binTypes[0].unlimited_copies = false;
+        }
+        renderInstanceParameters();
+        renderForm();
+    });
+    $("problem-type").addEventListener("change", () => openProblemType(problemType()));
+    // The examples of solutions select their problem type.
+    for (const button of document.querySelectorAll("#gallery button")) {
+        button.addEventListener("click", () => {
+            openProblemType(button.dataset.problemType);
+            $("problem").scrollIntoView({behavior: "smooth"});
+        });
+    }
+    $("add-bin-type").addEventListener("click", () => {
+        state.binTypes.push(newBinRow(problemType()));
+        renderForm();
+    });
+    $("add-item-type").addEventListener("click", () => {
+        state.itemTypes.push(newItemRow(problemType()));
+        renderForm();
+    });
+    // The fields are checked as they are typed.
+    for (const event of ["input", "change"])
+        $("form-fields").addEventListener(event, scheduleFormCheck);
+    // The modifications of the form are recorded in its history: the
+    // characters typed once a value is typed, the clicks (e.g. on the
+    // buttons adding or removing a row) and the changes at once.
+    $("form-fields").addEventListener("input", () => scheduleHistory(500));
+    $("form-fields").addEventListener("change", () => scheduleHistory());
+    $("form-fields").addEventListener("click", (event) => {
+        if (event.target.closest("button") !== null)
+            scheduleHistory();
+    });
+    $("bin-types").addEventListener("paste", (event) => onTablePaste(event, "bin"));
+    $("item-types").addEventListener("paste", (event) => onTablePaste(event, "item"));
+    $("undo-button").addEventListener("click", undo);
+    $("redo-button").addEventListener("click", redo);
+    // Ctrl+Z, Ctrl+Shift+Z and Ctrl+Y (Cmd on macOS), except in a text field,
+    // where they undo and redo the characters typed.
+    document.addEventListener("keydown", (event) => {
+        if (!(event.ctrlKey || event.metaKey) || event.altKey)
+            return;
+        const key = event.key.toLowerCase();
+        if (key !== "z" && key !== "y")
+            return;
+        if (event.target.closest("input:not([type=checkbox]):not([type=radio]), textarea, select, [contenteditable]") !== null)
+            return;
+        event.preventDefault();
+        if (key === "y" || event.shiftKey)
+            redo();
+        else
+            undo();
+    });
+    $("load-file-items").addEventListener("click", () => $("file-items-file").click());
+    $("file-items-file").addEventListener("change", async () => {
+        const file = $("file-items-file").files[0];
+        $("file-items-file").value = "";
+        if (file !== undefined) {
+            await loadFileItems(file);
+            scheduleSave();
+            scheduleHistory();
+        }
+    });
+    $("new-project").addEventListener("click", newProject);
+    // The examples are folded or shown as they were last.
+    $("examples").open = (remembered("examplesOpen") !== "false");
+    $("examples").addEventListener("toggle", () => remember("examplesOpen", String($("examples").open)));
+    $("load-json").addEventListener("click", () => $("json-file").click());
+    $("json-file").addEventListener("change", async () => {
+        const file = $("json-file").files[0];
+        $("json-file").value = "";
+        if (file !== undefined)
+            await loadJsonFile(file);
+    });
+    $("export-projects").addEventListener("click", exportProjects);
+    $("import-projects").addEventListener("click", () => $("import-projects-file").click());
+    $("import-projects-file").addEventListener("change", async () => {
+        const file = $("import-projects-file").files[0];
+        $("import-projects-file").value = "";
+        if (file !== undefined)
+            await importProjectsFile(file);
+    });
+    $("rename-project").addEventListener("click", startRename);
+    $("project-name-input").addEventListener("keydown", (event) => {
+        if (event.key === "Enter")
+            endRename(true);
+        else if (event.key === "Escape")
+            endRename(false);
+    });
+    $("project-name-input").addEventListener("blur", () => endRename(true));
+    $("duplicate-project").addEventListener("click", duplicateProject);
+    $("delete-project").addEventListener("click", deleteProject);
+    // The changes of the form and of the parameters are saved.
+    for (const section of [$("form-fields"), $("parameters")]) {
+        for (const event of ["input", "change", "click"])
+            section.addEventListener(event, () => scheduleSave());
+    }
+    window.addEventListener("pagehide", flushSaves);
+    // The charts take the colors of the page when they are drawn: drawn again
+    // when it switches between light and dark.
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+        if (state.current !== null && state.current.result !== null)
+            schedulePlot();
+    });
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden")
+            flushSaves();
+    });
+    $("solve").addEventListener("click", solve);
+    $("stop").addEventListener("click", () => state.worker.postMessage({type: "stop"}));
+    $("download-certificate").addEventListener("click", () => {
+        const json = state.current.problemType === "irregular";
+        download(
+            `${state.current.name}_solution.${json? "json": "csv"}`,
+            json? "application/json": "text/csv",
+            state.last.certificate);
+    });
+    $("download-instance").addEventListener("click", downloadInstance);
+    // The error of a download is cleared when the instance changes.
+    for (const event of ["input", "change", "click"]) {
+        $("problem").addEventListener(event, (e) => {
+            if (e.target !== $("download-instance"))
+                $("download-instance-error").textContent = "";
+        });
+    }
+    $("download-output").addEventListener("click", () => {
+        download(`${state.current.name}_output.json`, "application/json",
+            JSON.stringify(state.last.output, null, 4));
+    });
+
+    // The projects: the examples, and those stored in the browser.
+    state.store = await projects.openStore();
+    if (!state.store.persistent) {
+        $("storage-note").textContent =
+            "The projects can't be saved in this browser: they are lost when the page is closed.";
+    }
+    let stored = [];
+    try {
+        stored = await state.store.load();
+    } catch (error) {
+        console.error(error);
+    }
+    state.projects = projects.withExamples(PROBLEM_TYPES, stored, await loadDocExamples());
+    // The example given by the URL ('?example=<problem type>/<name>', the
+    // links of the documentation), the last project opened otherwise.
+    const reference = new URLSearchParams(window.location.search).get("example");
+    const linked = (reference === null)? undefined: projects.findExample(state.projects, reference);
+    if (linked !== undefined) {
+        $("examples").open = true;
+        openProject(linked);
+        $("problem").scrollIntoView();
+    } else {
+        const type = remembered("problemType");
+        openProblemType(PROBLEM_TYPES.includes(type)? type: problemType());
+        if (reference !== null)
+            $("example-link-error").textContent = `Error: there is no example "${reference}".`;
+    }
+
+    // The threads of the solver need 'SharedArrayBuffer'.
+    if (!window.crossOriginIsolated) {
+        $("isolation-error").hidden = false;
+        setStatus("The solver can't run on this page.", true);
+        return;
+    }
+    state.worker = new Worker("packingsolver_worker.js");
+    state.worker.onmessage = onWorkerMessage;
+    state.worker.onerror = (error) => {
+        setRunning(false);
+        state.solvingProject = null;
+        renderProjectList();
+        renderProjectHeader();
+        setStatus("Error: " + error.message, true);
+    };
+}
+
+init();

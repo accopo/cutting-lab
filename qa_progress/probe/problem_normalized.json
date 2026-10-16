@@ -1,0 +1,145 @@
+{
+  "id": "paper-layout",
+  "name": "纸张 · 包装拼版",
+  "industry": "paper",
+  "kind": "rectangle",
+  "unit": "mm",
+  "description": "矩形自由摆放，允许 90°旋转；选择贯通路线可比较裁切约束。",
+  "source": {
+    "label": "本地合成教学示例",
+    "kind": "synthetic",
+    "note": "为演示该行业约束而构造的尺寸与轮廓，不代表工厂订单或真实生产纸样。"
+  },
+  "stock": {
+    "width": 900,
+    "height": 640,
+    "copies": 20
+  },
+  "items": [
+    {
+      "id": 0,
+      "name": "包装面 A",
+      "quantity": 12,
+      "width": 297,
+      "height": 210,
+      "profit": 3.0,
+      "allowed_rotations": [
+        0.0,
+        90.0
+      ],
+      "effective_rotations": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "polygon": [
+        [
+          297.0,
+          0.0
+        ],
+        [
+          297.0,
+          210.0
+        ],
+        [
+          0.0,
+          210.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": 1,
+      "name": "标签 B",
+      "quantity": 30,
+      "width": 140,
+      "height": 90,
+      "profit": 1.0,
+      "allowed_rotations": [
+        0.0,
+        90.0
+      ],
+      "effective_rotations": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "polygon": [
+        [
+          140.0,
+          0.0
+        ],
+        [
+          140.0,
+          90.0
+        ],
+        [
+          0.0,
+          90.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": 2,
+      "name": "内衬 C",
+      "quantity": 10,
+      "width": 220,
+      "height": 160,
+      "profit": 2.0,
+      "allowed_rotations": [
+        0.0,
+        90.0
+      ],
+      "effective_rotations": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "polygon": [
+        [
+          220.0,
+          0.0
+        ],
+        [
+          220.0,
+          160.0
+        ],
+        [
+          0.0,
+          160.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    }
+  ],
+  "settings": {
+    "engine": "rectangle",
+    "objective": "bins",
+    "rotation": "quarter",
+    "custom_angles": [
+      0.0,
+      180.0
+    ],
+    "spacing": 0,
+    "edge": 0,
+    "kerf": 0,
+    "time_limit": 1.0,
+    "stages": 3,
+    "first_cut": "vertical"
+  },
+  "defects": [],
+  "effective_stock_copies": 20
+}

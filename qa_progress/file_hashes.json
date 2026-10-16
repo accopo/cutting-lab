@@ -1,0 +1,18 @@
+[
+  {
+    "path": "progress.py",
+    "sha256": "a150bacd286892050842f4d472230a9c6acf3d032fd57904a2fc34ef07728a12"
+  },
+  {
+    "path": "test_progress.py",
+    "sha256": "85f45122fd85128de9d118d0ba74f9791ef61429b38125a2b606e42923532f07"
+  },
+  {
+    "path": "qa_progress\\results.json",
+    "sha256": "09069d45e31422c89ded4552757c23273376f58897e8c2f218ca01ff69af0318"
+  },
+  {
+    "path": "qa_progress\\README.md",
+    "sha256": "0deb0a4b2d0b5f1dd14c429ecb2dcd04611e5169e462c389e7d30248c8dcff93"
+  }
+]

@@ -1,0 +1,215 @@
+{
+  "name": "合成一维锯缝校验",
+  "kind": "onedimensional",
+  "unit": "mm",
+  "stock": {
+    "width": 10,
+    "height": 1,
+    "copies": 3
+  },
+  "items": [
+    {
+      "id": 0,
+      "name": "成品 0",
+      "length": 6,
+      "quantity": 1,
+      "allowed_rotations": [
+        0.0
+      ],
+      "profit": 1.0,
+      "effective_rotations": [
+        0
+      ],
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          6,
+          0
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": 1,
+      "name": "成品 1",
+      "length": 5,
+      "quantity": 1,
+      "allowed_rotations": [
+        0.0
+      ],
+      "profit": 1.0,
+      "effective_rotations": [
+        0
+      ],
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": 2,
+      "name": "成品 2",
+      "length": 3,
+      "quantity": 1,
+      "allowed_rotations": [
+        0.0
+      ],
+      "profit": 1.0,
+      "effective_rotations": [
+        0
+      ],
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": 3,
+      "name": "成品 3",
+      "length": 2,
+      "quantity": 1,
+      "allowed_rotations": [
+        0.0
+      ],
+      "profit": 1.0,
+      "effective_rotations": [
+        0
+      ],
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": 4,
+      "name": "成品 4",
+      "length": 2,
+      "quantity": 1,
+      "allowed_rotations": [
+        0.0
+      ],
+      "profit": 1.0,
+      "effective_rotations": [
+        0
+      ],
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": 5,
+      "name": "成品 5",
+      "length": 2,
+      "quantity": 1,
+      "allowed_rotations": [
+        0.0
+      ],
+      "profit": 1.0,
+      "effective_rotations": [
+        0
+      ],
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  ],
+  "settings": {
+    "engine": "bfd-1d",
+    "objective": "bins",
+    "kerf": 0,
+    "rotation": "none",
+    "time_limit": 1.0,
+    "custom_angles": [
+      0.0,
+      180.0
+    ],
+    "spacing": 0,
+    "edge": 0,
+    "stages": 3,
+    "first_cut": "vertical"
+  },
+  "defects": [],
+  "effective_stock_copies": 3
+}

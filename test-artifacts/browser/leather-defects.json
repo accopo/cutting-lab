@@ -1,0 +1,1398 @@
+{
+  "problem": {
+    "id": "leather-defects",
+    "name": "皮革 · 疵点避让示例",
+    "industry": "leather",
+    "kind": "irregular",
+    "unit": "mm",
+    "description": "矩形可用区域中的合成皮革部件，带两处矩形疵点；未建模整张天然皮边界。",
+    "source": {
+      "label": "本地合成教学示例",
+      "kind": "synthetic",
+      "note": "为演示该行业约束而构造的尺寸与轮廓，不代表工厂订单或真实生产纸样。",
+      "derived": false,
+      "scenario_label": "原始实例参数"
+    },
+    "stock": {
+      "width": 1600,
+      "height": 1000,
+      "copies": 10
+    },
+    "items": [
+      {
+        "id": 0,
+        "name": "包面示意",
+        "polygon": [
+          [
+            0,
+            0
+          ],
+          [
+            300,
+            0
+          ],
+          [
+            330,
+            160
+          ],
+          [
+            285,
+            250
+          ],
+          [
+            45,
+            250
+          ],
+          [
+            0,
+            170
+          ]
+        ],
+        "quantity": 6,
+        "profit": 5,
+        "allowed_rotations": [
+          0,
+          180
+        ],
+        "effective_rotations": [
+          0,
+          180
+        ]
+      },
+      {
+        "id": 1,
+        "name": "侧片示意",
+        "polygon": [
+          [
+            0,
+            0
+          ],
+          [
+            120,
+            0
+          ],
+          [
+            160,
+            220
+          ],
+          [
+            115,
+            260
+          ],
+          [
+            20,
+            240
+          ]
+        ],
+        "quantity": 8,
+        "profit": 3,
+        "allowed_rotations": [
+          0,
+          180
+        ],
+        "effective_rotations": [
+          0,
+          180
+        ]
+      },
+      {
+        "id": 2,
+        "name": "带片示意",
+        "polygon": [
+          [
+            0,
+            0
+          ],
+          [
+            380,
+            0
+          ],
+          [
+            380,
+            35
+          ],
+          [
+            0,
+            35
+          ]
+        ],
+        "quantity": 10,
+        "profit": 1,
+        "allowed_rotations": [
+          0,
+          180
+        ],
+        "effective_rotations": [
+          0,
+          180
+        ]
+      }
+    ],
+    "settings": {
+      "engine": "irregular",
+      "objective": "bins",
+      "rotation": "source",
+      "custom_angles": [
+        0,
+        180
+      ],
+      "spacing": 4,
+      "edge": 8,
+      "kerf": 0,
+      "time_limit": 1,
+      "stages": 3,
+      "first_cut": "vertical"
+    },
+    "defects": [
+      {
+        "x": 450,
+        "y": 250,
+        "width": 140,
+        "height": 100
+      },
+      {
+        "x": 1050,
+        "y": 650,
+        "width": 180,
+        "height": 130
+      }
+    ],
+    "effective_stock_copies": 10
+  },
+  "native": {
+    "problemType": "irregular",
+    "instance": {
+      "objective": "bin-packing",
+      "bin_types": [
+        {
+          "type": "general",
+          "elements": [
+            {
+              "type": "LineSegment",
+              "start": {
+                "x": 0,
+                "y": 0
+              },
+              "end": {
+                "x": 1600,
+                "y": 0
+              }
+            },
+            {
+              "type": "LineSegment",
+              "start": {
+                "x": 1600,
+                "y": 0
+              },
+              "end": {
+                "x": 1600,
+                "y": 1000
+              }
+            },
+            {
+              "type": "LineSegment",
+              "start": {
+                "x": 1600,
+                "y": 1000
+              },
+              "end": {
+                "x": 0,
+                "y": 1000
+              }
+            },
+            {
+              "type": "LineSegment",
+              "start": {
+                "x": 0,
+                "y": 1000
+              },
+              "end": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          ],
+          "copies": 10,
+          "item_bin_minimum_spacing": 8,
+          "defects": [
+            {
+              "type": "general",
+              "elements": [
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 450,
+                    "y": 250
+                  },
+                  "end": {
+                    "x": 590,
+                    "y": 250
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 590,
+                    "y": 250
+                  },
+                  "end": {
+                    "x": 590,
+                    "y": 350
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 590,
+                    "y": 350
+                  },
+                  "end": {
+                    "x": 450,
+                    "y": 350
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 450,
+                    "y": 350
+                  },
+                  "end": {
+                    "x": 450,
+                    "y": 250
+                  }
+                }
+              ],
+              "item_defect_minimum_spacing": 4
+            },
+            {
+              "type": "general",
+              "elements": [
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 1050,
+                    "y": 650
+                  },
+                  "end": {
+                    "x": 1230,
+                    "y": 650
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 1230,
+                    "y": 650
+                  },
+                  "end": {
+                    "x": 1230,
+                    "y": 780
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 1230,
+                    "y": 780
+                  },
+                  "end": {
+                    "x": 1050,
+                    "y": 780
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 1050,
+                    "y": 780
+                  },
+                  "end": {
+                    "x": 1050,
+                    "y": 650
+                  }
+                }
+              ],
+              "item_defect_minimum_spacing": 4
+            }
+          ]
+        }
+      ],
+      "item_types": [
+        {
+          "shapes": [
+            {
+              "type": "general",
+              "elements": [
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "end": {
+                    "x": 300,
+                    "y": 0
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 300,
+                    "y": 0
+                  },
+                  "end": {
+                    "x": 330,
+                    "y": 160
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 330,
+                    "y": 160
+                  },
+                  "end": {
+                    "x": 285,
+                    "y": 250
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 285,
+                    "y": 250
+                  },
+                  "end": {
+                    "x": 45,
+                    "y": 250
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 45,
+                    "y": 250
+                  },
+                  "end": {
+                    "x": 0,
+                    "y": 170
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 0,
+                    "y": 170
+                  },
+                  "end": {
+                    "x": 0,
+                    "y": 0
+                  }
+                }
+              ]
+            }
+          ],
+          "copies": 6,
+          "profit": 5,
+          "allowed_rotations": [
+            {
+              "start": 0,
+              "end": 0,
+              "mirror": false
+            },
+            {
+              "start": 180,
+              "end": 180,
+              "mirror": false
+            }
+          ]
+        },
+        {
+          "shapes": [
+            {
+              "type": "general",
+              "elements": [
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "end": {
+                    "x": 120,
+                    "y": 0
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 120,
+                    "y": 0
+                  },
+                  "end": {
+                    "x": 160,
+                    "y": 220
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 160,
+                    "y": 220
+                  },
+                  "end": {
+                    "x": 115,
+                    "y": 260
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 115,
+                    "y": 260
+                  },
+                  "end": {
+                    "x": 20,
+                    "y": 240
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 20,
+                    "y": 240
+                  },
+                  "end": {
+                    "x": 0,
+                    "y": 0
+                  }
+                }
+              ]
+            }
+          ],
+          "copies": 8,
+          "profit": 3,
+          "allowed_rotations": [
+            {
+              "start": 0,
+              "end": 0,
+              "mirror": false
+            },
+            {
+              "start": 180,
+              "end": 180,
+              "mirror": false
+            }
+          ]
+        },
+        {
+          "shapes": [
+            {
+              "type": "general",
+              "elements": [
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "end": {
+                    "x": 380,
+                    "y": 0
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 380,
+                    "y": 0
+                  },
+                  "end": {
+                    "x": 380,
+                    "y": 35
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 380,
+                    "y": 35
+                  },
+                  "end": {
+                    "x": 0,
+                    "y": 35
+                  }
+                },
+                {
+                  "type": "LineSegment",
+                  "start": {
+                    "x": 0,
+                    "y": 35
+                  },
+                  "end": {
+                    "x": 0,
+                    "y": 0
+                  }
+                }
+              ]
+            }
+          ],
+          "copies": 10,
+          "profit": 1,
+          "allowed_rotations": [
+            {
+              "start": 0,
+              "end": 0,
+              "mirror": false
+            },
+            {
+              "start": 180,
+              "end": 180,
+              "mirror": false
+            }
+          ]
+        }
+      ],
+      "parameters": {
+        "item_item_minimum_spacing": 4
+      }
+    },
+    "parameters": {
+      "time_limit": 1,
+      "verbosity_level": 0,
+      "optimization_mode": "anytime"
+    }
+  },
+  "raw": {
+    "certificate": "{\n    \"bins\": [\n        {\n            \"copies\": 1,\n            \"defects\": [\n                {\n                    \"shape\": [\n                        {\n                            \"type\": \"LineSegment\",\n                            \"xe\": 590.0,\n                            \"xs\": 450.0,\n                            \"ye\": 250.0,\n                            \"ys\": 250.0\n                        },\n                        {\n                            \"type\": \"LineSegment\",\n                            \"xe\": 590.0,\n                            \"xs\": 590.0,\n                            \"ye\": 350.0,\n                            \"ys\": 250.0\n                        },\n                        {\n                            \"type\": \"LineSegment\",\n                            \"xe\": 450.0,\n                            \"xs\": 590.0,\n                            \"ye\": 350.0,\n                            \"ys\": 350.0\n                        },\n                        {\n                            \"type\": \"LineSegment\",\n                            \"xe\": 450.0,\n                            \"xs\": 450.0,\n                            \"ye\": 250.0,\n                            \"ys\": 350.0\n                        }\n                    ]\n                },\n                {\n                    \"shape\": [\n                        {\n                            \"type\": \"LineSegment\",\n                            \"xe\": 1230.0,\n                            \"xs\": 1050.0,\n                            \"ye\": 650.0,\n                            \"ys\": 650.0\n                        },\n                        {\n                            \"type\": \"LineSegment\",\n                            \"xe\": 1230.0,\n                            \"xs\": 1230.0,\n                            \"ye\": 780.0,\n                            \"ys\": 650.0\n                        },\n                        {\n                            \"type\": \"LineSegment\",\n                            \"xe\": 1050.0,\n                            \"xs\": 1230.0,\n                            \"ye\": 780.0,\n                            \"ys\": 780.0\n                        },\n                        {\n                            \"type\": \"LineSegment\",\n                            \"xe\": 1050.0,\n                            \"xs\": 1050.0,\n                            \"ye\": 650.0,\n                            \"ys\": 780.0\n                        }\n                    ]\n                }\n            ],\n            \"id\": 0,\n            \"items\": [\n                {\n                    \"angle\": 0.0,\n                    \"id\": 0,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 308.0,\n                                    \"xs\": 8.0,\n                                    \"ye\": 8.0,\n                                    \"ys\": 8.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 338.0,\n                                    \"xs\": 308.0,\n                                    \"ye\": 168.0,\n                                    \"ys\": 8.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 293.0,\n                                    \"xs\": 338.0,\n                                    \"ye\": 258.0,\n                                    \"ys\": 168.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 53.0,\n                                    \"xs\": 293.0,\n                                    \"ye\": 258.0,\n                                    \"ys\": 258.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 8.0,\n                                    \"xs\": 53.0,\n                                    \"ye\": 178.0,\n                                    \"ys\": 258.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 8.0,\n                                    \"xs\": 8.0,\n                                    \"ye\": 8.0,\n                                    \"ys\": 178.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 8.0,\n                    \"y\": 8.0\n                },\n                {\n                    \"angle\": 0.0,\n                    \"id\": 0,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 308.0,\n                                    \"xs\": 8.0,\n                                    \"ye\": 262.0,\n                                    \"ys\": 262.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 338.0,\n                                    \"xs\": 308.0,\n                                    \"ye\": 422.0,\n                                    \"ys\": 262.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 293.0,\n                                    \"xs\": 338.0,\n                                    \"ye\": 512.0,\n                                    \"ys\": 422.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 53.0,\n                                    \"xs\": 293.0,\n                                    \"ye\": 512.0,\n                                    \"ys\": 512.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 8.0,\n                                    \"xs\": 53.0,\n                                    \"ye\": 432.0,\n                                    \"ys\": 512.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 8.0,\n                                    \"xs\": 8.0,\n                                    \"ye\": 262.0,\n                                    \"ys\": 432.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 8.0,\n                    \"y\": 262.0\n                },\n                {\n                    \"angle\": 0.0,\n                    \"id\": 0,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 308.0,\n                                    \"xs\": 8.0,\n                                    \"ye\": 516.0,\n                                    \"ys\": 516.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 338.0,\n                                    \"xs\": 308.0,\n                                    \"ye\": 676.0,\n                                    \"ys\": 516.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 293.0,\n                                    \"xs\": 338.0,\n                                    \"ye\": 766.0,\n                                    \"ys\": 676.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 53.0,\n                                    \"xs\": 293.0,\n                                    \"ye\": 766.0,\n                                    \"ys\": 766.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 8.0,\n                                    \"xs\": 53.0,\n                                    \"ye\": 686.0,\n                                    \"ys\": 766.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 8.0,\n                                    \"xs\": 8.0,\n                                    \"ye\": 516.0,\n                                    \"ys\": 686.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 8.0,\n                    \"y\": 516.0\n                },\n                {\n                    \"angle\": 0.0,\n                    \"id\": 2,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 388.0,\n                                    \"xs\": 8.0,\n                                    \"ye\": 770.0,\n                                    \"ys\": 770.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 388.0,\n                                    \"xs\": 388.0,\n                                    \"ye\": 805.0,\n                                    \"ys\": 770.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 8.0,\n                                    \"xs\": 388.0,\n                                    \"ye\": 805.0,\n                                    \"ys\": 805.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 8.0,\n                                    \"xs\": 8.0,\n                                    \"ye\": 770.0,\n                                    \"ys\": 805.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 8.0,\n                    \"y\": 770.0\n                },\n                {\n                    \"angle\": 0.0,\n                    \"id\": 2,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 388.0,\n                                    \"xs\": 8.0,\n                                    \"ye\": 809.0,\n                                    \"ys\": 809.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 388.0,\n                                    \"xs\": 388.0,\n                                    \"ye\": 844.0,\n                                    \"ys\": 809.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 8.0,\n                                    \"xs\": 388.0,\n                                    \"ye\": 844.0,\n                                    \"ys\": 844.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 8.0,\n                                    \"xs\": 8.0,\n                                    \"ye\": 809.0,\n                                    \"ys\": 844.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 8.0,\n                    \"y\": 809.0\n                },\n                {\n                    \"angle\": 0.0,\n                    \"id\": 2,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 388.0,\n                                    \"xs\": 8.0,\n                                    \"ye\": 848.0,\n                                    \"ys\": 848.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 388.0,\n                                    \"xs\": 388.0,\n                                    \"ye\": 883.0,\n                                    \"ys\": 848.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 8.0,\n                                    \"xs\": 388.0,\n                                    \"ye\": 883.0,\n                                    \"ys\": 883.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 8.0,\n                                    \"xs\": 8.0,\n                                    \"ye\": 848.0,\n                                    \"ys\": 883.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 8.0,\n                    \"y\": 848.0\n                },\n                {\n                    \"angle\": 0.0,\n                    \"id\": 2,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 388.0,\n                                    \"xs\": 8.0,\n                                    \"ye\": 887.0,\n                                    \"ys\": 887.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 388.0,\n                                    \"xs\": 388.0,\n                                    \"ye\": 922.0,\n                                    \"ys\": 887.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 8.0,\n                                    \"xs\": 388.0,\n                                    \"ye\": 922.0,\n                                    \"ys\": 922.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 8.0,\n                                    \"xs\": 8.0,\n                                    \"ye\": 887.0,\n                                    \"ys\": 922.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 8.0,\n                    \"y\": 887.0\n                },\n                {\n                    \"angle\": 0.0,\n                    \"id\": 2,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 388.0,\n                                    \"xs\": 8.0,\n                                    \"ye\": 926.0,\n                                    \"ys\": 926.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 388.0,\n                                    \"xs\": 388.0,\n                                    \"ye\": 961.0,\n                                    \"ys\": 926.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 8.0,\n                                    \"xs\": 388.0,\n                                    \"ye\": 961.0,\n                                    \"ys\": 961.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 8.0,\n                                    \"xs\": 8.0,\n                                    \"ye\": 926.0,\n                                    \"ys\": 961.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 8.0,\n                    \"y\": 926.0\n                },\n                {\n                    \"angle\": 180.0,\n                    \"id\": 0,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 337.54309536883625,\n                                    \"xs\": 637.5430953688362,\n                                    \"ye\": 651.8580811723267,\n                                    \"ys\": 651.8580811723267\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 307.54309536883625,\n                                    \"xs\": 337.54309536883625,\n                                    \"ye\": 491.8580811723267,\n                                    \"ys\": 651.8580811723267\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 352.54309536883625,\n                                    \"xs\": 307.54309536883625,\n                                    \"ye\": 401.8580811723267,\n                                    \"ys\": 491.8580811723267\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 592.5430953688362,\n                                    \"xs\": 352.54309536883625,\n                                    \"ye\": 401.8580811723267,\n                                    \"ys\": 401.8580811723267\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 637.5430953688362,\n                                    \"xs\": 592.5430953688362,\n                                    \"ye\": 481.8580811723267,\n                                    \"ys\": 401.8580811723267\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 637.5430953688362,\n                                    \"xs\": 637.5430953688362,\n                                    \"ye\": 651.8580811723267,\n                                    \"ys\": 481.8580811723267\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 637.5430953688362,\n                    \"y\": 651.8580811723267\n                },\n                {\n                    \"angle\": 0.0,\n                    \"id\": 2,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 694.9721359549997,\n                                    \"xs\": 314.9721359549996,\n                                    \"ye\": 730.9999999999999,\n                                    \"ys\": 730.9999999999999\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 694.9721359549997,\n                                    \"xs\": 694.9721359549997,\n                                    \"ye\": 765.9999999999999,\n                                    \"ys\": 730.9999999999999\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 314.9721359549996,\n                                    \"xs\": 694.9721359549997,\n                                    \"ye\": 765.9999999999999,\n                                    \"ys\": 765.9999999999999\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 314.9721359549996,\n                                    \"xs\": 314.9721359549996,\n                                    \"ye\": 730.9999999999999,\n                                    \"ys\": 765.9999999999999\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 314.9721359549996,\n                    \"y\": 730.9999999999999\n                },\n                {\n                    \"angle\": 0.0,\n                    \"id\": 2,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 698.6322051490249,\n                                    \"xs\": 318.6322051490249,\n                                    \"ye\": 8.0,\n                                    \"ys\": 8.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 698.6322051490249,\n                                    \"xs\": 698.6322051490249,\n                                    \"ye\": 43.0,\n                                    \"ys\": 8.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 318.6322051490249,\n                                    \"xs\": 698.6322051490249,\n                                    \"ye\": 43.0,\n                                    \"ys\": 43.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 318.6322051490249,\n                                    \"xs\": 318.6322051490249,\n                                    \"ye\": 8.0,\n                                    \"ys\": 43.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 318.6322051490249,\n                    \"y\": 8.0\n                },\n                {\n                    \"angle\": 0.0,\n                    \"id\": 2,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 705.9447051490249,\n                                    \"xs\": 325.9447051490249,\n                                    \"ye\": 47.0,\n                                    \"ys\": 47.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 705.9447051490249,\n                                    \"xs\": 705.9447051490249,\n                                    \"ye\": 82.0,\n                                    \"ys\": 47.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 325.9447051490249,\n                                    \"xs\": 705.9447051490249,\n                                    \"ye\": 82.0,\n                                    \"ys\": 82.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 325.9447051490249,\n                                    \"xs\": 325.9447051490249,\n                                    \"ye\": 47.0,\n                                    \"ys\": 82.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 325.9447051490249,\n                    \"y\": 47.0\n                },\n                {\n                    \"angle\": 0.0,\n                    \"id\": 2,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 700.9721359549997,\n                                    \"xs\": 320.9721359549996,\n                                    \"ye\": 210.99999999999991,\n                                    \"ys\": 210.99999999999991\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 700.9721359549997,\n                                    \"xs\": 700.9721359549997,\n                                    \"ye\": 245.99999999999991,\n                                    \"ys\": 210.99999999999991\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 320.9721359549996,\n                                    \"xs\": 700.9721359549997,\n                                    \"ye\": 245.99999999999991,\n                                    \"ys\": 245.99999999999991\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 320.9721359549996,\n                                    \"xs\": 320.9721359549996,\n                                    \"ye\": 210.99999999999991,\n                                    \"ys\": 245.99999999999991\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 320.9721359549996,\n                    \"y\": 210.99999999999991\n                },\n                {\n                    \"angle\": 0.0,\n                    \"id\": 2,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 713.2572051490249,\n                                    \"xs\": 333.2572051490249,\n                                    \"ye\": 86.0,\n                                    \"ys\": 86.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 713.2572051490249,\n                                    \"xs\": 713.2572051490249,\n                                    \"ye\": 121.0,\n                                    \"ys\": 86.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 333.2572051490249,\n                                    \"xs\": 713.2572051490249,\n                                    \"ye\": 121.0,\n                                    \"ys\": 121.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 333.2572051490249,\n                                    \"xs\": 333.2572051490249,\n                                    \"ye\": 86.0,\n                                    \"ys\": 121.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 333.2572051490249,\n                    \"y\": 86.0\n                },\n                {\n                    \"angle\": 180.0,\n                    \"id\": 0,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 660.6947051490249,\n                                    \"xs\": 960.6947051490249,\n                                    \"ye\": 499.9999999999999,\n                                    \"ys\": 499.9999999999999\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 630.6947051490249,\n                                    \"xs\": 660.6947051490249,\n                                    \"ye\": 339.9999999999999,\n                                    \"ys\": 499.9999999999999\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 675.6947051490249,\n                                    \"xs\": 630.6947051490249,\n                                    \"ye\": 249.9999999999999,\n                                    \"ys\": 339.9999999999999\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 915.6947051490249,\n                                    \"xs\": 675.6947051490249,\n                                    \"ye\": 249.9999999999999,\n                                    \"ys\": 249.9999999999999\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 960.6947051490249,\n                                    \"xs\": 915.6947051490249,\n                                    \"ye\": 329.9999999999999,\n                                    \"ys\": 249.9999999999999\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 960.6947051490249,\n                                    \"xs\": 960.6947051490249,\n                                    \"ye\": 499.9999999999999,\n                                    \"ys\": 329.9999999999999\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 960.6947051490249,\n                    \"y\": 499.9999999999999\n                },\n                {\n                    \"angle\": 180.0,\n                    \"id\": 0,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 697.9721359549997,\n                                    \"xs\": 997.9721359549997,\n                                    \"ye\": 991.9999999999999,\n                                    \"ys\": 991.9999999999999\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 667.9721359549997,\n                                    \"xs\": 697.9721359549997,\n                                    \"ye\": 831.9999999999999,\n                                    \"ys\": 991.9999999999999\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 712.9721359549997,\n                                    \"xs\": 667.9721359549997,\n                                    \"ye\": 741.9999999999999,\n                                    \"ys\": 831.9999999999999\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 952.9721359549997,\n                                    \"xs\": 712.9721359549997,\n                                    \"ye\": 741.9999999999999,\n                                    \"ys\": 741.9999999999999\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 997.9721359549997,\n                                    \"xs\": 952.9721359549997,\n                                    \"ye\": 821.9999999999999,\n                                    \"ys\": 741.9999999999999\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 997.9721359549997,\n                                    \"xs\": 997.9721359549997,\n                                    \"ye\": 991.9999999999999,\n                                    \"ys\": 821.9999999999999\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 997.9721359549997,\n                    \"y\": 991.9999999999999\n                },\n                {\n                    \"angle\": 180.0,\n                    \"id\": 1,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 968.6947051490249,\n                                    \"xs\": 1088.694705149025,\n                                    \"ye\": 268.0,\n                                    \"ys\": 268.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 928.6947051490249,\n                                    \"xs\": 968.6947051490249,\n                                    \"ye\": 48.0,\n                                    \"ys\": 268.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 973.6947051490249,\n                                    \"xs\": 928.6947051490249,\n                                    \"ye\": 8.0,\n                                    \"ys\": 48.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1068.694705149025,\n                                    \"xs\": 973.6947051490249,\n                                    \"ye\": 28.0,\n                                    \"ys\": 8.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1088.694705149025,\n                                    \"xs\": 1068.694705149025,\n                                    \"ye\": 268.0,\n                                    \"ys\": 28.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 1088.694705149025,\n                    \"y\": 268.0\n                },\n                {\n                    \"angle\": 0.0,\n                    \"id\": 1,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1084.694705149025,\n                                    \"xs\": 964.6947051490249,\n                                    \"ye\": 272.0,\n                                    \"ys\": 272.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1124.694705149025,\n                                    \"xs\": 1084.694705149025,\n                                    \"ye\": 492.0,\n                                    \"ys\": 272.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1079.694705149025,\n                                    \"xs\": 1124.694705149025,\n                                    \"ye\": 532.0,\n                                    \"ys\": 492.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 984.6947051490249,\n                                    \"xs\": 1079.694705149025,\n                                    \"ye\": 512.0,\n                                    \"ys\": 532.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 964.6947051490249,\n                                    \"xs\": 984.6947051490249,\n                                    \"ye\": 272.0,\n                                    \"ys\": 512.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 964.6947051490249,\n                    \"y\": 272.0\n                },\n                {\n                    \"angle\": 0.0,\n                    \"id\": 1,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1191.0419033419557,\n                                    \"xs\": 1071.0419033419557,\n                                    \"ye\": 8.0,\n                                    \"ys\": 8.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1231.0419033419557,\n                                    \"xs\": 1191.0419033419557,\n                                    \"ye\": 228.0,\n                                    \"ys\": 8.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1186.0419033419557,\n                                    \"xs\": 1231.0419033419557,\n                                    \"ye\": 268.0,\n                                    \"ys\": 228.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1091.0419033419557,\n                                    \"xs\": 1186.0419033419557,\n                                    \"ye\": 248.0,\n                                    \"ys\": 268.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1071.0419033419557,\n                                    \"xs\": 1091.0419033419557,\n                                    \"ye\": 8.0,\n                                    \"ys\": 248.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 1071.0419033419557,\n                    \"y\": 8.0\n                },\n                {\n                    \"angle\": 180.0,\n                    \"id\": 1,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1134.258188475483,\n                                    \"xs\": 1254.258188475483,\n                                    \"ye\": 522.2384785205211,\n                                    \"ys\": 522.2384785205211\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1094.258188475483,\n                                    \"xs\": 1134.258188475483,\n                                    \"ye\": 302.2384785205211,\n                                    \"ys\": 522.2384785205211\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1139.258188475483,\n                                    \"xs\": 1094.258188475483,\n                                    \"ye\": 262.2384785205211,\n                                    \"ys\": 302.2384785205211\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1234.258188475483,\n                                    \"xs\": 1139.258188475483,\n                                    \"ye\": 282.2384785205211,\n                                    \"ys\": 262.2384785205211\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1254.258188475483,\n                                    \"xs\": 1234.258188475483,\n                                    \"ye\": 522.2384785205211,\n                                    \"ys\": 282.2384785205211\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 1254.258188475483,\n                    \"y\": 522.2384785205211\n                },\n                {\n                    \"angle\": 180.0,\n                    \"id\": 1,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1242.3802087555919,\n                                    \"xs\": 1362.3802087555919,\n                                    \"ye\": 268.0,\n                                    \"ys\": 268.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1202.3802087555919,\n                                    \"xs\": 1242.3802087555919,\n                                    \"ye\": 48.0,\n                                    \"ys\": 268.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1247.3802087555919,\n                                    \"xs\": 1202.3802087555919,\n                                    \"ye\": 8.0,\n                                    \"ys\": 48.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1342.3802087555919,\n                                    \"xs\": 1247.3802087555919,\n                                    \"ye\": 28.0,\n                                    \"ys\": 8.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1362.3802087555919,\n                                    \"xs\": 1342.3802087555919,\n                                    \"ye\": 268.0,\n                                    \"ys\": 28.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 1362.3802087555919,\n                    \"y\": 268.0\n                },\n                {\n                    \"angle\": 180.0,\n                    \"id\": 1,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1258.1508456722772,\n                                    \"xs\": 1378.1508456722772,\n                                    \"ye\": 780.5202501207556,\n                                    \"ys\": 780.5202501207556\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1218.1508456722772,\n                                    \"xs\": 1258.1508456722772,\n                                    \"ye\": 560.5202501207556,\n                                    \"ys\": 780.5202501207556\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1263.1508456722772,\n                                    \"xs\": 1218.1508456722772,\n                                    \"ye\": 520.5202501207556,\n                                    \"ys\": 560.5202501207556\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1358.1508456722772,\n                                    \"xs\": 1263.1508456722772,\n                                    \"ye\": 540.5202501207556,\n                                    \"ys\": 520.5202501207556\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1378.1508456722772,\n                                    \"xs\": 1358.1508456722772,\n                                    \"ye\": 780.5202501207556,\n                                    \"ys\": 540.5202501207556\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 1378.1508456722772,\n                    \"y\": 780.5202501207556\n                },\n                {\n                    \"angle\": 0.0,\n                    \"id\": 1,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1357.4188467917036,\n                                    \"xs\": 1237.4188467917036,\n                                    \"ye\": 272.0,\n                                    \"ys\": 272.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1397.4188467917036,\n                                    \"xs\": 1357.4188467917036,\n                                    \"ye\": 492.0,\n                                    \"ys\": 272.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1352.4188467917036,\n                                    \"xs\": 1397.4188467917036,\n                                    \"ye\": 532.0,\n                                    \"ys\": 492.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1257.4188467917036,\n                                    \"xs\": 1352.4188467917036,\n                                    \"ye\": 512.0,\n                                    \"ys\": 532.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1237.4188467917036,\n                                    \"xs\": 1257.4188467917036,\n                                    \"ye\": 272.0,\n                                    \"ys\": 512.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 1237.4188467917036,\n                    \"y\": 272.0\n                },\n                {\n                    \"angle\": 0.0,\n                    \"id\": 1,\n                    \"item_shapes\": [\n                        {\n                            \"shape\": [\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1464.7274069485225,\n                                    \"xs\": 1344.7274069485225,\n                                    \"ye\": 8.0,\n                                    \"ys\": 8.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1504.7274069485225,\n                                    \"xs\": 1464.7274069485225,\n                                    \"ye\": 228.0,\n                                    \"ys\": 8.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1459.7274069485225,\n                                    \"xs\": 1504.7274069485225,\n                                    \"ye\": 268.0,\n                                    \"ys\": 228.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1364.7274069485225,\n                                    \"xs\": 1459.7274069485225,\n                                    \"ye\": 248.0,\n                                    \"ys\": 268.0\n                                },\n                                {\n                                    \"type\": \"LineSegment\",\n                                    \"xe\": 1344.7274069485225,\n                                    \"xs\": 1364.7274069485225,\n                                    \"ye\": 8.0,\n                                    \"ys\": 248.0\n                                }\n                            ]\n                        }\n                    ],\n                    \"mirror\": false,\n                    \"x\": 1344.7274069485225,\n                    \"y\": 8.0\n                }\n            ],\n            \"shape\": [\n                {\n                    \"type\": \"LineSegment\",\n                    \"xe\": 1600.0,\n                    \"xs\": 0.0,\n                    \"ye\": 0.0,\n                    \"ys\": 0.0\n                },\n                {\n                    \"type\": \"LineSegment\",\n                    \"xe\": 1600.0,\n                    \"xs\": 1600.0,\n                    \"ye\": 1000.0,\n                    \"ys\": 0.0\n                },\n                {\n                    \"type\": \"LineSegment\",\n                    \"xe\": 0.0,\n                    \"xs\": 1600.0,\n                    \"ye\": 1000.0,\n                    \"ys\": 1000.0\n                },\n                {\n                    \"type\": \"LineSegment\",\n                    \"xe\": 0.0,\n                    \"xs\": 0.0,\n                    \"ye\": 0.0,\n                    \"ys\": 1000.0\n                }\n            ]\n        }\n    ]\n}\n",
+    "output": {
+      "BinPackingBound": 1,
+      "IsProvenInfeasible": false,
+      "KnapsackBound": null,
+      "OpenDimensionXBound": 0,
+      "OpenDimensionYBound": 0,
+      "Solution": {
+        "BinArea": 1600000,
+        "BinCost": 1600000,
+        "DensityX": 0.5655841689797273,
+        "DensityY": 0.5361958165322581,
+        "FullWaste": 748950,
+        "FullWastePercentage": 0.46809375,
+        "ItemArea": 851050,
+        "ItemProfit": 64,
+        "LeftoverValue": 107310.41230706591,
+        "NumberOfBins": 1,
+        "NumberOfItems": 24,
+        "OpenDimensionXYArea": 1472779.768437346,
+        "XMax": 1504.7274069485225,
+        "XMin": 8,
+        "YMax": 991.9999999999999,
+        "YMin": 8
+      },
+      "Time": 0.012803584,
+      "VariableSizedBinPackingBound": 0
+    }
+  },
+  "result": {
+    "engine": "irregular",
+    "objective": "bins",
+    "elapsed_s": 0.012803584,
+    "full": true,
+    "feasible": true,
+    "units": "mm",
+    "metrics": {
+      "required_pieces": 24,
+      "placed_pieces": 24,
+      "bin_count": 1,
+      "utilization_percent": 53.19062500000002,
+      "profit": 64,
+      "used_length": null,
+      "total_item_area": 851050.0000000002
+    },
+    "bins": [
+      {
+        "index": 0,
+        "width": 1600,
+        "height": 1000,
+        "items": [
+          {
+            "id": 0,
+            "name": "包面示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                8,
+                8
+              ],
+              [
+                308,
+                8
+              ],
+              [
+                338,
+                168
+              ],
+              [
+                293,
+                258
+              ],
+              [
+                53,
+                258
+              ],
+              [
+                8,
+                178
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "包面示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                8,
+                262
+              ],
+              [
+                308,
+                262
+              ],
+              [
+                338,
+                422
+              ],
+              [
+                293,
+                512
+              ],
+              [
+                53,
+                512
+              ],
+              [
+                8,
+                432
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "包面示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                8,
+                516
+              ],
+              [
+                308,
+                516
+              ],
+              [
+                338,
+                676
+              ],
+              [
+                293,
+                766
+              ],
+              [
+                53,
+                766
+              ],
+              [
+                8,
+                686
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "带片示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                8,
+                770
+              ],
+              [
+                388,
+                770
+              ],
+              [
+                388,
+                805
+              ],
+              [
+                8,
+                805
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "带片示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                8,
+                809
+              ],
+              [
+                388,
+                809
+              ],
+              [
+                388,
+                844
+              ],
+              [
+                8,
+                844
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "带片示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                8,
+                848
+              ],
+              [
+                388,
+                848
+              ],
+              [
+                388,
+                883
+              ],
+              [
+                8,
+                883
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "带片示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                8,
+                887
+              ],
+              [
+                388,
+                887
+              ],
+              [
+                388,
+                922
+              ],
+              [
+                8,
+                922
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "带片示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                8,
+                926
+              ],
+              [
+                388,
+                926
+              ],
+              [
+                388,
+                961
+              ],
+              [
+                8,
+                961
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "包面示意",
+            "angle": 180,
+            "mirror": false,
+            "polygon": [
+              [
+                637.5430953688362,
+                651.8580811723267
+              ],
+              [
+                337.54309536883625,
+                651.8580811723267
+              ],
+              [
+                307.54309536883625,
+                491.8580811723267
+              ],
+              [
+                352.54309536883625,
+                401.8580811723267
+              ],
+              [
+                592.5430953688362,
+                401.8580811723267
+              ],
+              [
+                637.5430953688362,
+                481.8580811723267
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "带片示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                314.9721359549996,
+                730.9999999999999
+              ],
+              [
+                694.9721359549997,
+                730.9999999999999
+              ],
+              [
+                694.9721359549997,
+                765.9999999999999
+              ],
+              [
+                314.9721359549996,
+                765.9999999999999
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "带片示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                318.6322051490249,
+                8
+              ],
+              [
+                698.6322051490249,
+                8
+              ],
+              [
+                698.6322051490249,
+                43
+              ],
+              [
+                318.6322051490249,
+                43
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "带片示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                325.9447051490249,
+                47
+              ],
+              [
+                705.9447051490249,
+                47
+              ],
+              [
+                705.9447051490249,
+                82
+              ],
+              [
+                325.9447051490249,
+                82
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "带片示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                320.9721359549996,
+                210.99999999999991
+              ],
+              [
+                700.9721359549997,
+                210.99999999999991
+              ],
+              [
+                700.9721359549997,
+                245.99999999999991
+              ],
+              [
+                320.9721359549996,
+                245.99999999999991
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "带片示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                333.2572051490249,
+                86
+              ],
+              [
+                713.2572051490249,
+                86
+              ],
+              [
+                713.2572051490249,
+                121
+              ],
+              [
+                333.2572051490249,
+                121
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "包面示意",
+            "angle": 180,
+            "mirror": false,
+            "polygon": [
+              [
+                960.6947051490249,
+                499.9999999999999
+              ],
+              [
+                660.6947051490249,
+                499.9999999999999
+              ],
+              [
+                630.6947051490249,
+                339.9999999999999
+              ],
+              [
+                675.6947051490249,
+                249.9999999999999
+              ],
+              [
+                915.6947051490249,
+                249.9999999999999
+              ],
+              [
+                960.6947051490249,
+                329.9999999999999
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "包面示意",
+            "angle": 180,
+            "mirror": false,
+            "polygon": [
+              [
+                997.9721359549997,
+                991.9999999999999
+              ],
+              [
+                697.9721359549997,
+                991.9999999999999
+              ],
+              [
+                667.9721359549997,
+                831.9999999999999
+              ],
+              [
+                712.9721359549997,
+                741.9999999999999
+              ],
+              [
+                952.9721359549997,
+                741.9999999999999
+              ],
+              [
+                997.9721359549997,
+                821.9999999999999
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "侧片示意",
+            "angle": 180,
+            "mirror": false,
+            "polygon": [
+              [
+                1088.694705149025,
+                268
+              ],
+              [
+                968.6947051490249,
+                268
+              ],
+              [
+                928.6947051490249,
+                48
+              ],
+              [
+                973.6947051490249,
+                8
+              ],
+              [
+                1068.694705149025,
+                28
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "侧片示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                964.6947051490249,
+                272
+              ],
+              [
+                1084.694705149025,
+                272
+              ],
+              [
+                1124.694705149025,
+                492
+              ],
+              [
+                1079.694705149025,
+                532
+              ],
+              [
+                984.6947051490249,
+                512
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "侧片示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1071.0419033419557,
+                8
+              ],
+              [
+                1191.0419033419557,
+                8
+              ],
+              [
+                1231.0419033419557,
+                228
+              ],
+              [
+                1186.0419033419557,
+                268
+              ],
+              [
+                1091.0419033419557,
+                248
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "侧片示意",
+            "angle": 180,
+            "mirror": false,
+            "polygon": [
+              [
+                1254.258188475483,
+                522.2384785205211
+              ],
+              [
+                1134.258188475483,
+                522.2384785205211
+              ],
+              [
+                1094.258188475483,
+                302.2384785205211
+              ],
+              [
+                1139.258188475483,
+                262.2384785205211
+              ],
+              [
+                1234.258188475483,
+                282.2384785205211
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "侧片示意",
+            "angle": 180,
+            "mirror": false,
+            "polygon": [
+              [
+                1362.3802087555919,
+                268
+              ],
+              [
+                1242.3802087555919,
+                268
+              ],
+              [
+                1202.3802087555919,
+                48
+              ],
+              [
+                1247.3802087555919,
+                8
+              ],
+              [
+                1342.3802087555919,
+                28
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "侧片示意",
+            "angle": 180,
+            "mirror": false,
+            "polygon": [
+              [
+                1378.1508456722772,
+                780.5202501207556
+              ],
+              [
+                1258.1508456722772,
+                780.5202501207556
+              ],
+              [
+                1218.1508456722772,
+                560.5202501207556
+              ],
+              [
+                1263.1508456722772,
+                520.5202501207556
+              ],
+              [
+                1358.1508456722772,
+                540.5202501207556
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "侧片示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1237.4188467917036,
+                272
+              ],
+              [
+                1357.4188467917036,
+                272
+              ],
+              [
+                1397.4188467917036,
+                492
+              ],
+              [
+                1352.4188467917036,
+                532
+              ],
+              [
+                1257.4188467917036,
+                512
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "侧片示意",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1344.7274069485225,
+                8
+              ],
+              [
+                1464.7274069485225,
+                8
+              ],
+              [
+                1504.7274069485225,
+                228
+              ],
+              [
+                1459.7274069485225,
+                268
+              ],
+              [
+                1364.7274069485225,
+                248
+              ]
+            ]
+          }
+        ],
+        "defects": [
+          {
+            "x": 450,
+            "y": 250,
+            "width": 140,
+            "height": 100
+          },
+          {
+            "x": 1050,
+            "y": 650,
+            "width": 180,
+            "height": 130
+          }
+        ]
+      }
+    ],
+    "solver_statistics": {
+      "BinArea": 1600000,
+      "BinCost": 1600000,
+      "DensityX": 0.5655841689797273,
+      "DensityY": 0.5361958165322581,
+      "FullWaste": 748950,
+      "FullWastePercentage": 0.46809375,
+      "ItemArea": 851050,
+      "ItemProfit": 64,
+      "LeftoverValue": 107310.41230706591,
+      "NumberOfBins": 1,
+      "NumberOfItems": 24,
+      "OpenDimensionXYArea": 1472779.768437346,
+      "XMax": 1504.7274069485225,
+      "XMin": 8,
+      "YMax": 991.9999999999999,
+      "YMin": 8
+    },
+    "raw_output": {
+      "BinPackingBound": 1,
+      "IsProvenInfeasible": false,
+      "KnapsackBound": null,
+      "OpenDimensionXBound": 0,
+      "OpenDimensionYBound": 0,
+      "Solution": {
+        "BinArea": 1600000,
+        "BinCost": 1600000,
+        "DensityX": 0.5655841689797273,
+        "DensityY": 0.5361958165322581,
+        "FullWaste": 748950,
+        "FullWastePercentage": 0.46809375,
+        "ItemArea": 851050,
+        "ItemProfit": 64,
+        "LeftoverValue": 107310.41230706591,
+        "NumberOfBins": 1,
+        "NumberOfItems": 24,
+        "OpenDimensionXYArea": 1472779.768437346,
+        "XMax": 1504.7274069485225,
+        "XMin": 8,
+        "YMax": 991.9999999999999,
+        "YMin": 8
+      },
+      "Time": 0.012803584,
+      "VariableSizedBinPackingBound": 0
+    },
+    "engine_version": "wasm-649fd65233ee",
+    "config": {
+      "engine": "irregular",
+      "objective": "bins",
+      "settings": {
+        "engine": "irregular",
+        "objective": "bins",
+        "rotation": "source",
+        "custom_angles": [
+          0,
+          180
+        ],
+        "spacing": 4,
+        "edge": 8,
+        "kerf": 0,
+        "time_limit": 1,
+        "stages": 3,
+        "first_cut": "vertical"
+      },
+      "stock": {
+        "width": 1600,
+        "height": 1000,
+        "copies": 10
+      },
+      "effective_stock_copies": 10
+    },
+    "warnings": [
+      "真实浏览器 WebAssembly 限时求解；不保证全局最优。",
+      "独立数值几何校验不等同于工业加工、局部承重或稳定性证明。"
+    ],
+    "validation": {
+      "pass": true,
+      "geometry_pass": true,
+      "full_demand": true,
+      "errors": [],
+      "placed_counts": {
+        "0": 6,
+        "1": 8,
+        "2": 10
+      },
+      "required_counts": {
+        "0": 6,
+        "1": 8,
+        "2": 10
+      },
+      "minimum_item_clearance": 3.9999999999998255,
+      "minimum_defect_clearance": 4.000000000000085,
+      "coordinate_tolerance": 0.000016,
+      "area_tolerance": "max(1e-8, original_piece_area * 1e-7)",
+      "checks": [
+        "source geometry",
+        "quantity",
+        "bounds",
+        "overlap",
+        "allowed angles",
+        "spacing",
+        "defects"
+      ],
+      "scope": "独立几何校验；不等同于加工可制造性或全局最优证明。"
+    }
+  }
+}

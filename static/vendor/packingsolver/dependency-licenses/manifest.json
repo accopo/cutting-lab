@@ -1,0 +1,114 @@
+[
+  {
+    "name": "optimizationtools",
+    "repository": "fontanf/optimizationtools",
+    "ref": "7e29ad3e2dab11a44887fbcc9382188c5d0ead12",
+    "path": "LICENSE",
+    "sha256": "962dd687c882a318b6c543328ac72b217ceab896d21054ea2f0bc7093e53b6c8"
+  },
+  {
+    "name": "shape",
+    "repository": "fontanf/shape",
+    "ref": "04409204e5eac77bd95bc1b004b9d86641d01ef5",
+    "path": "LICENSE",
+    "sha256": "69e3d21106bfc8a3a6cb3a78485116bbf9c7b5d41ea4f88416c98b4b987cf396"
+  },
+  {
+    "name": "highs",
+    "repository": "ERGO-Code/HiGHS",
+    "ref": "v1.13.1",
+    "path": "LICENSE.txt",
+    "sha256": "795e6090936bcf2e1a0bfb339053de0c5bb6f3102035ead0ecc0ed4a7c41f1b7"
+  },
+  {
+    "name": "mathoptsolverscmake",
+    "repository": "fontanf/mathoptsolverscmake",
+    "ref": "358904e29889b129ec2f733866abd8d18f7a4978",
+    "path": "LICENSE",
+    "sha256": "40ad2dafd76525591bdedbd52bab67457c1c59c13145a15361652da3412efb53"
+  },
+  {
+    "name": "knapsacksolver",
+    "repository": "fontanf/knapsacksolver",
+    "ref": "605153f85b0781ae0c2b7548a18639ef77d25c09",
+    "path": "LICENSE",
+    "sha256": "36922e2ab7db4c604e59c45fc642359285bdfe9745ad808ef3cb966fc5436e65"
+  },
+  {
+    "name": "multiplechoicesubsetssumsolver",
+    "repository": "fontanf/multiplechoicesubsetsumsolver",
+    "ref": "83406f59044425aef1391030db0b29333c208d7f",
+    "path": "LICENSE",
+    "sha256": "36922e2ab7db4c604e59c45fc642359285bdfe9745ad808ef3cb966fc5436e65"
+  },
+  {
+    "name": "subsetsumsolver",
+    "repository": "fontanf/subsetsumsolver",
+    "ref": "2ba9d52e87cf01d0dd80df082db5539d5d5850b8",
+    "path": "LICENSE",
+    "sha256": "36922e2ab7db4c604e59c45fc642359285bdfe9745ad808ef3cb966fc5436e65"
+  },
+  {
+    "name": "treesearchsolver",
+    "repository": "fontanf/treesearchsolver",
+    "ref": "b7254420989dd804144d16b898f323f1d606dda4",
+    "path": "LICENSE",
+    "sha256": "abf1bbdbb511f88c59937a2201dc474f058c22646b4a6a7897a10ce097d19be7"
+  },
+  {
+    "name": "columngenerationsolver",
+    "repository": "fontanf/columngenerationsolver",
+    "ref": "091ee511c51352076974e62c85aed046f83e401a",
+    "path": "LICENSE",
+    "sha256": "abf1bbdbb511f88c59937a2201dc474f058c22646b4a6a7897a10ce097d19be7"
+  },
+  {
+    "name": "nlohmann-json",
+    "repository": "nlohmann/json",
+    "ref": "v3.11.3",
+    "path": "LICENSE.MIT",
+    "sha256": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14"
+  },
+  {
+    "name": "emscripten",
+    "repository": "emscripten-core/emscripten",
+    "ref": "6.0.11",
+    "path": "LICENSE",
+    "sha256": "620a78084fc7ca97c0b5dea9abf891f3ffcadfdbf305276f099c9c4e12fc1d86"
+  },
+  {
+    "name": "mimalloc",
+    "repository": "emscripten-core/emscripten",
+    "ref": "6.0.11",
+    "path": "system/lib/mimalloc/LICENSE",
+    "sha256": "82ade5d7d9b029044b5fbbc326207fc47c2d44ee4dd71e8a559c36d728217de9"
+  },
+  {
+    "name": "musl",
+    "repository": "emscripten-core/emscripten",
+    "ref": "6.0.11",
+    "path": "system/lib/libc/musl/COPYRIGHT",
+    "sha256": "b870108ec5e7790e9f9919064f1b9421d62d5f9b0e6c230c6adf7ea2da62e97b"
+  },
+  {
+    "name": "libcxx",
+    "repository": "emscripten-core/emscripten",
+    "ref": "6.0.11",
+    "path": "system/lib/libcxx/LICENSE.TXT",
+    "sha256": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b"
+  },
+  {
+    "name": "libcxxabi",
+    "repository": "emscripten-core/emscripten",
+    "ref": "6.0.11",
+    "path": "system/lib/libcxxabi/LICENSE.TXT",
+    "sha256": "e2b35be49f7284a45b7baca8fc7b3ab7440e7902392b2528a457816b5bb2a15c"
+  },
+  {
+    "name": "compiler-rt",
+    "repository": "emscripten-core/emscripten",
+    "ref": "6.0.11",
+    "path": "system/lib/compiler-rt/LICENSE.TXT",
+    "sha256": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d"
+  }
+]

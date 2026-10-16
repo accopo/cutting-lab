@@ -13,3 +13,11 @@ node_modules/
 Thumbs.db
 .codex/
 qa/*_output/
+dist/
+*.tgz
+static/vendor/*/package/
+engine_box_smoke_output/
+HANDOFF.md
+PUBLICATION_PLAN.md
+direction-approved.md
+docs/IMPLEMENTATION_PLAN.md

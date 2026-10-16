@@ -1,0 +1,93 @@
+{
+  "pass": true,
+  "tests_run": 4,
+  "failures": 0,
+  "errors": 0,
+  "records": [
+    {
+      "name": "native-irregular",
+      "events": 11,
+      "latest_sequence": 11,
+      "latest_elapsed_s": 0.4156857,
+      "format": "json",
+      "validation_pass": true,
+      "error_count": 0
+    },
+    {
+      "name": "native-rectangle",
+      "events": 2,
+      "latest_sequence": 2,
+      "latest_elapsed_s": 0.0171506,
+      "format": "csv",
+      "validation_pass": true,
+      "error_count": 0
+    },
+    {
+      "name": "native-guillotine",
+      "events": 3,
+      "latest_sequence": 3,
+      "latest_elapsed_s": 0.0384284,
+      "format": "csv",
+      "validation_pass": true,
+      "error_count": 0
+    },
+    {
+      "name": "native-onedimensional",
+      "events": 2,
+      "latest_sequence": 2,
+      "latest_elapsed_s": 0.0917188,
+      "format": "csv",
+      "validation_pass": true,
+      "error_count": 0
+    },
+    {
+      "name": "native-onedimensional-kerf",
+      "events": 2,
+      "latest_sequence": 2,
+      "latest_elapsed_s": 0.0289546,
+      "format": "csv",
+      "validation_pass": true,
+      "error_count": 0
+    },
+    {
+      "name": "native-box",
+      "events": 2,
+      "latest_sequence": 2,
+      "latest_elapsed_s": 0.0146898,
+      "format": "csv",
+      "validation_pass": true,
+      "error_count": 0
+    },
+    {
+      "name": "storage-bounds-and-allowlist",
+      "retained_events": 3,
+      "retained_certificate_files": 3,
+      "dropped_events": 5,
+      "path_traversal_rejected": true,
+      "fixture_only": true
+    },
+    {
+      "name": "callback-error-isolation",
+      "final_validation_pass": true,
+      "error_recorded": true,
+      "errors": [
+        {
+          "sequence": 1,
+          "stage": "callback",
+          "elapsed_s": 0.003806399996392429,
+          "error_type": "OSError",
+          "message": "中间解记录失败；最终求解继续。"
+        }
+      ]
+    },
+    {
+      "name": "live-read-and-cancel",
+      "reads_while_running": 3,
+      "sequence_before_cancel": 1,
+      "sequence_after_cancel": 2,
+      "certificate_retained": true,
+      "final_result_absent": true
+    }
+  ],
+  "scope": "Actual native callbacks are labeled native; storage replay fixtures are separately marked."
+}

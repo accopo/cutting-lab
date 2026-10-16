@@ -1,0 +1,4 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),C=require('../static/solver-worker'),G=require('../static/vendor/cutting-geometry');
+const rows=require('../test-artifacts/browser/baseline-oracle.json');
+function signature(bins){return bins.flatMap((b,n)=>b.items.map(i=>({bin:n,id:i.id,angle:i.angle,box:C.bounds(i.polygon).map(x=>Math.round(x*1e8)/1e8)})));}
+(async()=>{let count=0;for(const row of rows){const p=G.normalize(row.problem);const r=C.checked(p,await C.baseline(p),G);assert(r.validation.geometry_pass,JSON.stringify(r.validation));assert.deepEqual(signature(r.bins),signature(row.bins),p.settings.engine+' case '+count);count++;}console.log('PASS',count,'baseline cases match Python geometry and placement order exactly');})().catch(e=>{console.error(e);process.exit(1)});

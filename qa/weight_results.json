@@ -1,0 +1,50 @@
+[
+  {
+    "case": "weight_requires_two_bins",
+    "pass": true,
+    "metrics": {
+      "required_pieces": 2,
+      "placed_pieces": 2,
+      "bin_count": 2,
+      "total_item_volume": 16000,
+      "total_stock_volume": 2000000,
+      "total_item_weight": 12.0,
+      "utilization_percent": 0.8,
+      "profit": 2.0
+    }
+  },
+  {
+    "case": "same_geometry_without_capacity_uses_one_bin",
+    "pass": true,
+    "metrics": {
+      "required_pieces": 2,
+      "placed_pieces": 2,
+      "bin_count": 1,
+      "total_item_volume": 16000,
+      "total_stock_volume": 1000000,
+      "total_item_weight": 12.0,
+      "utilization_percent": 1.6,
+      "profit": 2.0
+    }
+  },
+  {
+    "case": "validator_recomputes_weight_from_input",
+    "pass": true
+  },
+  {
+    "case": "negative_weight",
+    "pass": true
+  },
+  {
+    "case": "zero_weight_with_capacity",
+    "pass": true
+  },
+  {
+    "case": "missing_weight_with_capacity",
+    "pass": true
+  },
+  {
+    "case": "capacity_alias",
+    "pass": true
+  }
+]

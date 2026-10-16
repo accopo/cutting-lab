@@ -1,0 +1,336 @@
+{
+  "captured_at_utc": "2026-10-15T12:17:48.367320+00:00",
+  "selected_names": [
+    "albano",
+    "dagli",
+    "shirts",
+    "swim",
+    "trousers"
+  ],
+  "raw_files_count": 31,
+  "total_bytes": 4382080,
+  "sources": [
+    {
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "commit_date": "2025-12-18T10:05:33Z"
+    },
+    {
+      "repository": "Oscar-Oliveira/OR-Datasets",
+      "commit": "e2e151cf241ab97d860f657cbfe515232e7096d7",
+      "commit_date": "2025-09-09T11:24:35Z"
+    }
+  ],
+  "files": [
+    {
+      "local_path": "raw/esicup/2d_irregular/README.md",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/README.md",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 6459,
+      "sha256": "b97224c981ce9d9676aec297c1afa683efbc1fb1dc908ad0eff8c513febb6d06",
+      "git_blob_sha1": "aa248ac59551cccac59fe79e6b9c6e251584c925",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/albano/albano.pdf",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/albano/albano.pdf",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 237893,
+      "sha256": "71456527636957adfbcd24c0cc9a34ebcedd73cc3885b9751f8d8540021d4187",
+      "git_blob_sha1": "e13cc8c3333fb26ecc35b88b72d8e84f48dbae2b",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/albano/albano.xls",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/albano/albano.xls",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 14848,
+      "sha256": "4722b1302f1c056f67c63b2b3852638f20047e467cf877dbf6674dd5c0e616ea",
+      "git_blob_sha1": "81a07813306487ecde80266ee4acff15355cacd4",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/albano/albano.xml",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/albano/albano.xml",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 405543,
+      "sha256": "d612f29754a5e6dced3112e2f15e30c7db93dd0f5d526451416632c68c4f05e1",
+      "git_blob_sha1": "56d08ad124ad20c0b03888d18a8eb1324f9a0bb1",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/albano/readme.txt",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/albano/readme.txt",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 431,
+      "sha256": "c3ce33637a4e84bea5b1b48655b963cf94ca4161b2d9ce19f2f5ed77384a9f7b",
+      "git_blob_sha1": "a41c9befc5fd7e3522e70c925114c2d6227e15ae",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/dagli/dagli.pdf",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/dagli/dagli.pdf",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 64290,
+      "sha256": "3aab18e7cbcab05202b5e84a6d055ba272ed7f0607cf54431711c5b2942d0e68",
+      "git_blob_sha1": "6ef2d8088937d0c7e65d3908f4a638f6ac9d6fd8",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/dagli/dagli.xml",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/dagli/dagli.xml",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 436181,
+      "sha256": "bd361007d63e249cba48bc972a37bdf123ce776d5bdf2d844eff100cf0eabfca",
+      "git_blob_sha1": "c732ca62fdc8b965793ed6d4dc3d77a1f677bb78",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/dagli/readme.txt",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/dagli/readme.txt",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 428,
+      "sha256": "1a58c52d8a2b1c4073500dc205f713be686de0a15f8aa9a67e351518f5eb54f7",
+      "git_blob_sha1": "4b704b6fd3d382e3c837bc3a14fde6577cd88b60",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/shirts/readme.txt",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/shirts/readme.txt",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 527,
+      "sha256": "1c7e2095162eb4569baefb2182c899c5f511560ab63c279db41714adee844670",
+      "git_blob_sha1": "b107135344783a0128b4a8a276fd38cadc13d5c1",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/shirts/shirts.pdf",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/shirts/shirts.pdf",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 30793,
+      "sha256": "d1d75a81c6b4d09c736fcd92fd23730020ded8fd7742a926af3f8d82f143dba0",
+      "git_blob_sha1": "fbd338d23c17d656b35958fc26128cdfb1a4cb99",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/shirts/shirts.txt",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/shirts/shirts.txt",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 825,
+      "sha256": "d4050760bab2230e8440d73fd70105cebda3cbb97035b6d7aa5196cd50432044",
+      "git_blob_sha1": "7b91526886ffff8553740f5d340c5a79d4b1ec3d",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/shirts/shirts.xml",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/shirts/shirts.xml",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 334704,
+      "sha256": "c884de028b34c7788eb3b454660be74e919fa297a29394a35f9b3be13d1fc93d",
+      "git_blob_sha1": "0d65cf0b1a14fa6e2ab437df4431e7e2e22cced0",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/swim/readme.txt",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/swim/readme.txt",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 300,
+      "sha256": "0815adb7875ff707cdfa3266a2644137ce1aedead2665efa77ed8ccce7b1ef32",
+      "git_blob_sha1": "d906bdee6eac6c8dbee800201ea83491c964230c",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/swim/swim.pdf",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/swim/swim.pdf",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 33890,
+      "sha256": "9ff55a5551651116ae5e51cb2f3f61ee81565e2fbb849e18a9d0c0050d9499bc",
+      "git_blob_sha1": "a732a28980ec3d6589630b9852d7a8caf5c84686",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/swim/swim.txt",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/swim/swim.txt",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 6260,
+      "sha256": "7f5f023223d318fccd8c7f8f10553fcf13373c0db0ff23f76f8226828ada660d",
+      "git_blob_sha1": "ed4047e16e9d9337f3f3884d8f89cbc2b053d9d2",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/swim/swim.xml",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/swim/swim.xml",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 1562338,
+      "sha256": "39cf44a3ca7f03a9f00c985628b01abc6a0eaa58f3582d055205a928d4a624da",
+      "git_blob_sha1": "7090afedfdfc2063cc088f63599e88874df12963",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/trousers/readme.txt",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/trousers/readme.txt",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 280,
+      "sha256": "47e1a90f63b9770d2855665b30fb8a37f069692e16671a8473b7ead27b6621dc",
+      "git_blob_sha1": "c313d98e179f5b5c3e5352c03cef41da71a8ed17",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/trousers/trousers.pdf",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/trousers/trousers.pdf",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 30980,
+      "sha256": "928932a4a2fb081c104ab3927ca193185caa0f1534ba3223c1f592fcbef21fa7",
+      "git_blob_sha1": "4e85ceaf281e38c23729c920987c3a53be90c0f7",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/trousers/trousers.txt",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/trousers/trousers.txt",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 1562,
+      "sha256": "22c5a3a9cf762ba3e95ef442f38ff2983e13333d5179be15340f79727f7ef7c2",
+      "git_blob_sha1": "6aef707d4a48a0fd6125c0ed38f9db337dc64cbf",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/2d_irregular/trousers/trousers.xml",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/trousers/trousers.xml",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 1151810,
+      "sha256": "076b68e1d1e0cd02517204647a7f660ab075507b8bc5132f858214598e8eb9cd",
+      "git_blob_sha1": "e98b8a5597ca3b978d138b9b9d18af41bd210967",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/CITATION.cff",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/CITATION.cff",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 479,
+      "sha256": "41e71c155b14209be80937acffed3220f94e0943ad99e0a208021d4c6ebd4fe5",
+      "git_blob_sha1": "40b5c3d6d5f60b8f6113bbeb8fe2133be1d223cf",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/LICENSE",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/LICENSE",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+      "git_blob_sha1": "0e259d42c996742e9e3cba14c677129b2c1b6311",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/esicup/README.md",
+      "url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/README.md",
+      "repository": "ESICUP/datasets",
+      "commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "bytes": 3933,
+      "sha256": "e246a5021e38ffc348b8a14996bc4bfc9c54b3a212bb205686f3ed739b218c40",
+      "git_blob_sha1": "47566bd8f46f66386ce74ea3ba1cef2144704632",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/or_datasets/Cutting-and-Packing/2D-Irregular/Datasets/ALBANO/json/albano.json",
+      "url": "https://raw.githubusercontent.com/Oscar-Oliveira/OR-Datasets/e2e151cf241ab97d860f657cbfe515232e7096d7/Cutting-and-Packing/2D-Irregular/Datasets/ALBANO/json/albano.json",
+      "repository": "Oscar-Oliveira/OR-Datasets",
+      "commit": "e2e151cf241ab97d860f657cbfe515232e7096d7",
+      "bytes": 5951,
+      "sha256": "cf26a244040ef1a49be1b5f9c947ab0ba14046dcaefdc844d6d57d96970a7542",
+      "git_blob_sha1": "6b7f6f0769ae4fde5edee46f507a87607fbb48d0",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/or_datasets/Cutting-and-Packing/2D-Irregular/Datasets/DAGLI/json/dagli.json",
+      "url": "https://raw.githubusercontent.com/Oscar-Oliveira/OR-Datasets/e2e151cf241ab97d860f657cbfe515232e7096d7/Cutting-and-Packing/2D-Irregular/Datasets/DAGLI/json/dagli.json",
+      "repository": "Oscar-Oliveira/OR-Datasets",
+      "commit": "e2e151cf241ab97d860f657cbfe515232e7096d7",
+      "bytes": 6556,
+      "sha256": "e4f87dc490ba96467b0c1df3a0957212db3098813195d42fe5695c03aadea07a",
+      "git_blob_sha1": "363cdc9983a4b8941079b179b95809e83090c999",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/or_datasets/Cutting-and-Packing/2D-Irregular/Datasets/SHIRTS/json/shirts.json",
+      "url": "https://raw.githubusercontent.com/Oscar-Oliveira/OR-Datasets/e2e151cf241ab97d860f657cbfe515232e7096d7/Cutting-and-Packing/2D-Irregular/Datasets/SHIRTS/json/shirts.json",
+      "repository": "Oscar-Oliveira/OR-Datasets",
+      "commit": "e2e151cf241ab97d860f657cbfe515232e7096d7",
+      "bytes": 5454,
+      "sha256": "3d35fc0b2127a6d07793bba3d867cdc7b4c88837b991207d849f8f3383598557",
+      "git_blob_sha1": "3a1501dc68390734f9e55b98bfc4028b49cb88ed",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/or_datasets/Cutting-and-Packing/2D-Irregular/Datasets/SWIM/json/swim.json",
+      "url": "https://raw.githubusercontent.com/Oscar-Oliveira/OR-Datasets/e2e151cf241ab97d860f657cbfe515232e7096d7/Cutting-and-Packing/2D-Irregular/Datasets/SWIM/json/swim.json",
+      "repository": "Oscar-Oliveira/OR-Datasets",
+      "commit": "e2e151cf241ab97d860f657cbfe515232e7096d7",
+      "bytes": 17026,
+      "sha256": "b296788340a3489c3d304b79ad8ca561735fe4ee3f79554f5170da8fcc4f3a0d",
+      "git_blob_sha1": "3d551b7d093640dbd5d43b6159c6f083ae50eec1",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/or_datasets/Cutting-and-Packing/2D-Irregular/Datasets/TROUSERS/json/trousers.json",
+      "url": "https://raw.githubusercontent.com/Oscar-Oliveira/OR-Datasets/e2e151cf241ab97d860f657cbfe515232e7096d7/Cutting-and-Packing/2D-Irregular/Datasets/TROUSERS/json/trousers.json",
+      "repository": "Oscar-Oliveira/OR-Datasets",
+      "commit": "e2e151cf241ab97d860f657cbfe515232e7096d7",
+      "bytes": 10009,
+      "sha256": "c2a91d1f1687f540764ddc14103eb03dc5f54ac135194ab9c23b4d50c83bb68e",
+      "git_blob_sha1": "d27c906bdc9267345dfbbbf3d4f8ac55fade46fb",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/or_datasets/Cutting-and-Packing/2D-Irregular/README.md",
+      "url": "https://raw.githubusercontent.com/Oscar-Oliveira/OR-Datasets/e2e151cf241ab97d860f657cbfe515232e7096d7/Cutting-and-Packing/2D-Irregular/README.md",
+      "repository": "Oscar-Oliveira/OR-Datasets",
+      "commit": "e2e151cf241ab97d860f657cbfe515232e7096d7",
+      "bytes": 3665,
+      "sha256": "c682738bdf967297742b72b73cbfe32d06be38d731229bd3bc56e36a7cc21444",
+      "git_blob_sha1": "40dc499397a95f61b09bfb9e54e475a560badb81",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/or_datasets/LICENSE",
+      "url": "https://raw.githubusercontent.com/Oscar-Oliveira/OR-Datasets/e2e151cf241ab97d860f657cbfe515232e7096d7/LICENSE",
+      "repository": "Oscar-Oliveira/OR-Datasets",
+      "commit": "e2e151cf241ab97d860f657cbfe515232e7096d7",
+      "bytes": 1110,
+      "sha256": "2e78204e2926f6acf65b45fac57d63afe1e45573e680251ecbf177f10533dba0",
+      "git_blob_sha1": "6b7c781c76f7889914e9167cb603d3c37a351905",
+      "git_blob_verified": true
+    },
+    {
+      "local_path": "raw/or_datasets/README.md",
+      "url": "https://raw.githubusercontent.com/Oscar-Oliveira/OR-Datasets/e2e151cf241ab97d860f657cbfe515232e7096d7/README.md",
+      "repository": "Oscar-Oliveira/OR-Datasets",
+      "commit": "e2e151cf241ab97d860f657cbfe515232e7096d7",
+      "bytes": 507,
+      "sha256": "b3745aa80f165b88e6dba15acfc8cd8a8244c384717ccc01b9ea4758edc3fbb4",
+      "git_blob_sha1": "4b2c9ea3a6d3ca23e5913a3d75d35fd92148e402",
+      "git_blob_verified": true
+    }
+  ]
+}

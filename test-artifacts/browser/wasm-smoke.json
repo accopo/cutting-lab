@@ -1,0 +1,111 @@
+{
+  "commit": "649fd65233ee93f50b69871f197779ace46db9f5",
+  "receipts": [
+    {
+      "id": "shirts",
+      "engine": "irregular",
+      "placed": 99,
+      "required": 99,
+      "full": true,
+      "bins": 1,
+      "validation": true
+    },
+    {
+      "id": "metal-parts",
+      "engine": "irregular",
+      "placed": 23,
+      "required": 23,
+      "full": true,
+      "bins": 1,
+      "validation": true
+    },
+    {
+      "id": "leather-defects",
+      "engine": "irregular",
+      "placed": 24,
+      "required": 24,
+      "full": true,
+      "bins": 1,
+      "validation": true
+    },
+    {
+      "id": "paper-layout",
+      "engine": "rectangle",
+      "placed": 52,
+      "required": 52,
+      "full": true,
+      "bins": 3,
+      "validation": true
+    },
+    {
+      "id": "wood-cabinet",
+      "engine": "guillotine",
+      "placed": 24,
+      "required": 24,
+      "full": true,
+      "bins": 2,
+      "validation": true
+    },
+    {
+      "id": "glass-panels",
+      "engine": "guillotine",
+      "placed": 17,
+      "required": 17,
+      "full": true,
+      "bins": 2,
+      "validation": true
+    },
+    {
+      "id": "bar-stock",
+      "engine": "onedimensional",
+      "placed": 36,
+      "required": 36,
+      "full": true,
+      "bins": 6,
+      "validation": true
+    },
+    {
+      "id": "bar-stock-kerf",
+      "engine": "onedimensional-kerf",
+      "placed": 36,
+      "required": 36,
+      "full": true,
+      "bins": 6,
+      "validation": true
+    },
+    {
+      "id": "box-mixed",
+      "engine": "box",
+      "placed": 24,
+      "required": 24,
+      "full": true,
+      "bins": 1,
+      "validation": true
+    },
+    {
+      "id": "box-value",
+      "engine": "box",
+      "placed": 7,
+      "required": 12,
+      "full": false,
+      "bins": 1,
+      "validation": true
+    },
+    {
+      "id": "box-weight",
+      "engine": "box",
+      "placed": 24,
+      "required": 24,
+      "full": true,
+      "bins": 3,
+      "validation": true
+    }
+  ],
+  "failures": 0,
+  "session": {
+    "seen": 7,
+    "done": true,
+    "stopped": true,
+    "placed": 99
+  }
+}

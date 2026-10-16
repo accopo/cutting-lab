@@ -1,0 +1,222 @@
+{
+  "date": "2026-10-16",
+  "scenario_id": "paper-layout",
+  "source_kind": "synthetic",
+  "input": {
+    "id": "paper-layout",
+    "name": "纸张 · 包装拼版",
+    "industry": "paper",
+    "kind": "rectangle",
+    "unit": "mm",
+    "description": "矩形自由摆放，允许 90°旋转；选择贯通路线可比较裁切约束。",
+    "source": {
+      "label": "本地合成教学示例",
+      "kind": "synthetic",
+      "note": "为演示该行业约束而构造的尺寸与轮廓，不代表工厂订单或真实生产纸样。"
+    },
+    "stock": {
+      "width": 900,
+      "height": 640,
+      "copies": 20
+    },
+    "items": [
+      {
+        "id": 0,
+        "name": "包装面 A",
+        "quantity": 12,
+        "width": 297,
+        "height": 210,
+        "profit": 3,
+        "allowed_rotations": [
+          0,
+          90
+        ]
+      },
+      {
+        "id": 1,
+        "name": "标签 B",
+        "quantity": 30,
+        "width": 140,
+        "height": 90,
+        "profit": 1,
+        "allowed_rotations": [
+          0,
+          90
+        ]
+      },
+      {
+        "id": 2,
+        "name": "内衬 C",
+        "quantity": 10,
+        "width": 220,
+        "height": 160,
+        "profit": 2,
+        "allowed_rotations": [
+          0,
+          90
+        ]
+      }
+    ],
+    "settings": {
+      "engine": "rectangle",
+      "objective": "bins",
+      "rotation": "quarter",
+      "custom_angles": [
+        0,
+        180
+      ],
+      "spacing": 0,
+      "edge": 0,
+      "kerf": 0,
+      "time_limit": 1,
+      "stages": 3,
+      "first_cut": "vertical"
+    },
+    "defects": []
+  },
+  "method": "同一材料、数量、允许方向、无额外间距/刀缝/疵点。均允许最多1秒；确定性构造算法完成即返回。",
+  "limitations": [
+    "仅一组合成实例及单次运行，不能据此推广算法排名或工业收益。",
+    "没有加入贯通算法，因贯通约束会改变可行域；不能与自由矩形摆放混作同一问题。"
+  ],
+  "results": [
+    {
+      "route": "rectangle",
+      "instance_fingerprint": "62d990a1af3f915dddaed34b2700fc931da91ca873c04e60af7b9bf173e95495",
+      "budget_s": 1,
+      "actual_s": 1.0523033000063151,
+      "metrics": {
+        "required_pieces": 52,
+        "placed_pieces": 52,
+        "bin_count": 3,
+        "used_length": null,
+        "utilization_percent": 85.55787037037037,
+        "total_item_area": 1478440.0,
+        "profit": 86.0
+      },
+      "validation": {
+        "pass": true,
+        "geometry_pass": true,
+        "full_demand": true,
+        "errors": [],
+        "placed_counts": {
+          "0": 12,
+          "2": 10,
+          "1": 30
+        },
+        "required_counts": {
+          "0": 12,
+          "1": 30,
+          "2": 10
+        },
+        "minimum_item_clearance": 0.0,
+        "minimum_defect_clearance": null,
+        "coordinate_tolerance": 9e-06,
+        "area_tolerance": "max(1e-8, original_piece_area * 1e-7)",
+        "checks": [
+          "source geometry",
+          "quantity",
+          "bounds",
+          "overlap",
+          "allowed angles",
+          "spacing",
+          "defects"
+        ],
+        "scope": "独立几何校验；不等同于加工可制造性或全局最优证明。"
+      },
+      "engine_version": "0.1.1184"
+    },
+    {
+      "route": "rectpack-maxrects",
+      "instance_fingerprint": "62d990a1af3f915dddaed34b2700fc931da91ca873c04e60af7b9bf173e95495",
+      "budget_s": 1,
+      "actual_s": 0.07967440003994852,
+      "metrics": {
+        "required_pieces": 52,
+        "placed_pieces": 52,
+        "bin_count": 3,
+        "used_length": null,
+        "utilization_percent": 85.55787037037037,
+        "total_item_area": 1478440.0,
+        "profit": 86.0
+      },
+      "validation": {
+        "pass": true,
+        "geometry_pass": true,
+        "full_demand": true,
+        "errors": [],
+        "placed_counts": {
+          "0": 12,
+          "1": 30,
+          "2": 10
+        },
+        "required_counts": {
+          "0": 12,
+          "1": 30,
+          "2": 10
+        },
+        "minimum_item_clearance": 0.0,
+        "minimum_defect_clearance": null,
+        "coordinate_tolerance": 9e-06,
+        "area_tolerance": "max(1e-8, original_piece_area * 1e-7)",
+        "checks": [
+          "source geometry",
+          "quantity",
+          "bounds",
+          "overlap",
+          "allowed angles",
+          "spacing",
+          "defects"
+        ],
+        "scope": "独立几何校验；不等同于加工可制造性或全局最优证明。"
+      },
+      "engine_version": "0.2.2"
+    },
+    {
+      "route": "rectpack-skyline",
+      "instance_fingerprint": "62d990a1af3f915dddaed34b2700fc931da91ca873c04e60af7b9bf173e95495",
+      "budget_s": 1,
+      "actual_s": 0.004706599982455373,
+      "metrics": {
+        "required_pieces": 52,
+        "placed_pieces": 52,
+        "bin_count": 3,
+        "used_length": null,
+        "utilization_percent": 85.55787037037037,
+        "total_item_area": 1478440.0,
+        "profit": 86.0
+      },
+      "validation": {
+        "pass": true,
+        "geometry_pass": true,
+        "full_demand": true,
+        "errors": [],
+        "placed_counts": {
+          "0": 12,
+          "2": 10,
+          "1": 30
+        },
+        "required_counts": {
+          "0": 12,
+          "1": 30,
+          "2": 10
+        },
+        "minimum_item_clearance": 0.0,
+        "minimum_defect_clearance": null,
+        "coordinate_tolerance": 9e-06,
+        "area_tolerance": "max(1e-8, original_piece_area * 1e-7)",
+        "checks": [
+          "source geometry",
+          "quantity",
+          "bounds",
+          "overlap",
+          "allowed angles",
+          "spacing",
+          "defects"
+        ],
+        "scope": "独立几何校验；不等同于加工可制造性或全局最优证明。"
+      },
+      "engine_version": "0.2.2"
+    }
+  ]
+}

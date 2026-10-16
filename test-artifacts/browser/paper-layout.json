@@ -1,0 +1,1620 @@
+{
+  "problem": {
+    "id": "paper-layout",
+    "name": "纸张 · 包装拼版",
+    "industry": "paper",
+    "kind": "rectangle",
+    "unit": "mm",
+    "description": "矩形自由摆放，允许 90°旋转；选择贯通路线可比较裁切约束。",
+    "source": {
+      "label": "本地合成教学示例",
+      "kind": "synthetic",
+      "note": "为演示该行业约束而构造的尺寸与轮廓，不代表工厂订单或真实生产纸样。",
+      "derived": false,
+      "scenario_label": "原始实例参数"
+    },
+    "stock": {
+      "width": 900,
+      "height": 640,
+      "copies": 20
+    },
+    "items": [
+      {
+        "id": 0,
+        "name": "包装面 A",
+        "quantity": 12,
+        "width": 297,
+        "height": 210,
+        "profit": 3,
+        "allowed_rotations": [
+          0,
+          90
+        ],
+        "effective_rotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "polygon": [
+          [
+            0,
+            0
+          ],
+          [
+            297,
+            0
+          ],
+          [
+            297,
+            210
+          ],
+          [
+            0,
+            210
+          ]
+        ]
+      },
+      {
+        "id": 1,
+        "name": "标签 B",
+        "quantity": 30,
+        "width": 140,
+        "height": 90,
+        "profit": 1,
+        "allowed_rotations": [
+          0,
+          90
+        ],
+        "effective_rotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "polygon": [
+          [
+            0,
+            0
+          ],
+          [
+            140,
+            0
+          ],
+          [
+            140,
+            90
+          ],
+          [
+            0,
+            90
+          ]
+        ]
+      },
+      {
+        "id": 2,
+        "name": "内衬 C",
+        "quantity": 10,
+        "width": 220,
+        "height": 160,
+        "profit": 2,
+        "allowed_rotations": [
+          0,
+          90
+        ],
+        "effective_rotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "polygon": [
+          [
+            0,
+            0
+          ],
+          [
+            220,
+            0
+          ],
+          [
+            220,
+            160
+          ],
+          [
+            0,
+            160
+          ]
+        ]
+      }
+    ],
+    "settings": {
+      "engine": "rectangle",
+      "objective": "bins",
+      "rotation": "quarter",
+      "custom_angles": [
+        0,
+        180
+      ],
+      "spacing": 0,
+      "edge": 0,
+      "kerf": 0,
+      "time_limit": 1,
+      "stages": 3,
+      "first_cut": "vertical"
+    },
+    "defects": [],
+    "effective_stock_copies": 20
+  },
+  "native": {
+    "problemType": "rectangle",
+    "instance": {
+      "objective": "bin-packing",
+      "bin_types": [
+        {
+          "x": 900,
+          "y": 640,
+          "copies": 20,
+          "defects": []
+        }
+      ],
+      "item_types": [
+        {
+          "x": 297,
+          "y": 210,
+          "copies": 12,
+          "profit": 3,
+          "oriented": false
+        },
+        {
+          "x": 140,
+          "y": 90,
+          "copies": 30,
+          "profit": 1,
+          "oriented": false
+        },
+        {
+          "x": 220,
+          "y": 160,
+          "copies": 10,
+          "profit": 2,
+          "oriented": false
+        }
+      ]
+    },
+    "parameters": {
+      "time_limit": 1,
+      "verbosity_level": 0,
+      "optimization_mode": "anytime"
+    }
+  },
+  "raw": {
+    "certificate": "TYPE,ID,COPIES,BIN,X,Y,LX,LY,GROUP_ID\nBIN,0,1,0,0,0,900,640,\nITEM,0,1,0,0,0,297,210,0\nITEM,0,1,0,297,0,297,210,0\nITEM,0,1,0,594,0,297,210,0\nITEM,0,1,0,0,210,297,210,0\nITEM,0,1,0,297,210,297,210,0\nITEM,0,1,0,594,210,297,210,0\nITEM,0,1,0,0,420,297,210,0\nITEM,0,1,0,297,420,297,210,0\nITEM,0,1,0,594,420,297,210,0\nBIN,0,1,1,0,0,900,640,\nITEM,0,1,1,0,0,297,210,0\nITEM,0,1,1,297,0,297,210,0\nITEM,0,1,1,594,0,297,210,0\nITEM,2,1,1,0,210,220,160,0\nITEM,2,1,1,220,210,220,160,0\nITEM,2,1,1,440,210,220,160,0\nITEM,2,1,1,660,210,220,160,0\nITEM,2,1,1,0,370,220,160,0\nITEM,2,1,1,220,370,220,160,0\nITEM,2,1,1,440,370,220,160,0\nITEM,2,1,1,660,370,220,160,0\nITEM,1,1,1,0,530,140,90,0\nITEM,1,1,1,140,530,140,90,0\nITEM,1,1,1,280,530,140,90,0\nITEM,1,1,1,420,530,140,90,0\nITEM,1,1,1,560,530,140,90,0\nITEM,1,1,1,700,530,140,90,0\nBIN,0,1,2,0,0,900,640,\nITEM,2,1,2,0,0,220,160,0\nITEM,2,1,2,220,0,220,160,0\nITEM,1,1,2,440,0,140,90,0\nITEM,1,1,2,580,0,140,90,0\nITEM,1,1,2,720,0,140,90,0\nITEM,1,1,2,440,90,140,90,0\nITEM,1,1,2,580,90,140,90,0\nITEM,1,1,2,720,90,140,90,0\nITEM,1,1,2,0,160,140,90,0\nITEM,1,1,2,140,160,140,90,0\nITEM,1,1,2,280,160,140,90,0\nITEM,1,1,2,420,180,140,90,0\nITEM,1,1,2,560,180,140,90,0\nITEM,1,1,2,700,180,140,90,0\nITEM,1,1,2,0,250,140,90,0\nITEM,1,1,2,140,250,140,90,0\nITEM,1,1,2,280,250,140,90,0\nITEM,1,1,2,420,270,140,90,0\nITEM,1,1,2,560,270,140,90,0\nITEM,1,1,2,700,270,140,90,0\nITEM,1,1,2,0,340,140,90,0\nITEM,1,1,2,140,340,140,90,0\nITEM,1,1,2,280,340,140,90,0\nITEM,1,1,2,420,360,140,90,0\nITEM,1,1,2,560,360,140,90,0\nITEM,1,1,2,0,430,140,90,0\n",
+    "output": {
+      "BinPackingBound": 3,
+      "IsProvenInfeasible": false,
+      "KnapsackBound": null,
+      "OpenDimensionXBound": 0,
+      "OpenDimensionYBound": 0,
+      "Solution": {
+        "AreaLoad": 0.12833680555555554,
+        "BinArea": 1728000,
+        "BinCost": 1728000,
+        "BinWeight": null,
+        "FullWaste": 249560,
+        "FullWastePercentage": 0.1444212962962963,
+        "ItemArea": 1478440,
+        "ItemProfit": 86,
+        "ItemWeight": 0,
+        "LeftoverValue": 128800,
+        "NumberOfBins": 3,
+        "NumberOfItems": 52,
+        "Waste": 120760,
+        "WastePercentage": 0.07551275637818909,
+        "WeightLoad": 0,
+        "XMax": 860,
+        "YMax": 520
+      },
+      "Time": 0.029152768,
+      "VariableSizedBinPackingBound": 0
+    }
+  },
+  "result": {
+    "engine": "rectangle",
+    "objective": "bins",
+    "elapsed_s": 0.029152768,
+    "full": true,
+    "feasible": true,
+    "units": "mm",
+    "metrics": {
+      "required_pieces": 52,
+      "placed_pieces": 52,
+      "bin_count": 3,
+      "utilization_percent": 85.55787037037037,
+      "profit": 86,
+      "used_length": null,
+      "total_item_area": 1478440
+    },
+    "bins": [
+      {
+        "index": 0,
+        "width": 900,
+        "height": 640,
+        "items": [
+          {
+            "id": 0,
+            "name": "包装面 A",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                0
+              ],
+              [
+                297,
+                0
+              ],
+              [
+                297,
+                210
+              ],
+              [
+                0,
+                210
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "包装面 A",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                297,
+                0
+              ],
+              [
+                594,
+                0
+              ],
+              [
+                594,
+                210
+              ],
+              [
+                297,
+                210
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "包装面 A",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                594,
+                0
+              ],
+              [
+                891,
+                0
+              ],
+              [
+                891,
+                210
+              ],
+              [
+                594,
+                210
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "包装面 A",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                210
+              ],
+              [
+                297,
+                210
+              ],
+              [
+                297,
+                420
+              ],
+              [
+                0,
+                420
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "包装面 A",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                297,
+                210
+              ],
+              [
+                594,
+                210
+              ],
+              [
+                594,
+                420
+              ],
+              [
+                297,
+                420
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "包装面 A",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                594,
+                210
+              ],
+              [
+                891,
+                210
+              ],
+              [
+                891,
+                420
+              ],
+              [
+                594,
+                420
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "包装面 A",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                420
+              ],
+              [
+                297,
+                420
+              ],
+              [
+                297,
+                630
+              ],
+              [
+                0,
+                630
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "包装面 A",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                297,
+                420
+              ],
+              [
+                594,
+                420
+              ],
+              [
+                594,
+                630
+              ],
+              [
+                297,
+                630
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "包装面 A",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                594,
+                420
+              ],
+              [
+                891,
+                420
+              ],
+              [
+                891,
+                630
+              ],
+              [
+                594,
+                630
+              ]
+            ]
+          }
+        ],
+        "defects": []
+      },
+      {
+        "index": 1,
+        "width": 900,
+        "height": 640,
+        "items": [
+          {
+            "id": 0,
+            "name": "包装面 A",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                0
+              ],
+              [
+                297,
+                0
+              ],
+              [
+                297,
+                210
+              ],
+              [
+                0,
+                210
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "包装面 A",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                297,
+                0
+              ],
+              [
+                594,
+                0
+              ],
+              [
+                594,
+                210
+              ],
+              [
+                297,
+                210
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "包装面 A",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                594,
+                0
+              ],
+              [
+                891,
+                0
+              ],
+              [
+                891,
+                210
+              ],
+              [
+                594,
+                210
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "内衬 C",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                210
+              ],
+              [
+                220,
+                210
+              ],
+              [
+                220,
+                370
+              ],
+              [
+                0,
+                370
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "内衬 C",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                220,
+                210
+              ],
+              [
+                440,
+                210
+              ],
+              [
+                440,
+                370
+              ],
+              [
+                220,
+                370
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "内衬 C",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                440,
+                210
+              ],
+              [
+                660,
+                210
+              ],
+              [
+                660,
+                370
+              ],
+              [
+                440,
+                370
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "内衬 C",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                660,
+                210
+              ],
+              [
+                880,
+                210
+              ],
+              [
+                880,
+                370
+              ],
+              [
+                660,
+                370
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "内衬 C",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                370
+              ],
+              [
+                220,
+                370
+              ],
+              [
+                220,
+                530
+              ],
+              [
+                0,
+                530
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "内衬 C",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                220,
+                370
+              ],
+              [
+                440,
+                370
+              ],
+              [
+                440,
+                530
+              ],
+              [
+                220,
+                530
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "内衬 C",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                440,
+                370
+              ],
+              [
+                660,
+                370
+              ],
+              [
+                660,
+                530
+              ],
+              [
+                440,
+                530
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "内衬 C",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                660,
+                370
+              ],
+              [
+                880,
+                370
+              ],
+              [
+                880,
+                530
+              ],
+              [
+                660,
+                530
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                530
+              ],
+              [
+                140,
+                530
+              ],
+              [
+                140,
+                620
+              ],
+              [
+                0,
+                620
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                140,
+                530
+              ],
+              [
+                280,
+                530
+              ],
+              [
+                280,
+                620
+              ],
+              [
+                140,
+                620
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                280,
+                530
+              ],
+              [
+                420,
+                530
+              ],
+              [
+                420,
+                620
+              ],
+              [
+                280,
+                620
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                420,
+                530
+              ],
+              [
+                560,
+                530
+              ],
+              [
+                560,
+                620
+              ],
+              [
+                420,
+                620
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                560,
+                530
+              ],
+              [
+                700,
+                530
+              ],
+              [
+                700,
+                620
+              ],
+              [
+                560,
+                620
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                700,
+                530
+              ],
+              [
+                840,
+                530
+              ],
+              [
+                840,
+                620
+              ],
+              [
+                700,
+                620
+              ]
+            ]
+          }
+        ],
+        "defects": []
+      },
+      {
+        "index": 2,
+        "width": 900,
+        "height": 640,
+        "items": [
+          {
+            "id": 2,
+            "name": "内衬 C",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                0
+              ],
+              [
+                220,
+                0
+              ],
+              [
+                220,
+                160
+              ],
+              [
+                0,
+                160
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "内衬 C",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                220,
+                0
+              ],
+              [
+                440,
+                0
+              ],
+              [
+                440,
+                160
+              ],
+              [
+                220,
+                160
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                440,
+                0
+              ],
+              [
+                580,
+                0
+              ],
+              [
+                580,
+                90
+              ],
+              [
+                440,
+                90
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                580,
+                0
+              ],
+              [
+                720,
+                0
+              ],
+              [
+                720,
+                90
+              ],
+              [
+                580,
+                90
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                720,
+                0
+              ],
+              [
+                860,
+                0
+              ],
+              [
+                860,
+                90
+              ],
+              [
+                720,
+                90
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                440,
+                90
+              ],
+              [
+                580,
+                90
+              ],
+              [
+                580,
+                180
+              ],
+              [
+                440,
+                180
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                580,
+                90
+              ],
+              [
+                720,
+                90
+              ],
+              [
+                720,
+                180
+              ],
+              [
+                580,
+                180
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                720,
+                90
+              ],
+              [
+                860,
+                90
+              ],
+              [
+                860,
+                180
+              ],
+              [
+                720,
+                180
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                160
+              ],
+              [
+                140,
+                160
+              ],
+              [
+                140,
+                250
+              ],
+              [
+                0,
+                250
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                140,
+                160
+              ],
+              [
+                280,
+                160
+              ],
+              [
+                280,
+                250
+              ],
+              [
+                140,
+                250
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                280,
+                160
+              ],
+              [
+                420,
+                160
+              ],
+              [
+                420,
+                250
+              ],
+              [
+                280,
+                250
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                420,
+                180
+              ],
+              [
+                560,
+                180
+              ],
+              [
+                560,
+                270
+              ],
+              [
+                420,
+                270
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                560,
+                180
+              ],
+              [
+                700,
+                180
+              ],
+              [
+                700,
+                270
+              ],
+              [
+                560,
+                270
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                700,
+                180
+              ],
+              [
+                840,
+                180
+              ],
+              [
+                840,
+                270
+              ],
+              [
+                700,
+                270
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                250
+              ],
+              [
+                140,
+                250
+              ],
+              [
+                140,
+                340
+              ],
+              [
+                0,
+                340
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                140,
+                250
+              ],
+              [
+                280,
+                250
+              ],
+              [
+                280,
+                340
+              ],
+              [
+                140,
+                340
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                280,
+                250
+              ],
+              [
+                420,
+                250
+              ],
+              [
+                420,
+                340
+              ],
+              [
+                280,
+                340
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                420,
+                270
+              ],
+              [
+                560,
+                270
+              ],
+              [
+                560,
+                360
+              ],
+              [
+                420,
+                360
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                560,
+                270
+              ],
+              [
+                700,
+                270
+              ],
+              [
+                700,
+                360
+              ],
+              [
+                560,
+                360
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                700,
+                270
+              ],
+              [
+                840,
+                270
+              ],
+              [
+                840,
+                360
+              ],
+              [
+                700,
+                360
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                340
+              ],
+              [
+                140,
+                340
+              ],
+              [
+                140,
+                430
+              ],
+              [
+                0,
+                430
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                140,
+                340
+              ],
+              [
+                280,
+                340
+              ],
+              [
+                280,
+                430
+              ],
+              [
+                140,
+                430
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                280,
+                340
+              ],
+              [
+                420,
+                340
+              ],
+              [
+                420,
+                430
+              ],
+              [
+                280,
+                430
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                420,
+                360
+              ],
+              [
+                560,
+                360
+              ],
+              [
+                560,
+                450
+              ],
+              [
+                420,
+                450
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                560,
+                360
+              ],
+              [
+                700,
+                360
+              ],
+              [
+                700,
+                450
+              ],
+              [
+                560,
+                450
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "标签 B",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                430
+              ],
+              [
+                140,
+                430
+              ],
+              [
+                140,
+                520
+              ],
+              [
+                0,
+                520
+              ]
+            ]
+          }
+        ],
+        "defects": []
+      }
+    ],
+    "solver_statistics": {
+      "AreaLoad": 0.12833680555555554,
+      "BinArea": 1728000,
+      "BinCost": 1728000,
+      "BinWeight": null,
+      "FullWaste": 249560,
+      "FullWastePercentage": 0.1444212962962963,
+      "ItemArea": 1478440,
+      "ItemProfit": 86,
+      "ItemWeight": 0,
+      "LeftoverValue": 128800,
+      "NumberOfBins": 3,
+      "NumberOfItems": 52,
+      "Waste": 120760,
+      "WastePercentage": 0.07551275637818909,
+      "WeightLoad": 0,
+      "XMax": 860,
+      "YMax": 520
+    },
+    "raw_output": {
+      "BinPackingBound": 3,
+      "IsProvenInfeasible": false,
+      "KnapsackBound": null,
+      "OpenDimensionXBound": 0,
+      "OpenDimensionYBound": 0,
+      "Solution": {
+        "AreaLoad": 0.12833680555555554,
+        "BinArea": 1728000,
+        "BinCost": 1728000,
+        "BinWeight": null,
+        "FullWaste": 249560,
+        "FullWastePercentage": 0.1444212962962963,
+        "ItemArea": 1478440,
+        "ItemProfit": 86,
+        "ItemWeight": 0,
+        "LeftoverValue": 128800,
+        "NumberOfBins": 3,
+        "NumberOfItems": 52,
+        "Waste": 120760,
+        "WastePercentage": 0.07551275637818909,
+        "WeightLoad": 0,
+        "XMax": 860,
+        "YMax": 520
+      },
+      "Time": 0.029152768,
+      "VariableSizedBinPackingBound": 0
+    },
+    "engine_version": "wasm-649fd65233ee",
+    "config": {
+      "engine": "rectangle",
+      "objective": "bins",
+      "settings": {
+        "engine": "rectangle",
+        "objective": "bins",
+        "rotation": "quarter",
+        "custom_angles": [
+          0,
+          180
+        ],
+        "spacing": 0,
+        "edge": 0,
+        "kerf": 0,
+        "time_limit": 1,
+        "stages": 3,
+        "first_cut": "vertical"
+      },
+      "stock": {
+        "width": 900,
+        "height": 640,
+        "copies": 20
+      },
+      "effective_stock_copies": 20
+    },
+    "warnings": [
+      "真实浏览器 WebAssembly 限时求解；不保证全局最优。",
+      "独立数值几何校验不等同于工业加工、局部承重或稳定性证明。"
+    ],
+    "validation": {
+      "pass": true,
+      "geometry_pass": true,
+      "full_demand": true,
+      "errors": [],
+      "placed_counts": {
+        "0": 12,
+        "1": 30,
+        "2": 10
+      },
+      "required_counts": {
+        "0": 12,
+        "1": 30,
+        "2": 10
+      },
+      "minimum_item_clearance": 0,
+      "minimum_defect_clearance": null,
+      "coordinate_tolerance": 0.000009,
+      "area_tolerance": "max(1e-8, original_piece_area * 1e-7)",
+      "checks": [
+        "source geometry",
+        "quantity",
+        "bounds",
+        "overlap",
+        "allowed angles",
+        "spacing",
+        "defects"
+      ],
+      "scope": "独立几何校验；不等同于加工可制造性或全局最优证明。"
+    }
+  }
+}

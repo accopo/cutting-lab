@@ -1,0 +1,695 @@
+{
+  "problem": {
+    "id": "box-weight",
+    "name": "物流 · 容器限重装箱",
+    "industry": "logistics",
+    "kind": "box",
+    "unit": "mm",
+    "description": "重量单位统一为 kg：每容器最多180kg；未建模重心、支撑与单件堆叠承重。",
+    "source": {
+      "label": "本地合成教学示例",
+      "kind": "synthetic",
+      "note": "为演示该行业约束而构造的尺寸与轮廓，不代表工厂订单或真实生产纸样。",
+      "derived": false,
+      "scenario_label": "原始实例参数"
+    },
+    "stock": {
+      "width": 1200,
+      "height": 1000,
+      "depth": 1000,
+      "copies": 10,
+      "maximum_weight": 180
+    },
+    "items": [
+      {
+        "id": 0,
+        "name": "标准箱 A",
+        "width": 400,
+        "height": 300,
+        "depth": 250,
+        "quantity": 12,
+        "profit": 5,
+        "weight": 12,
+        "allowed_rotations": [
+          "XYZ",
+          "XZY",
+          "YXZ",
+          "YZX",
+          "ZXY",
+          "ZYX"
+        ],
+        "effective_rotations": [
+          "XYZ",
+          "XZY",
+          "YXZ",
+          "YZX",
+          "ZXY",
+          "ZYX"
+        ]
+      },
+      {
+        "id": 1,
+        "name": "标准箱 B",
+        "width": 600,
+        "height": 400,
+        "depth": 300,
+        "quantity": 6,
+        "profit": 8,
+        "weight": 22,
+        "allowed_rotations": [
+          "XYZ",
+          "XZY",
+          "YXZ",
+          "YZX",
+          "ZXY",
+          "ZYX"
+        ],
+        "effective_rotations": [
+          "XYZ",
+          "XZY",
+          "YXZ",
+          "YZX",
+          "ZXY",
+          "ZYX"
+        ]
+      },
+      {
+        "id": 2,
+        "name": "长条零件 C",
+        "width": 800,
+        "height": 200,
+        "depth": 150,
+        "quantity": 6,
+        "profit": 4,
+        "weight": 18,
+        "allowed_rotations": [
+          "XYZ",
+          "XZY",
+          "YXZ",
+          "YZX",
+          "ZXY",
+          "ZYX"
+        ],
+        "effective_rotations": [
+          "XYZ",
+          "XZY",
+          "YXZ",
+          "YZX",
+          "ZXY",
+          "ZYX"
+        ]
+      }
+    ],
+    "settings": {
+      "engine": "box",
+      "objective": "bins",
+      "rotation": "orthogonal",
+      "custom_angles": [
+        0,
+        180
+      ],
+      "spacing": 0,
+      "edge": 0,
+      "kerf": 0,
+      "time_limit": 1,
+      "stages": 3,
+      "first_cut": "vertical"
+    },
+    "defects": [],
+    "effective_stock_copies": 10
+  },
+  "native": {
+    "problemType": "box",
+    "instance": {
+      "objective": "bin-packing",
+      "bin_types": [
+        {
+          "x": 1200,
+          "y": 1000,
+          "z": 1000,
+          "copies": 10,
+          "maximum_weight": 180
+        }
+      ],
+      "item_types": [
+        {
+          "x": 400,
+          "y": 300,
+          "z": 250,
+          "copies": 12,
+          "profit": 5,
+          "weight": 12,
+          "rotations": [
+            "XYZ",
+            "XZY",
+            "YXZ",
+            "YZX",
+            "ZXY",
+            "ZYX"
+          ]
+        },
+        {
+          "x": 600,
+          "y": 400,
+          "z": 300,
+          "copies": 6,
+          "profit": 8,
+          "weight": 22,
+          "rotations": [
+            "XYZ",
+            "XZY",
+            "YXZ",
+            "YZX",
+            "ZXY",
+            "ZYX"
+          ]
+        },
+        {
+          "x": 800,
+          "y": 200,
+          "z": 150,
+          "copies": 6,
+          "profit": 4,
+          "weight": 18,
+          "rotations": [
+            "XYZ",
+            "XZY",
+            "YXZ",
+            "YZX",
+            "ZXY",
+            "ZYX"
+          ]
+        }
+      ]
+    },
+    "parameters": {
+      "time_limit": 1,
+      "verbosity_level": 0,
+      "optimization_mode": "anytime"
+    }
+  },
+  "raw": {
+    "certificate": "TYPE,ID,COPIES,BIN,X,Y,Z,LX,LY,LZ,ROTATION\nBIN,0,1,0,0,0,0,1200,1000,1000,\nITEM,1,1,0,0,0,0,600,400,300,XYZ\nITEM,1,1,0,600,0,0,600,400,300,XYZ\nITEM,1,1,0,0,400,0,600,400,300,XYZ\nITEM,1,1,0,600,400,0,600,400,300,XYZ\nITEM,2,1,0,0,800,0,800,200,150,XYZ\nITEM,1,1,0,0,0,300,600,400,300,XYZ\nITEM,1,1,0,600,0,300,600,400,300,XYZ\nITEM,2,1,0,0,800,150,800,200,150,XYZ\nITEM,0,1,0,0,400,300,400,300,250,XYZ\nBIN,0,1,1,0,0,0,1200,1000,1000,\nITEM,0,1,1,0,0,0,400,300,250,XYZ\nITEM,0,1,1,400,0,0,400,300,250,XYZ\nITEM,0,1,1,800,0,0,400,300,250,XYZ\nITEM,0,1,1,0,300,0,400,300,250,XYZ\nITEM,0,1,1,400,300,0,400,300,250,XYZ\nITEM,0,1,1,800,300,0,400,300,250,XYZ\nITEM,0,1,1,0,600,0,400,250,300,XZY\nITEM,0,1,1,400,600,0,400,250,300,XZY\nITEM,0,1,1,800,600,0,400,250,300,XZY\nITEM,2,1,1,0,850,0,800,150,200,XZY\nITEM,2,1,1,800,850,0,200,150,800,YZX\nITEM,0,1,1,0,0,250,400,300,250,XYZ\nITEM,0,1,1,400,0,250,400,300,250,XYZ\nBIN,0,1,2,0,0,0,1200,1000,1000,\nITEM,2,1,2,0,0,0,800,200,150,XYZ\nITEM,2,1,2,0,0,150,800,200,150,XYZ\n",
+    "output": {
+      "BinPackingBound": 1,
+      "IsProvenInfeasible": false,
+      "KnapsackBound": null,
+      "OpenDimensionXBound": 0,
+      "OpenDimensionYBound": 0,
+      "OpenDimensionZBound": 0,
+      "Solution": {
+        "AreaLoad": 0,
+        "BinArea": 3600000,
+        "BinCost": 3600000000,
+        "BinVolume": 3600000000,
+        "BinWeight": 540,
+        "FullWaste": 2664000000,
+        "FullWastePercentage": 0.74,
+        "ItemProfit": 132,
+        "ItemVolume": 936000000,
+        "ItemWeight": 384,
+        "LeftoverValue": 1152000000,
+        "NumberOfBins": 3,
+        "NumberOfItems": 24,
+        "NumberOfStacks": 0,
+        "NumberOfUnpackedItems": 0,
+        "StackArea": 0,
+        "VolumeLoad": 0.078,
+        "Waste": 1512000000,
+        "WastePercentage": 0.6176470588235294,
+        "WeightLoad": 0.21333333333333335,
+        "XMax": 800,
+        "YMax": 200,
+        "ZMax": 300
+      },
+      "Time": 1.00091008,
+      "VariableSizedBinPackingBound": 0
+    }
+  },
+  "result": {
+    "engine": "box",
+    "objective": "bins",
+    "kind": "box",
+    "elapsed_s": 1.00091008,
+    "full": true,
+    "feasible": true,
+    "units": "mm",
+    "metrics": {
+      "required_pieces": 24,
+      "placed_pieces": 24,
+      "bin_count": 3,
+      "utilization_percent": 26,
+      "profit": 132,
+      "total_item_volume": 936000000,
+      "total_stock_volume": 3600000000,
+      "total_item_weight": 384
+    },
+    "bins": [
+      {
+        "index": 0,
+        "width": 1200,
+        "height": 1000,
+        "depth": 1000,
+        "items": [
+          {
+            "id": 1,
+            "name": "标准箱 B",
+            "rotation": "XYZ",
+            "weight": 22,
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "width": 600,
+            "height": 400,
+            "depth": 300
+          },
+          {
+            "id": 1,
+            "name": "标准箱 B",
+            "rotation": "XYZ",
+            "weight": 22,
+            "x": 600,
+            "y": 0,
+            "z": 0,
+            "width": 600,
+            "height": 400,
+            "depth": 300
+          },
+          {
+            "id": 1,
+            "name": "标准箱 B",
+            "rotation": "XYZ",
+            "weight": 22,
+            "x": 0,
+            "y": 400,
+            "z": 0,
+            "width": 600,
+            "height": 400,
+            "depth": 300
+          },
+          {
+            "id": 1,
+            "name": "标准箱 B",
+            "rotation": "XYZ",
+            "weight": 22,
+            "x": 600,
+            "y": 400,
+            "z": 0,
+            "width": 600,
+            "height": 400,
+            "depth": 300
+          },
+          {
+            "id": 2,
+            "name": "长条零件 C",
+            "rotation": "XYZ",
+            "weight": 18,
+            "x": 0,
+            "y": 800,
+            "z": 0,
+            "width": 800,
+            "height": 200,
+            "depth": 150
+          },
+          {
+            "id": 1,
+            "name": "标准箱 B",
+            "rotation": "XYZ",
+            "weight": 22,
+            "x": 0,
+            "y": 0,
+            "z": 300,
+            "width": 600,
+            "height": 400,
+            "depth": 300
+          },
+          {
+            "id": 1,
+            "name": "标准箱 B",
+            "rotation": "XYZ",
+            "weight": 22,
+            "x": 600,
+            "y": 0,
+            "z": 300,
+            "width": 600,
+            "height": 400,
+            "depth": 300
+          },
+          {
+            "id": 2,
+            "name": "长条零件 C",
+            "rotation": "XYZ",
+            "weight": 18,
+            "x": 0,
+            "y": 800,
+            "z": 150,
+            "width": 800,
+            "height": 200,
+            "depth": 150
+          },
+          {
+            "id": 0,
+            "name": "标准箱 A",
+            "rotation": "XYZ",
+            "weight": 12,
+            "x": 0,
+            "y": 400,
+            "z": 300,
+            "width": 400,
+            "height": 300,
+            "depth": 250
+          }
+        ],
+        "defects": [],
+        "total_weight": 180,
+        "maximum_weight": 180
+      },
+      {
+        "index": 1,
+        "width": 1200,
+        "height": 1000,
+        "depth": 1000,
+        "items": [
+          {
+            "id": 0,
+            "name": "标准箱 A",
+            "rotation": "XYZ",
+            "weight": 12,
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "width": 400,
+            "height": 300,
+            "depth": 250
+          },
+          {
+            "id": 0,
+            "name": "标准箱 A",
+            "rotation": "XYZ",
+            "weight": 12,
+            "x": 400,
+            "y": 0,
+            "z": 0,
+            "width": 400,
+            "height": 300,
+            "depth": 250
+          },
+          {
+            "id": 0,
+            "name": "标准箱 A",
+            "rotation": "XYZ",
+            "weight": 12,
+            "x": 800,
+            "y": 0,
+            "z": 0,
+            "width": 400,
+            "height": 300,
+            "depth": 250
+          },
+          {
+            "id": 0,
+            "name": "标准箱 A",
+            "rotation": "XYZ",
+            "weight": 12,
+            "x": 0,
+            "y": 300,
+            "z": 0,
+            "width": 400,
+            "height": 300,
+            "depth": 250
+          },
+          {
+            "id": 0,
+            "name": "标准箱 A",
+            "rotation": "XYZ",
+            "weight": 12,
+            "x": 400,
+            "y": 300,
+            "z": 0,
+            "width": 400,
+            "height": 300,
+            "depth": 250
+          },
+          {
+            "id": 0,
+            "name": "标准箱 A",
+            "rotation": "XYZ",
+            "weight": 12,
+            "x": 800,
+            "y": 300,
+            "z": 0,
+            "width": 400,
+            "height": 300,
+            "depth": 250
+          },
+          {
+            "id": 0,
+            "name": "标准箱 A",
+            "rotation": "XZY",
+            "weight": 12,
+            "x": 0,
+            "y": 600,
+            "z": 0,
+            "width": 400,
+            "height": 250,
+            "depth": 300
+          },
+          {
+            "id": 0,
+            "name": "标准箱 A",
+            "rotation": "XZY",
+            "weight": 12,
+            "x": 400,
+            "y": 600,
+            "z": 0,
+            "width": 400,
+            "height": 250,
+            "depth": 300
+          },
+          {
+            "id": 0,
+            "name": "标准箱 A",
+            "rotation": "XZY",
+            "weight": 12,
+            "x": 800,
+            "y": 600,
+            "z": 0,
+            "width": 400,
+            "height": 250,
+            "depth": 300
+          },
+          {
+            "id": 2,
+            "name": "长条零件 C",
+            "rotation": "XZY",
+            "weight": 18,
+            "x": 0,
+            "y": 850,
+            "z": 0,
+            "width": 800,
+            "height": 150,
+            "depth": 200
+          },
+          {
+            "id": 2,
+            "name": "长条零件 C",
+            "rotation": "YZX",
+            "weight": 18,
+            "x": 800,
+            "y": 850,
+            "z": 0,
+            "width": 200,
+            "height": 150,
+            "depth": 800
+          },
+          {
+            "id": 0,
+            "name": "标准箱 A",
+            "rotation": "XYZ",
+            "weight": 12,
+            "x": 0,
+            "y": 0,
+            "z": 250,
+            "width": 400,
+            "height": 300,
+            "depth": 250
+          },
+          {
+            "id": 0,
+            "name": "标准箱 A",
+            "rotation": "XYZ",
+            "weight": 12,
+            "x": 400,
+            "y": 0,
+            "z": 250,
+            "width": 400,
+            "height": 300,
+            "depth": 250
+          }
+        ],
+        "defects": [],
+        "total_weight": 168,
+        "maximum_weight": 180
+      },
+      {
+        "index": 2,
+        "width": 1200,
+        "height": 1000,
+        "depth": 1000,
+        "items": [
+          {
+            "id": 2,
+            "name": "长条零件 C",
+            "rotation": "XYZ",
+            "weight": 18,
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "width": 800,
+            "height": 200,
+            "depth": 150
+          },
+          {
+            "id": 2,
+            "name": "长条零件 C",
+            "rotation": "XYZ",
+            "weight": 18,
+            "x": 0,
+            "y": 0,
+            "z": 150,
+            "width": 800,
+            "height": 200,
+            "depth": 150
+          }
+        ],
+        "defects": [],
+        "total_weight": 36,
+        "maximum_weight": 180
+      }
+    ],
+    "solver_statistics": {
+      "AreaLoad": 0,
+      "BinArea": 3600000,
+      "BinCost": 3600000000,
+      "BinVolume": 3600000000,
+      "BinWeight": 540,
+      "FullWaste": 2664000000,
+      "FullWastePercentage": 0.74,
+      "ItemProfit": 132,
+      "ItemVolume": 936000000,
+      "ItemWeight": 384,
+      "LeftoverValue": 1152000000,
+      "NumberOfBins": 3,
+      "NumberOfItems": 24,
+      "NumberOfStacks": 0,
+      "NumberOfUnpackedItems": 0,
+      "StackArea": 0,
+      "VolumeLoad": 0.078,
+      "Waste": 1512000000,
+      "WastePercentage": 0.6176470588235294,
+      "WeightLoad": 0.21333333333333335,
+      "XMax": 800,
+      "YMax": 200,
+      "ZMax": 300
+    },
+    "raw_output": {
+      "BinPackingBound": 1,
+      "IsProvenInfeasible": false,
+      "KnapsackBound": null,
+      "OpenDimensionXBound": 0,
+      "OpenDimensionYBound": 0,
+      "OpenDimensionZBound": 0,
+      "Solution": {
+        "AreaLoad": 0,
+        "BinArea": 3600000,
+        "BinCost": 3600000000,
+        "BinVolume": 3600000000,
+        "BinWeight": 540,
+        "FullWaste": 2664000000,
+        "FullWastePercentage": 0.74,
+        "ItemProfit": 132,
+        "ItemVolume": 936000000,
+        "ItemWeight": 384,
+        "LeftoverValue": 1152000000,
+        "NumberOfBins": 3,
+        "NumberOfItems": 24,
+        "NumberOfStacks": 0,
+        "NumberOfUnpackedItems": 0,
+        "StackArea": 0,
+        "VolumeLoad": 0.078,
+        "Waste": 1512000000,
+        "WastePercentage": 0.6176470588235294,
+        "WeightLoad": 0.21333333333333335,
+        "XMax": 800,
+        "YMax": 200,
+        "ZMax": 300
+      },
+      "Time": 1.00091008,
+      "VariableSizedBinPackingBound": 0
+    },
+    "engine_version": "wasm-649fd65233ee",
+    "config": {
+      "engine": "box",
+      "objective": "bins",
+      "settings": {
+        "engine": "box",
+        "objective": "bins",
+        "rotation": "orthogonal",
+        "custom_angles": [
+          0,
+          180
+        ],
+        "spacing": 0,
+        "edge": 0,
+        "kerf": 0,
+        "time_limit": 1,
+        "stages": 3,
+        "first_cut": "vertical"
+      },
+      "stock": {
+        "width": 1200,
+        "height": 1000,
+        "depth": 1000,
+        "copies": 10,
+        "maximum_weight": 180
+      },
+      "effective_stock_copies": 10
+    },
+    "warnings": [
+      "真实浏览器 WebAssembly 限时求解；不保证全局最优。",
+      "独立数值几何校验不等同于工业加工、局部承重或稳定性证明。"
+    ],
+    "validation": {
+      "pass": true,
+      "geometry_pass": true,
+      "full_demand": true,
+      "errors": [],
+      "placed_counts": {
+        "0": 12,
+        "1": 6,
+        "2": 6
+      },
+      "required_counts": {
+        "0": 12,
+        "1": 6,
+        "2": 6
+      },
+      "total_item_volume_checked": 936000000,
+      "bin_weights_checked": [
+        180,
+        168,
+        36
+      ],
+      "coordinate_tolerance": 1e-7,
+      "checks": [
+        "quantity",
+        "container bounds",
+        "positive-volume overlap",
+        "axis-permutation orientation",
+        "original dimensions",
+        "container total weight"
+      ],
+      "scope": "独立三维长方体几何与总重量校验；不包含重力稳定性、局部堆叠承重、装卸顺序或全局最优证明。"
+    }
+  }
+}

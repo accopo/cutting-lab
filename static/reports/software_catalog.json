@@ -1,0 +1,251 @@
+{
+  "title": "行业商业软件公开资料",
+  "source_note": "转录2026-10-15官方来源核查。许可与试用政策可能变化，请以官网当前条款为准。",
+  "products": [
+    {
+      "name": "服装：Lectra Diamino / Valia Fashion",
+      "industries": [
+        "apparel"
+      ],
+      "features": "官方 2026 资料将 Diamino Expert 与 AccuNest 列为本地工作站方案，将 Valia 描述为云端整合平台；Valia 规则包含布宽、缩率、花型重复、旋转限制、尺码组合，并连接排料与裁床",
+      "workflow": "订单、裁片和工艺规则进入；生成排料/用布估计并连到 Vector/Virga 等裁切流程。该页未给通用文件格式清单",
+      "access": "云端 Valia 与历史桌面 Diamino 应区分；本次未确认无需联系销售的公开离线试用",
+      "links": [
+        {
+          "title": "Valia 约束说明",
+          "url": "https://www.lectra.com/en/library/how-valia-fashion-solves-the-material-waste-challenge"
+        },
+        {
+          "title": "2026 产品关系比较（意大利语）",
+          "url": "https://www.lectra.com/it/libreria/perche-le-soluzioni-tradizionali-per-le-sale-taglio-non-riescono-a-stare-al-passo-con-le"
+        }
+      ],
+      "checked_on": "2026-10-15"
+    },
+    {
+      "name": "服装：Gerber AccuNest",
+      "industries": [
+        "apparel"
+      ],
+      "features": "AccuMark Lay Limits 可把需缝合匹配的裁片分组，同组遵守允许的旋转/翻转以保持纱向、色差一致；MC 版多核并行找更好排料",
+      "workflow": "AccuMark Explorer / UltraQueue 提交 marker；输出 AccuMark 体系的排料结果",
+      "access": "2022 版官方配置页写 Windows 10/11、64 位、至少 8 GB，建议独占物理 PC；不支持虚拟 PC/server。此为旧版本页，当前采购需核实；本次未确认公开免费试用",
+      "links": [
+        {
+          "title": "分组约束",
+          "url": "https://gerber-help.lectra.com/AccuNest/Group_Function_in_Lay_Limits_for_AccuNest_Placement.htm"
+        },
+        {
+          "title": "配置说明与版本边界",
+          "url": "https://gerber-help.lectra.com/AccuNest/Recommended_Configuration.htm"
+        }
+      ],
+      "checked_on": "2026-10-15"
+    },
+    {
+      "name": "服装/软材：Optitex Marker、Nest++2 / Nest++Pro",
+      "industries": [
+        "apparel"
+      ],
+      "features": "按款式、材料、尺码数量建任务；支持旋转/翻转、沿折边放置、受损区域避让、顺序与方向约束、多核自动排料",
+      "workflow": "可聚合 PDS；官方支持页确认可导入 DXF/AAMA、Lectra MDL、Gerber Zip、Investronica EXP；生成排料与耗料/成本报告",
+      "access": "桌面 Windows 生态；安装指南明确 Nesting Pack 需要 Optitex license。产品页有咨询/概念验证服务，未确认无需销售授权的完整免费试用",
+      "links": [
+        {
+          "title": "Marker",
+          "url": "https://optitex.com/products/marker/"
+        },
+        {
+          "title": "格式与系统支持",
+          "url": "https://optitex.com/support/"
+        },
+        {
+          "title": "安装指南",
+          "url": "https://help.optitex.com/1382687/Content/PDFs/Optitex%20Installation%20Guide.pdf"
+        }
+      ],
+      "checked_on": "2026-10-15"
+    },
+    {
+      "name": "国内服装：富怡 Richpeace Garment CAD V10.0、Supernest",
+      "industries": [
+        "apparel"
+      ],
+      "features": "自动/手工/交互排料；按面料限制旋转和翻转，支持倾斜容差、分组、条格、色差处理与疵点避让；可排队处理多个 marker",
+      "workflow": "DGS 设计放码，GMS 排料；导入 DXF、AAMA/ASTM/AUTOCAD 和 HPGL；图样/裁切文件可重新排料，支持 1:1 绘图/裁切",
+      "access": "页面列 Windows 7/10（不能据此保证 Win11）；有官方 Download、Manual，但下载安装包不等于取得免费排料许可证；试用/模块授权需核实",
+      "links": [
+        {
+          "title": "官方 V10 产品与下载入口",
+          "url": "https://www.richpeace.com/garment_cad-show-437.html"
+        },
+        {
+          "title": "官方手册",
+          "url": "https://soft.richpeace.com/EN/manual/RichpeaceGarmentCADV10.0SystemManual.pdf"
+        }
+      ],
+      "checked_on": "2026-10-15"
+    },
+    {
+      "name": "金属：Lantek Expert Cut",
+      "industries": [
+        "metal"
+      ],
+      "features": "自动/半自动/手工套料，按材料/厚度/设备设工艺；支持余料、共边、引入引出、微连接、刀路和碰撞管理；覆盖激光/等离子/火焰/水刀",
+      "workflow": "DXF、DWG、DSTV 几何与订单进入；生成设备 CNC 程序，连接 MES/ERP",
+      "access": "商业模块化 CAD/CAM；官方入口为申请个性化 demo；本次未确认无账户免费完整安装版",
+      "links": [
+        {
+          "title": "当前产品页",
+          "url": "https://www.lantek.com/cad-cam/sheet-metal-cutting-software"
+        },
+        {
+          "title": "官方技术单页",
+          "url": "https://campaign.lantek.com/hubfs/Documents/English/Expert_CUT_ENG_PRINT.pdf?hsLang=en"
+        }
+      ],
+      "checked_on": "2026-10-15"
+    },
+    {
+      "name": "金属/木材/复材：SigmaNEST",
+      "industries": [
+        "metal",
+        "wood"
+      ],
+      "features": "旋转/镜像、夹具/压料、重定位、坡口、共边；优先板规格、余料库存；同时优化穿孔数、切割路径与生产批次",
+      "workflow": "支持主要 2D/3D CAD；列出 DXF/DWG/IGES/DSTV/STEP 等；输出型材切割机程序与任务/成本报告",
+      "access": "模块化商业软件、联系销售。EULA 明确 evaluation/demo/trial 仅供非生产用途；不能把评估许可当正式生产授权",
+      "links": [
+        {
+          "title": "当前官方产品页",
+          "url": "https://www.sigmateksystems.com/en/sigmanest"
+        },
+        {
+          "title": "官方 EULA",
+          "url": "https://connect.sigmanest.com/Legal/EndUserLicenseAgreementPdf?language=en-US"
+        }
+      ],
+      "checked_on": "2026-10-15"
+    },
+    {
+      "name": "金属：Hypertherm ProNest 2025 / ProNest LT",
+      "industries": [
+        "metal"
+      ],
+      "features": "完整版列纱纹方向/夹持安全区、割缝补偿、引入引出、切序、余料与水刀疵点；Automatic Nesting、Nesting System Optimization、Common Line Cutting 等属于可选模块",
+      "workflow": "CAD/PDF/OMX/ORD 与 BOM 输入；CNC、DXF、OMX/ORD 及 PDF/Excel/CSV 报告输出",
+      "access": "完整版支持 Windows 10/11 64 位，8 GB 最低/16 GB 建议，6 GB 磁盘，入口为 Request a demo。LT 按计划订阅，官网写 7 天试用后自动计费；各计划设备与输出有差异",
+      "links": [
+        {
+          "title": "ProNest 完整版",
+          "url": "https://www.hypertherm.com/hypertherm/pronest/pronest-cadcam-nesting-software/"
+        },
+        {
+          "title": "LT 订阅与试用条款",
+          "url": "https://www.hypertherm.com/hypertherm/pronest/pronest-lt-cadcam-nesting-software/"
+        }
+      ],
+      "checked_on": "2026-10-15"
+    },
+    {
+      "name": "木材/板材：HOMAG Cut Rite",
+      "industries": [
+        "wood"
+      ],
+      "features": "按速度或废料优化；材料库、余料、切割规则、零件优先级、标签、分拣与 CNC/锯机衔接；Cut Rite Nesting 与锯切模式要区分",
+      "workflow": "多格式零件表；官方设备手册例举 Excel/woodWOP 输入；输出切图、机加工/设备数据、标签和成本/时间",
+      "access": "官方比较表明确 PC 安装、按用户许可、一次性购买；V12 提供免费 30 天试用。intelliDivide 是另一个云端产品，不能混称本地版",
+      "links": [
+        {
+          "title": "当前官方页/30 天试用/许可比较",
+          "url": "https://www.homag.com/en/software-detail/software/work-preparation/cut-rite-cutting-optimization-software"
+        },
+        {
+          "title": "Nesting 输入与机床联系",
+          "url": "https://www.homag.com/fileadmin/product/cnc/brochures/centateq-n-500/gantry-processing-centateq-n-500-en.pdf"
+        }
+      ],
+      "checked_on": "2026-10-15"
+    },
+    {
+      "name": "木材/板材/棒料：Boole & Partners OptiCut 6",
+      "industries": [
+        "wood",
+        "bars",
+        "paper"
+      ],
+      "features": "板材与棒料优化；纹理方向和跨零件纹理连续、修边、封边、预切、库存和可复用余料、翻板与条料分组",
+      "workflow": "产生切割方案、技术/财务汇总、二维码/条码标签、ERP 导出；Pro-PP 及以上有 CNC 锯机后处理",
+      "access": "提供官方 Free demo version；Windows 命令行可被其他软件调用；50/200/500 件与 Pro 无限件版本不同。demo 的保存/导出限制未在当前产品页讲清",
+      "links": [
+        {
+          "title": "官方产品/下载",
+          "url": "https://www.boole.eu/opticoupe.php"
+        }
+      ],
+      "checked_on": "2026-10-15"
+    },
+    {
+      "name": "通用异形：Boole & Partners OptiNest 3",
+      "industries": [
+        "leather",
+        "metal",
+        "paper"
+      ],
+      "features": "处理刀具厚度、板边修整、数量、旋转/翻转、内孔、分组；可调搜索深度、平滑和传播模式；官方只透露 CalepiLib 函数库，未给可复现完整求解器",
+      "workflow": "输入 DXF 闭合多段线或线/圆弧组合，输出保留裁片加工信息的 DXF 排料图；Pro-PP 支持 G-code",
+      "access": "官方 Free demo version；LT 限最多 10 顶点多边形，Std/Pro/Pro-PP 功能不同；应核实 demo 实际导出限制",
+      "links": [
+        {
+          "title": "官方产品/下载",
+          "url": "https://www.boole.eu/optinest.php"
+        }
+      ],
+      "checked_on": "2026-10-15"
+    },
+    {
+      "name": "玻璃：A+W Production / Shape Optimizer / iCut",
+      "industries": [
+        "glass"
+      ],
+      "features": "Production 联合机台、工序、批次、架位/存储与切割优化；Shape Optimizer 将两种异形组合进包围矩形并考虑掰断与除膜；iCut 有余片管理与破片重排",
+      "workflow": "iCut 支持标准异形库、DXF 异形输入；Production 可输出生产文件与机台 NC 代码",
+      "access": "官方为联系/demo；Shape Optimizer 属 Business Pro/Production 可用扩展。当前页未确认无需销售介入的本地独立试用及标准价格",
+      "links": [
+        {
+          "title": "Production",
+          "url": "https://www.a-w.com/aw-clarity/aw-production/"
+        },
+        {
+          "title": "Shape Optimizer",
+          "url": "https://www.a-w.com/software/shape-optimizer/"
+        },
+        {
+          "title": "iCut",
+          "url": "https://www.a-w.com/aw-clarity/aw-icut/"
+        }
+      ],
+      "checked_on": "2026-10-15"
+    },
+    {
+      "name": "玻璃：LiSEC GPS.opt / TSO",
+      "industries": [
+        "glass"
+      ],
+      "features": "订单输入包含复杂中空玻璃层构、镀膜、台阶、磨边余量；支持异形 TSO、花纹玻璃、竖槽架槽位分配与多接口",
+      "workflow": "当前官方页确认多接口和 CAD/CAM 扩展，但未在成功检索的正文中详列每种输入输出格式，因此不补写格式",
+      "access": "官方为询价/样本资料申请；未确认公开免费本地试用。检索系统有官方页正文，直接 open 多次遇到 405/超时，读取范围低于其他产品",
+      "links": [
+        {
+          "title": "官方 GPS.opt",
+          "url": "https://www.lisec.com/solutions/software/detail/optimizations/opt"
+        },
+        {
+          "title": "中文官方页",
+          "url": "https://www.lisec.com/cn/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/%E8%BD%AF%E4%BB%B6/detail/production/opt"
+        }
+      ],
+      "checked_on": "2026-10-15"
+    }
+  ]
+}

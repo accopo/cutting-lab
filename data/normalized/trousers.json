@@ -1,0 +1,602 @@
+{
+  "schema_version": 1,
+  "name": "trousers",
+  "source_format": "ESICUP XML",
+  "source_path": "raw/esicup/2d_irregular/trousers/trousers.xml",
+  "source_sha256": "076b68e1d1e0cd02517204647a7f660ab075507b8bc5132f858214598e8eb9cd",
+  "source_commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+  "source_coordinates_origin": "up-left",
+  "source_vertices_orientation": "clockwise",
+  "source_description": "Data set from the textile industry, coordinates stated in Oliveira J. F., Gomes A. M. and Ferreira S., 2000, \"A new constructive algorithm for nesting problems\", OR Spectrum 22 (2), 263-284.",
+  "units": "benchmark coordinates; physical unit unspecified",
+  "objective": "minimize occupied x length with fixed y strip width",
+  "strip_width": 79.0,
+  "source_length_limit": 1000.0,
+  "item_spacing": 0,
+  "edge_spacing": 0,
+  "spacing_note": "Mathematical benchmark assumption; no machine kerf or clearance specified.",
+  "items": [
+    {
+      "id": 0,
+      "source_piece_id": "piece0",
+      "polygon_id": "polygon1",
+      "demand": 8,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          12.0,
+          -1.0
+        ],
+        [
+          14.0,
+          -3.0
+        ],
+        [
+          24.0,
+          0.0
+        ],
+        [
+          33.0,
+          1.0
+        ],
+        [
+          59.0,
+          2.0
+        ],
+        [
+          59.0,
+          13.0
+        ],
+        [
+          4.0,
+          13.0
+        ],
+        [
+          4.0,
+          8.0
+        ],
+        [
+          2.0,
+          5.0
+        ],
+        [
+          0.0,
+          5.0
+        ]
+      ],
+      "area": 719.5
+    },
+    {
+      "id": 1,
+      "source_piece_id": "piece1",
+      "polygon_id": "polygon2",
+      "demand": 8,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -14.0
+        ],
+        [
+          27.0,
+          -17.0
+        ],
+        [
+          37.0,
+          -20.0
+        ],
+        [
+          41.0,
+          -22.0
+        ],
+        [
+          47.0,
+          -19.0
+        ],
+        [
+          56.0,
+          -16.0
+        ],
+        [
+          56.0,
+          0.0
+        ]
+      ],
+      "area": 968.0
+    },
+    {
+      "id": 2,
+      "source_piece_id": "piece2",
+      "polygon_id": "polygon3",
+      "demand": 1,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          57.0,
+          0.0
+        ],
+        [
+          57.0,
+          5.0
+        ],
+        [
+          0.0,
+          5.0
+        ]
+      ],
+      "area": 285.0
+    },
+    {
+      "id": 3,
+      "source_piece_id": "piece3",
+      "polygon_id": "polygon4",
+      "demand": 1,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          52.0,
+          0.0
+        ],
+        [
+          52.0,
+          5.0
+        ],
+        [
+          0.0,
+          5.0
+        ]
+      ],
+      "area": 260.0
+    },
+    {
+      "id": 4,
+      "source_piece_id": "piece4",
+      "polygon_id": "polygon5",
+      "demand": 1,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          44.0,
+          0.0
+        ],
+        [
+          44.0,
+          5.0
+        ],
+        [
+          0.0,
+          5.0
+        ]
+      ],
+      "area": 220.0
+    },
+    {
+      "id": 5,
+      "source_piece_id": "piece5",
+      "polygon_id": "polygon6",
+      "demand": 1,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          42.0,
+          0.0
+        ],
+        [
+          42.0,
+          5.0
+        ],
+        [
+          0.0,
+          5.0
+        ]
+      ],
+      "area": 210.0
+    },
+    {
+      "id": 6,
+      "source_piece_id": "piece6",
+      "polygon_id": "polygon7",
+      "demand": 8,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          21.0,
+          0.0
+        ],
+        [
+          21.0,
+          2.0
+        ],
+        [
+          0.0,
+          2.0
+        ]
+      ],
+      "area": 42.0
+    },
+    {
+      "id": 7,
+      "source_piece_id": "piece7",
+      "polygon_id": "polygon8",
+      "demand": 8,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          15.0,
+          4.0
+        ],
+        [
+          13.0,
+          7.0
+        ],
+        [
+          0.0,
+          6.0
+        ]
+      ],
+      "area": 65.5
+    },
+    {
+      "id": 8,
+      "source_piece_id": "piece8",
+      "polygon_id": "polygon9",
+      "demand": 1,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          15.0,
+          1.0
+        ],
+        [
+          15.0,
+          4.0
+        ],
+        [
+          0.0,
+          4.0
+        ]
+      ],
+      "area": 52.5
+    },
+    {
+      "id": 9,
+      "source_piece_id": "piece9",
+      "polygon_id": "polygon10",
+      "demand": 1,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          14.0,
+          0.0
+        ],
+        [
+          14.0,
+          5.0
+        ],
+        [
+          0.0,
+          5.0
+        ]
+      ],
+      "area": 70.0
+    },
+    {
+      "id": 10,
+      "source_piece_id": "piece10",
+      "polygon_id": "polygon11",
+      "demand": 1,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          14.0,
+          1.0
+        ],
+        [
+          14.0,
+          4.0
+        ],
+        [
+          0.0,
+          4.0
+        ]
+      ],
+      "area": 49.0
+    },
+    {
+      "id": 11,
+      "source_piece_id": "piece11",
+      "polygon_id": "polygon12",
+      "demand": 1,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          13.0,
+          0.0
+        ],
+        [
+          13.0,
+          5.0
+        ],
+        [
+          0.0,
+          5.0
+        ]
+      ],
+      "area": 65.0
+    },
+    {
+      "id": 12,
+      "source_piece_id": "piece12",
+      "polygon_id": "polygon13",
+      "demand": 2,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          13.0,
+          1.0
+        ],
+        [
+          13.0,
+          4.0
+        ],
+        [
+          0.0,
+          4.0
+        ]
+      ],
+      "area": 45.5
+    },
+    {
+      "id": 13,
+      "source_piece_id": "piece13",
+      "polygon_id": "polygon14",
+      "demand": 2,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          12.0,
+          0.0
+        ],
+        [
+          12.0,
+          5.0
+        ],
+        [
+          0.0,
+          5.0
+        ]
+      ],
+      "area": 60.0
+    },
+    {
+      "id": 14,
+      "source_piece_id": "piece14",
+      "polygon_id": "polygon15",
+      "demand": 8,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          2.0
+        ],
+        [
+          6.0,
+          10.0
+        ],
+        [
+          4.0,
+          11.0
+        ],
+        [
+          -4.0,
+          11.0
+        ],
+        [
+          -6.0,
+          10.0
+        ],
+        [
+          -4.0,
+          2.0
+        ]
+      ],
+      "area": 98.0
+    },
+    {
+      "id": 15,
+      "source_piece_id": "piece15",
+      "polygon_id": "polygon16",
+      "demand": 8,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          3.0,
+          -2.0
+        ],
+        [
+          8.0,
+          0.0
+        ],
+        [
+          8.0,
+          8.0
+        ],
+        [
+          2.0,
+          8.0
+        ]
+      ],
+      "area": 64.0
+    },
+    {
+      "id": 16,
+      "source_piece_id": "piece16",
+      "polygon_id": "polygon17",
+      "demand": 4,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          2.0,
+          1.0
+        ],
+        [
+          3.0,
+          6.0
+        ],
+        [
+          2.0,
+          7.0
+        ],
+        [
+          -2.0,
+          7.0
+        ],
+        [
+          -3.0,
+          6.0
+        ],
+        [
+          -2.0,
+          1.0
+        ]
+      ],
+      "area": 32.0
+    }
+  ]
+}

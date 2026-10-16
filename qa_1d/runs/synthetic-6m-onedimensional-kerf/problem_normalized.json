@@ -1,0 +1,192 @@
+{
+  "id": "bar-stock-kerf",
+  "name": "型材 · 6 米逐件锯缝下料",
+  "industry": "bars",
+  "kind": "onedimensional",
+  "unit": "mm",
+  "description": "合成教学示例：3 mm 逐件尾部锯缝，末件也预留一刀；不含端头修边、夹持余量与余料库存。可与相同约束的 FFD/BFD 基线比较。",
+  "source": {
+    "label": "本地合成教学示例",
+    "kind": "synthetic",
+    "note": "为演示该行业约束而构造的尺寸与轮廓，不代表工厂订单或真实生产纸样。"
+  },
+  "stock": {
+    "width": 6000,
+    "height": 1,
+    "copies": 30
+  },
+  "items": [
+    {
+      "id": 0,
+      "name": "型材 1700 mm",
+      "length": 1700,
+      "quantity": 5,
+      "profit": 5.0,
+      "allowed_rotations": [
+        0.0
+      ],
+      "effective_rotations": [
+        0
+      ],
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          1700,
+          0
+        ],
+        [
+          1700,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": 1,
+      "name": "型材 1350 mm",
+      "length": 1350,
+      "quantity": 7,
+      "profit": 4.0,
+      "allowed_rotations": [
+        0.0
+      ],
+      "effective_rotations": [
+        0
+      ],
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          1350,
+          0
+        ],
+        [
+          1350,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": 2,
+      "name": "型材 950 mm",
+      "length": 950,
+      "quantity": 8,
+      "profit": 3.0,
+      "allowed_rotations": [
+        0.0
+      ],
+      "effective_rotations": [
+        0
+      ],
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          950,
+          0
+        ],
+        [
+          950,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": 3,
+      "name": "型材 650 mm",
+      "length": 650,
+      "quantity": 10,
+      "profit": 2.0,
+      "allowed_rotations": [
+        0.0
+      ],
+      "effective_rotations": [
+        0
+      ],
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          650,
+          0
+        ],
+        [
+          650,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": 4,
+      "name": "型材 420 mm",
+      "length": 420,
+      "quantity": 6,
+      "profit": 1.0,
+      "allowed_rotations": [
+        0.0
+      ],
+      "effective_rotations": [
+        0
+      ],
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          420,
+          0
+        ],
+        [
+          420,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  ],
+  "settings": {
+    "engine": "onedimensional-kerf",
+    "objective": "bins",
+    "rotation": "none",
+    "custom_angles": [
+      0.0,
+      180.0
+    ],
+    "spacing": 0,
+    "edge": 0,
+    "kerf": 3,
+    "time_limit": 1.0,
+    "stages": 3,
+    "first_cut": "vertical"
+  },
+  "defects": [],
+  "effective_stock_copies": 30
+}

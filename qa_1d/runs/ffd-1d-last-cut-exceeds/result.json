@@ -1,0 +1,112 @@
+{
+  "engine": "ffd-1d",
+  "objective": "bins",
+  "elapsed_s": 9.7999582067132e-06,
+  "full": false,
+  "feasible": true,
+  "units": "mm",
+  "metrics": {
+    "required_pieces": 1,
+    "placed_pieces": 0,
+    "bin_count": 0,
+    "used_length": null,
+    "utilization_percent": 0,
+    "total_item_area": 0,
+    "profit": 0,
+    "total_item_length": 0,
+    "kerf_loss_length": 0,
+    "occupied_length": 0,
+    "total_stock_length": 0,
+    "unused_length": 0
+  },
+  "bins": [],
+  "warnings": [
+    "单次限时启发式结果；未证明全局最优，也未验证工业加工工艺。",
+    "保守逐件锯缝模型：每件成品尾部都预留一刀，末件也计锯缝；不含端头修边、夹持余量、斜切与余料库存。",
+    "透明递减贪心基线；在同一原料、需求与逐件锯缝约束下作比较，不保证最少根数。",
+    "此次未排完全部需求，请增加原料尺寸/数量或时限；不能作为完整订单方案。"
+  ],
+  "solver_statistics": {
+    "algorithm": "ffd-1d",
+    "sort": "decreasing finished length; stable input ties",
+    "selection": "first fitting bin",
+    "kerf_per_piece": 1,
+    "kerf_model": "per-piece-tail-kerf",
+    "occupied_lengths": []
+  },
+  "engine_version": "python-1d-greedy-1",
+  "config": {
+    "engine": "ffd-1d",
+    "objective": "bins",
+    "settings": {
+      "engine": "ffd-1d",
+      "objective": "bins",
+      "kerf": 1,
+      "rotation": "none",
+      "time_limit": 1.0,
+      "custom_angles": [
+        0.0,
+        180.0
+      ],
+      "spacing": 0,
+      "edge": 0,
+      "stages": 3,
+      "first_cut": "vertical"
+    },
+    "stock": {
+      "width": 10,
+      "height": 1,
+      "copies": 1
+    },
+    "effective_stock_copies": 1
+  },
+  "validation": {
+    "pass": false,
+    "geometry_pass": true,
+    "full_demand": false,
+    "errors": [
+      "尚未放置全部需求零件。"
+    ],
+    "placed_counts": {},
+    "required_counts": {
+      "0": 1
+    },
+    "minimum_item_clearance": null,
+    "minimum_defect_clearance": null,
+    "coordinate_tolerance": 1e-07,
+    "area_tolerance": "max(1e-8, original_piece_area * 1e-7)",
+    "checks": [
+      "source geometry",
+      "quantity",
+      "bounds",
+      "overlap",
+      "allowed angles",
+      "spacing",
+      "defects",
+      "original finished length",
+      "integer coordinates",
+      "tail kerf per piece",
+      "last-piece kerf",
+      "occupied interval bounds",
+      "occupied interval overlap",
+      "cut certificate correspondence"
+    ],
+    "scope": "独立几何校验；不等同于加工可制造性或全局最优证明。",
+    "kerf_validation": {
+      "pass": true,
+      "errors": [],
+      "model": "per-piece-tail-kerf",
+      "kerf_loss_length": 0,
+      "checks": [
+        "original finished length",
+        "integer coordinates",
+        "tail kerf per piece",
+        "last-piece kerf",
+        "occupied interval bounds",
+        "occupied interval overlap",
+        "cut certificate correspondence"
+      ],
+      "scope": "保守逐件锯缝模型：每件成品尾部都预留一刀，末件也计锯缝；不含端头修边、夹持余量、斜切与余料库存。"
+    }
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "engine": "onedimensional",
+  "objective": "bins",
+  "elapsed_s": 0.023254400002770126,
+  "full": true,
+  "feasible": true,
+  "units": "mm",
+  "metrics": {
+    "required_pieces": 2,
+    "placed_pieces": 2,
+    "bin_count": 1,
+    "used_length": null,
+    "utilization_percent": 100.0,
+    "total_item_area": 10.0,
+    "profit": 2.0
+  },
+  "bins": [
+    {
+      "index": 0,
+      "width": 10,
+      "height": 1,
+      "items": [
+        {
+          "id": 0,
+          "name": "成品 0",
+          "angle": 0.0,
+          "mirror": false,
+          "polygon": [
+            [
+              5.0,
+              0.0
+            ],
+            [
+              5.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "id": 1,
+          "name": "成品 1",
+          "angle": 0.0,
+          "mirror": false,
+          "polygon": [
+            [
+              10.0,
+              0.0
+            ],
+            [
+              10.0,
+              1.0
+            ],
+            [
+              5.0,
+              1.0
+            ],
+            [
+              5.0,
+              0.0
+            ]
+          ]
+        }
+      ],
+      "defects": []
+    }
+  ],
+  "warnings": [
+    "单次限时启发式结果；未证明全局最优，也未验证工业加工工艺。"
+  ],
+  "solver_statistics": {
+    "BinCost": 10.0,
+    "BinLength": 10,
+    "FullWaste": 0,
+    "FullWastePercentage": 0.0,
+    "ItemLength": 10,
+    "ItemNestedLength": 10,
+    "ItemProfit": 2.0,
+    "NumberOfBins": 1,
+    "NumberOfItems": 2,
+    "Waste": 0,
+    "WastePercentage": 0.0
+  },
+  "engine_version": "0.1.1184",
+  "config": {
+    "engine": "onedimensional",
+    "objective": "bins",
+    "settings": {
+      "engine": "onedimensional",
+      "objective": "bins",
+      "kerf": 0,
+      "rotation": "none",
+      "time_limit": 1.0,
+      "custom_angles": [
+        0.0,
+        180.0
+      ],
+      "spacing": 0,
+      "edge": 0,
+      "stages": 3,
+      "first_cut": "vertical"
+    },
+    "stock": {
+      "width": 10,
+      "height": 1,
+      "copies": 1
+    },
+    "effective_stock_copies": 1
+  },
+  "validation": {
+    "pass": true,
+    "geometry_pass": true,
+    "full_demand": true,
+    "errors": [],
+    "placed_counts": {
+      "0": 1,
+      "1": 1
+    },
+    "required_counts": {
+      "0": 1,
+      "1": 1
+    },
+    "minimum_item_clearance": 0.0,
+    "minimum_defect_clearance": null,
+    "coordinate_tolerance": 1e-07,
+    "area_tolerance": "max(1e-8, original_piece_area * 1e-7)",
+    "checks": [
+      "source geometry",
+      "quantity",
+      "bounds",
+      "overlap",
+      "allowed angles",
+      "spacing",
+      "defects"
+    ],
+    "scope": "独立几何校验；不等同于加工可制造性或全局最优证明。"
+  }
+}

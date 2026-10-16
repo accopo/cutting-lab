@@ -1,0 +1,1912 @@
+{
+  "problem": {
+    "id": "wood-cabinet",
+    "name": "木板 · 柜体三阶段开料",
+    "industry": "wood",
+    "kind": "rectangle",
+    "unit": "mm",
+    "description": "3 mm 锯缝，保留长宽方向，三阶段贯通切割。",
+    "source": {
+      "label": "本地合成教学示例",
+      "kind": "synthetic",
+      "note": "为演示该行业约束而构造的尺寸与轮廓，不代表工厂订单或真实生产纸样。",
+      "derived": false,
+      "scenario_label": "原始实例参数"
+    },
+    "stock": {
+      "width": 2440,
+      "height": 1220,
+      "copies": 10
+    },
+    "items": [
+      {
+        "id": 0,
+        "name": "柜体侧板",
+        "quantity": 4,
+        "width": 700,
+        "height": 500,
+        "profit": 5,
+        "allowed_rotations": [
+          0,
+          180
+        ],
+        "effective_rotations": [
+          0,
+          180
+        ],
+        "polygon": [
+          [
+            0,
+            0
+          ],
+          [
+            700,
+            0
+          ],
+          [
+            700,
+            500
+          ],
+          [
+            0,
+            500
+          ]
+        ]
+      },
+      {
+        "id": 1,
+        "name": "隔板",
+        "quantity": 6,
+        "width": 600,
+        "height": 400,
+        "profit": 3,
+        "allowed_rotations": [
+          0,
+          180
+        ],
+        "effective_rotations": [
+          0,
+          180
+        ],
+        "polygon": [
+          [
+            0,
+            0
+          ],
+          [
+            600,
+            0
+          ],
+          [
+            600,
+            400
+          ],
+          [
+            0,
+            400
+          ]
+        ]
+      },
+      {
+        "id": 2,
+        "name": "门板",
+        "quantity": 6,
+        "width": 500,
+        "height": 300,
+        "profit": 4,
+        "allowed_rotations": [
+          0,
+          180
+        ],
+        "effective_rotations": [
+          0,
+          180
+        ],
+        "polygon": [
+          [
+            0,
+            0
+          ],
+          [
+            500,
+            0
+          ],
+          [
+            500,
+            300
+          ],
+          [
+            0,
+            300
+          ]
+        ]
+      },
+      {
+        "id": 3,
+        "name": "抽屉底板",
+        "quantity": 8,
+        "width": 350,
+        "height": 250,
+        "profit": 2,
+        "allowed_rotations": [
+          0,
+          180
+        ],
+        "effective_rotations": [
+          0,
+          180
+        ],
+        "polygon": [
+          [
+            0,
+            0
+          ],
+          [
+            350,
+            0
+          ],
+          [
+            350,
+            250
+          ],
+          [
+            0,
+            250
+          ]
+        ]
+      }
+    ],
+    "settings": {
+      "engine": "guillotine",
+      "objective": "bins",
+      "rotation": "source",
+      "custom_angles": [
+        0,
+        180
+      ],
+      "spacing": 0,
+      "edge": 0,
+      "kerf": 3,
+      "time_limit": 1,
+      "stages": 3,
+      "first_cut": "vertical"
+    },
+    "defects": [],
+    "effective_stock_copies": 10
+  },
+  "native": {
+    "problemType": "rectangleguillotine",
+    "instance": {
+      "objective": "bin-packing",
+      "bin_types": [
+        {
+          "width": 2440,
+          "height": 1220,
+          "copies": 10,
+          "defects": []
+        }
+      ],
+      "item_types": [
+        {
+          "width": 700,
+          "height": 500,
+          "copies": 4,
+          "profit": 5,
+          "oriented": true
+        },
+        {
+          "width": 600,
+          "height": 400,
+          "copies": 6,
+          "profit": 3,
+          "oriented": true
+        },
+        {
+          "width": 500,
+          "height": 300,
+          "copies": 6,
+          "profit": 4,
+          "oriented": true
+        },
+        {
+          "width": 350,
+          "height": 250,
+          "copies": 8,
+          "profit": 2,
+          "oriented": true
+        }
+      ],
+      "number_of_stages": 3,
+      "cut_type": "exact",
+      "first_stage_orientation": "vertical",
+      "cut_thickness": 3,
+      "cut_through_defects": true
+    },
+    "parameters": {
+      "time_limit": 1,
+      "verbosity_level": 0,
+      "optimization_mode": "anytime"
+    }
+  },
+  "raw": {
+    "certificate": "PLATE_ID,COPIES,NODE_ID,X,Y,WIDTH,HEIGHT,TYPE,CUT,PARENT\n0,1,0,0,0,2440,1220,0,0,\n0,1,1,0,0,1403,1220,-2,1,0\n0,1,2,0,0,1403,500,-2,2,1\n0,1,3,0,0,700,500,0,3,2\n0,1,4,703,0,700,500,0,3,2\n0,1,5,0,503,1403,500,-2,2,1\n0,1,6,0,503,700,500,0,3,5\n0,1,7,703,503,700,500,0,3,5\n0,1,8,0,1006,1403,214,-1,2,1\n0,1,9,1406,0,600,1220,-2,1,0\n0,1,10,1406,0,600,400,-2,2,9\n0,1,11,1406,0,600,400,1,3,10\n0,1,12,1406,403,600,400,-2,2,9\n0,1,13,1406,403,600,400,1,3,12\n0,1,14,1406,806,600,400,-2,2,9\n0,1,15,1406,806,600,400,1,3,14\n0,1,16,1406,1209,600,11,-1,2,9\n0,1,17,2009,0,350,1220,-2,1,0\n0,1,18,2009,0,350,250,-2,2,17\n0,1,19,2009,0,350,250,3,3,18\n0,1,20,2009,253,350,250,-2,2,17\n0,1,21,2009,253,350,250,3,3,20\n0,1,22,2009,506,350,250,-2,2,17\n0,1,23,2009,506,350,250,3,3,22\n0,1,24,2009,759,350,250,-2,2,17\n0,1,25,2009,759,350,250,3,3,24\n0,1,26,2009,1012,350,208,-1,2,17\n0,1,27,2362,0,78,1220,-1,1,0\n1,1,28,0,0,2440,1220,0,0,\n1,1,29,0,0,600,1220,-2,1,28\n1,1,30,0,0,600,400,-2,2,29\n1,1,31,0,0,600,400,1,3,30\n1,1,32,0,403,600,400,-2,2,29\n1,1,33,0,403,600,400,1,3,32\n1,1,34,0,806,600,400,-2,2,29\n1,1,35,0,806,600,400,1,3,34\n1,1,36,0,1209,600,11,-1,2,29\n1,1,37,603,0,1506,1220,-2,1,28\n1,1,38,603,0,1506,300,-2,2,37\n1,1,39,603,0,500,300,2,3,38\n1,1,40,1106,0,500,300,2,3,38\n1,1,41,1609,0,500,300,2,3,38\n1,1,42,603,303,1506,300,-2,2,37\n1,1,43,603,303,500,300,2,3,42\n1,1,44,1106,303,500,300,2,3,42\n1,1,45,1609,303,500,300,2,3,42\n1,1,46,603,606,1506,250,-2,2,37\n1,1,47,603,606,350,250,3,3,46\n1,1,48,956,606,350,250,3,3,46\n1,1,49,1309,606,350,250,3,3,46\n1,1,50,1662,606,350,250,3,3,46\n1,1,51,2015,606,94,250,-1,3,46\n1,1,52,603,859,1506,361,-1,2,37\n1,1,53,2112,0,328,1220,-3,1,28\n",
+    "output": {
+      "BinPackingBound": 2,
+      "IsProvenInfeasible": false,
+      "KnapsackBound": null,
+      "OpenDimensionXBound": 0,
+      "OpenDimensionYBound": 0,
+      "Solution": {
+        "BinArea": 5953600,
+        "BinCost": 5953600,
+        "CuttingCost": 0,
+        "Feasible": {
+          "CutThroughDefects": true,
+          "Defects": true,
+          "Feasible": true,
+          "ItemCopies": true,
+          "MaximumDistance1Cuts": true,
+          "MaximumDistance2Cuts": true,
+          "MaximumNumber1Cuts": true,
+          "MaximumNumber2Cuts": true,
+          "MinimumDistance1Cuts": true,
+          "MinimumDistance2Cuts": true,
+          "MinimumWasteLength": true,
+          "NumberOfStages": true,
+          "Stacks": true,
+          "Trims": true
+        },
+        "FullWaste": 1513600,
+        "FullWastePercentage": 0.2542327331362537,
+        "Height": 1220,
+        "ItemArea": 4440000,
+        "ItemProfit": 78,
+        "NumberOfBins": 2,
+        "NumberOfDifferentBins": 2,
+        "NumberOfItems": 24,
+        "NumberOfStages": 3,
+        "SecondLeftoverValue": 543666,
+        "Waste": 1113440,
+        "WastePercentage": 0.20049554870494685,
+        "Width": 2109
+      },
+      "Time": 0.066116864,
+      "VariableSizedBinPackingBound": 0
+    }
+  },
+  "result": {
+    "engine": "guillotine",
+    "objective": "bins",
+    "elapsed_s": 0.066116864,
+    "full": true,
+    "feasible": true,
+    "units": "mm",
+    "metrics": {
+      "required_pieces": 24,
+      "placed_pieces": 24,
+      "bin_count": 2,
+      "utilization_percent": 74.57672668637463,
+      "profit": 78,
+      "used_length": null,
+      "total_item_area": 4440000
+    },
+    "bins": [
+      {
+        "index": 0,
+        "width": 2440,
+        "height": 1220,
+        "items": [
+          {
+            "id": 0,
+            "name": "柜体侧板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                0
+              ],
+              [
+                700,
+                0
+              ],
+              [
+                700,
+                500
+              ],
+              [
+                0,
+                500
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "柜体侧板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                703,
+                0
+              ],
+              [
+                1403,
+                0
+              ],
+              [
+                1403,
+                500
+              ],
+              [
+                703,
+                500
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "柜体侧板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                503
+              ],
+              [
+                700,
+                503
+              ],
+              [
+                700,
+                1003
+              ],
+              [
+                0,
+                1003
+              ]
+            ]
+          },
+          {
+            "id": 0,
+            "name": "柜体侧板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                703,
+                503
+              ],
+              [
+                1403,
+                503
+              ],
+              [
+                1403,
+                1003
+              ],
+              [
+                703,
+                1003
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "隔板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1406,
+                0
+              ],
+              [
+                2006,
+                0
+              ],
+              [
+                2006,
+                400
+              ],
+              [
+                1406,
+                400
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "隔板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1406,
+                403
+              ],
+              [
+                2006,
+                403
+              ],
+              [
+                2006,
+                803
+              ],
+              [
+                1406,
+                803
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "隔板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1406,
+                806
+              ],
+              [
+                2006,
+                806
+              ],
+              [
+                2006,
+                1206
+              ],
+              [
+                1406,
+                1206
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "抽屉底板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                2009,
+                0
+              ],
+              [
+                2359,
+                0
+              ],
+              [
+                2359,
+                250
+              ],
+              [
+                2009,
+                250
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "抽屉底板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                2009,
+                253
+              ],
+              [
+                2359,
+                253
+              ],
+              [
+                2359,
+                503
+              ],
+              [
+                2009,
+                503
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "抽屉底板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                2009,
+                506
+              ],
+              [
+                2359,
+                506
+              ],
+              [
+                2359,
+                756
+              ],
+              [
+                2009,
+                756
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "抽屉底板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                2009,
+                759
+              ],
+              [
+                2359,
+                759
+              ],
+              [
+                2359,
+                1009
+              ],
+              [
+                2009,
+                1009
+              ]
+            ]
+          }
+        ],
+        "defects": [],
+        "cuts": [
+          {
+            "x1": 701.5,
+            "y1": 0,
+            "x2": 701.5,
+            "y2": 500,
+            "stage": 3
+          },
+          {
+            "x1": 0,
+            "y1": 501.5,
+            "x2": 1403,
+            "y2": 501.5,
+            "stage": 2
+          },
+          {
+            "x1": 701.5,
+            "y1": 503,
+            "x2": 701.5,
+            "y2": 1003,
+            "stage": 3
+          },
+          {
+            "x1": 0,
+            "y1": 1004.5,
+            "x2": 1403,
+            "y2": 1004.5,
+            "stage": 2
+          },
+          {
+            "x1": 1404.5,
+            "y1": 0,
+            "x2": 1404.5,
+            "y2": 1220,
+            "stage": 1
+          },
+          {
+            "x1": 1406,
+            "y1": 401.5,
+            "x2": 2006,
+            "y2": 401.5,
+            "stage": 2
+          },
+          {
+            "x1": 1406,
+            "y1": 804.5,
+            "x2": 2006,
+            "y2": 804.5,
+            "stage": 2
+          },
+          {
+            "x1": 1406,
+            "y1": 1207.5,
+            "x2": 2006,
+            "y2": 1207.5,
+            "stage": 2
+          },
+          {
+            "x1": 2007.5,
+            "y1": 0,
+            "x2": 2007.5,
+            "y2": 1220,
+            "stage": 1
+          },
+          {
+            "x1": 2009,
+            "y1": 251.5,
+            "x2": 2359,
+            "y2": 251.5,
+            "stage": 2
+          },
+          {
+            "x1": 2009,
+            "y1": 504.5,
+            "x2": 2359,
+            "y2": 504.5,
+            "stage": 2
+          },
+          {
+            "x1": 2009,
+            "y1": 757.5,
+            "x2": 2359,
+            "y2": 757.5,
+            "stage": 2
+          },
+          {
+            "x1": 2009,
+            "y1": 1010.5,
+            "x2": 2359,
+            "y2": 1010.5,
+            "stage": 2
+          },
+          {
+            "x1": 2360.5,
+            "y1": 0,
+            "x2": 2360.5,
+            "y2": 1220,
+            "stage": 1
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "width": 2440,
+        "height": 1220,
+        "items": [
+          {
+            "id": 1,
+            "name": "隔板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                0
+              ],
+              [
+                600,
+                0
+              ],
+              [
+                600,
+                400
+              ],
+              [
+                0,
+                400
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "隔板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                403
+              ],
+              [
+                600,
+                403
+              ],
+              [
+                600,
+                803
+              ],
+              [
+                0,
+                803
+              ]
+            ]
+          },
+          {
+            "id": 1,
+            "name": "隔板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                0,
+                806
+              ],
+              [
+                600,
+                806
+              ],
+              [
+                600,
+                1206
+              ],
+              [
+                0,
+                1206
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "门板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                603,
+                0
+              ],
+              [
+                1103,
+                0
+              ],
+              [
+                1103,
+                300
+              ],
+              [
+                603,
+                300
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "门板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1106,
+                0
+              ],
+              [
+                1606,
+                0
+              ],
+              [
+                1606,
+                300
+              ],
+              [
+                1106,
+                300
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "门板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1609,
+                0
+              ],
+              [
+                2109,
+                0
+              ],
+              [
+                2109,
+                300
+              ],
+              [
+                1609,
+                300
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "门板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                603,
+                303
+              ],
+              [
+                1103,
+                303
+              ],
+              [
+                1103,
+                603
+              ],
+              [
+                603,
+                603
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "门板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1106,
+                303
+              ],
+              [
+                1606,
+                303
+              ],
+              [
+                1606,
+                603
+              ],
+              [
+                1106,
+                603
+              ]
+            ]
+          },
+          {
+            "id": 2,
+            "name": "门板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1609,
+                303
+              ],
+              [
+                2109,
+                303
+              ],
+              [
+                2109,
+                603
+              ],
+              [
+                1609,
+                603
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "抽屉底板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                603,
+                606
+              ],
+              [
+                953,
+                606
+              ],
+              [
+                953,
+                856
+              ],
+              [
+                603,
+                856
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "抽屉底板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                956,
+                606
+              ],
+              [
+                1306,
+                606
+              ],
+              [
+                1306,
+                856
+              ],
+              [
+                956,
+                856
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "抽屉底板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1309,
+                606
+              ],
+              [
+                1659,
+                606
+              ],
+              [
+                1659,
+                856
+              ],
+              [
+                1309,
+                856
+              ]
+            ]
+          },
+          {
+            "id": 3,
+            "name": "抽屉底板",
+            "angle": 0,
+            "mirror": false,
+            "polygon": [
+              [
+                1662,
+                606
+              ],
+              [
+                2012,
+                606
+              ],
+              [
+                2012,
+                856
+              ],
+              [
+                1662,
+                856
+              ]
+            ]
+          }
+        ],
+        "defects": [],
+        "cuts": [
+          {
+            "x1": 0,
+            "y1": 401.5,
+            "x2": 600,
+            "y2": 401.5,
+            "stage": 2
+          },
+          {
+            "x1": 0,
+            "y1": 804.5,
+            "x2": 600,
+            "y2": 804.5,
+            "stage": 2
+          },
+          {
+            "x1": 0,
+            "y1": 1207.5,
+            "x2": 600,
+            "y2": 1207.5,
+            "stage": 2
+          },
+          {
+            "x1": 601.5,
+            "y1": 0,
+            "x2": 601.5,
+            "y2": 1220,
+            "stage": 1
+          },
+          {
+            "x1": 1104.5,
+            "y1": 0,
+            "x2": 1104.5,
+            "y2": 300,
+            "stage": 3
+          },
+          {
+            "x1": 1607.5,
+            "y1": 0,
+            "x2": 1607.5,
+            "y2": 300,
+            "stage": 3
+          },
+          {
+            "x1": 603,
+            "y1": 301.5,
+            "x2": 2109,
+            "y2": 301.5,
+            "stage": 2
+          },
+          {
+            "x1": 1104.5,
+            "y1": 303,
+            "x2": 1104.5,
+            "y2": 603,
+            "stage": 3
+          },
+          {
+            "x1": 1607.5,
+            "y1": 303,
+            "x2": 1607.5,
+            "y2": 603,
+            "stage": 3
+          },
+          {
+            "x1": 603,
+            "y1": 604.5,
+            "x2": 2109,
+            "y2": 604.5,
+            "stage": 2
+          },
+          {
+            "x1": 954.5,
+            "y1": 606,
+            "x2": 954.5,
+            "y2": 856,
+            "stage": 3
+          },
+          {
+            "x1": 1307.5,
+            "y1": 606,
+            "x2": 1307.5,
+            "y2": 856,
+            "stage": 3
+          },
+          {
+            "x1": 1660.5,
+            "y1": 606,
+            "x2": 1660.5,
+            "y2": 856,
+            "stage": 3
+          },
+          {
+            "x1": 2013.5,
+            "y1": 606,
+            "x2": 2013.5,
+            "y2": 856,
+            "stage": 3
+          },
+          {
+            "x1": 603,
+            "y1": 857.5,
+            "x2": 2109,
+            "y2": 857.5,
+            "stage": 2
+          },
+          {
+            "x1": 2110.5,
+            "y1": 0,
+            "x2": 2110.5,
+            "y2": 1220,
+            "stage": 1
+          }
+        ]
+      }
+    ],
+    "solver_statistics": {
+      "BinArea": 5953600,
+      "BinCost": 5953600,
+      "CuttingCost": 0,
+      "Feasible": {
+        "CutThroughDefects": true,
+        "Defects": true,
+        "Feasible": true,
+        "ItemCopies": true,
+        "MaximumDistance1Cuts": true,
+        "MaximumDistance2Cuts": true,
+        "MaximumNumber1Cuts": true,
+        "MaximumNumber2Cuts": true,
+        "MinimumDistance1Cuts": true,
+        "MinimumDistance2Cuts": true,
+        "MinimumWasteLength": true,
+        "NumberOfStages": true,
+        "Stacks": true,
+        "Trims": true
+      },
+      "FullWaste": 1513600,
+      "FullWastePercentage": 0.2542327331362537,
+      "Height": 1220,
+      "ItemArea": 4440000,
+      "ItemProfit": 78,
+      "NumberOfBins": 2,
+      "NumberOfDifferentBins": 2,
+      "NumberOfItems": 24,
+      "NumberOfStages": 3,
+      "SecondLeftoverValue": 543666,
+      "Waste": 1113440,
+      "WastePercentage": 0.20049554870494685,
+      "Width": 2109
+    },
+    "raw_output": {
+      "BinPackingBound": 2,
+      "IsProvenInfeasible": false,
+      "KnapsackBound": null,
+      "OpenDimensionXBound": 0,
+      "OpenDimensionYBound": 0,
+      "Solution": {
+        "BinArea": 5953600,
+        "BinCost": 5953600,
+        "CuttingCost": 0,
+        "Feasible": {
+          "CutThroughDefects": true,
+          "Defects": true,
+          "Feasible": true,
+          "ItemCopies": true,
+          "MaximumDistance1Cuts": true,
+          "MaximumDistance2Cuts": true,
+          "MaximumNumber1Cuts": true,
+          "MaximumNumber2Cuts": true,
+          "MinimumDistance1Cuts": true,
+          "MinimumDistance2Cuts": true,
+          "MinimumWasteLength": true,
+          "NumberOfStages": true,
+          "Stacks": true,
+          "Trims": true
+        },
+        "FullWaste": 1513600,
+        "FullWastePercentage": 0.2542327331362537,
+        "Height": 1220,
+        "ItemArea": 4440000,
+        "ItemProfit": 78,
+        "NumberOfBins": 2,
+        "NumberOfDifferentBins": 2,
+        "NumberOfItems": 24,
+        "NumberOfStages": 3,
+        "SecondLeftoverValue": 543666,
+        "Waste": 1113440,
+        "WastePercentage": 0.20049554870494685,
+        "Width": 2109
+      },
+      "Time": 0.066116864,
+      "VariableSizedBinPackingBound": 0
+    },
+    "engine_version": "wasm-649fd65233ee",
+    "config": {
+      "engine": "guillotine",
+      "objective": "bins",
+      "settings": {
+        "engine": "guillotine",
+        "objective": "bins",
+        "rotation": "source",
+        "custom_angles": [
+          0,
+          180
+        ],
+        "spacing": 0,
+        "edge": 0,
+        "kerf": 3,
+        "time_limit": 1,
+        "stages": 3,
+        "first_cut": "vertical"
+      },
+      "stock": {
+        "width": 2440,
+        "height": 1220,
+        "copies": 10
+      },
+      "effective_stock_copies": 10
+    },
+    "warnings": [
+      "真实浏览器 WebAssembly 限时求解；不保证全局最优。",
+      "独立数值几何校验不等同于工业加工、局部承重或稳定性证明。"
+    ],
+    "cut_tree": [
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 0,
+        "X": 0,
+        "Y": 0,
+        "WIDTH": 2440,
+        "HEIGHT": 1220,
+        "TYPE": 0,
+        "CUT": 0,
+        "PARENT": null
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 1,
+        "X": 0,
+        "Y": 0,
+        "WIDTH": 1403,
+        "HEIGHT": 1220,
+        "TYPE": -2,
+        "CUT": 1,
+        "PARENT": 0
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 2,
+        "X": 0,
+        "Y": 0,
+        "WIDTH": 1403,
+        "HEIGHT": 500,
+        "TYPE": -2,
+        "CUT": 2,
+        "PARENT": 1
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 3,
+        "X": 0,
+        "Y": 0,
+        "WIDTH": 700,
+        "HEIGHT": 500,
+        "TYPE": 0,
+        "CUT": 3,
+        "PARENT": 2
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 4,
+        "X": 703,
+        "Y": 0,
+        "WIDTH": 700,
+        "HEIGHT": 500,
+        "TYPE": 0,
+        "CUT": 3,
+        "PARENT": 2
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 5,
+        "X": 0,
+        "Y": 503,
+        "WIDTH": 1403,
+        "HEIGHT": 500,
+        "TYPE": -2,
+        "CUT": 2,
+        "PARENT": 1
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 6,
+        "X": 0,
+        "Y": 503,
+        "WIDTH": 700,
+        "HEIGHT": 500,
+        "TYPE": 0,
+        "CUT": 3,
+        "PARENT": 5
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 7,
+        "X": 703,
+        "Y": 503,
+        "WIDTH": 700,
+        "HEIGHT": 500,
+        "TYPE": 0,
+        "CUT": 3,
+        "PARENT": 5
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 8,
+        "X": 0,
+        "Y": 1006,
+        "WIDTH": 1403,
+        "HEIGHT": 214,
+        "TYPE": -1,
+        "CUT": 2,
+        "PARENT": 1
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 9,
+        "X": 1406,
+        "Y": 0,
+        "WIDTH": 600,
+        "HEIGHT": 1220,
+        "TYPE": -2,
+        "CUT": 1,
+        "PARENT": 0
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 10,
+        "X": 1406,
+        "Y": 0,
+        "WIDTH": 600,
+        "HEIGHT": 400,
+        "TYPE": -2,
+        "CUT": 2,
+        "PARENT": 9
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 11,
+        "X": 1406,
+        "Y": 0,
+        "WIDTH": 600,
+        "HEIGHT": 400,
+        "TYPE": 1,
+        "CUT": 3,
+        "PARENT": 10
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 12,
+        "X": 1406,
+        "Y": 403,
+        "WIDTH": 600,
+        "HEIGHT": 400,
+        "TYPE": -2,
+        "CUT": 2,
+        "PARENT": 9
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 13,
+        "X": 1406,
+        "Y": 403,
+        "WIDTH": 600,
+        "HEIGHT": 400,
+        "TYPE": 1,
+        "CUT": 3,
+        "PARENT": 12
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 14,
+        "X": 1406,
+        "Y": 806,
+        "WIDTH": 600,
+        "HEIGHT": 400,
+        "TYPE": -2,
+        "CUT": 2,
+        "PARENT": 9
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 15,
+        "X": 1406,
+        "Y": 806,
+        "WIDTH": 600,
+        "HEIGHT": 400,
+        "TYPE": 1,
+        "CUT": 3,
+        "PARENT": 14
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 16,
+        "X": 1406,
+        "Y": 1209,
+        "WIDTH": 600,
+        "HEIGHT": 11,
+        "TYPE": -1,
+        "CUT": 2,
+        "PARENT": 9
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 17,
+        "X": 2009,
+        "Y": 0,
+        "WIDTH": 350,
+        "HEIGHT": 1220,
+        "TYPE": -2,
+        "CUT": 1,
+        "PARENT": 0
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 18,
+        "X": 2009,
+        "Y": 0,
+        "WIDTH": 350,
+        "HEIGHT": 250,
+        "TYPE": -2,
+        "CUT": 2,
+        "PARENT": 17
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 19,
+        "X": 2009,
+        "Y": 0,
+        "WIDTH": 350,
+        "HEIGHT": 250,
+        "TYPE": 3,
+        "CUT": 3,
+        "PARENT": 18
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 20,
+        "X": 2009,
+        "Y": 253,
+        "WIDTH": 350,
+        "HEIGHT": 250,
+        "TYPE": -2,
+        "CUT": 2,
+        "PARENT": 17
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 21,
+        "X": 2009,
+        "Y": 253,
+        "WIDTH": 350,
+        "HEIGHT": 250,
+        "TYPE": 3,
+        "CUT": 3,
+        "PARENT": 20
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 22,
+        "X": 2009,
+        "Y": 506,
+        "WIDTH": 350,
+        "HEIGHT": 250,
+        "TYPE": -2,
+        "CUT": 2,
+        "PARENT": 17
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 23,
+        "X": 2009,
+        "Y": 506,
+        "WIDTH": 350,
+        "HEIGHT": 250,
+        "TYPE": 3,
+        "CUT": 3,
+        "PARENT": 22
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 24,
+        "X": 2009,
+        "Y": 759,
+        "WIDTH": 350,
+        "HEIGHT": 250,
+        "TYPE": -2,
+        "CUT": 2,
+        "PARENT": 17
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 25,
+        "X": 2009,
+        "Y": 759,
+        "WIDTH": 350,
+        "HEIGHT": 250,
+        "TYPE": 3,
+        "CUT": 3,
+        "PARENT": 24
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 26,
+        "X": 2009,
+        "Y": 1012,
+        "WIDTH": 350,
+        "HEIGHT": 208,
+        "TYPE": -1,
+        "CUT": 2,
+        "PARENT": 17
+      },
+      {
+        "PLATE_ID": 0,
+        "COPIES": 1,
+        "NODE_ID": 27,
+        "X": 2362,
+        "Y": 0,
+        "WIDTH": 78,
+        "HEIGHT": 1220,
+        "TYPE": -1,
+        "CUT": 1,
+        "PARENT": 0
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 28,
+        "X": 0,
+        "Y": 0,
+        "WIDTH": 2440,
+        "HEIGHT": 1220,
+        "TYPE": 0,
+        "CUT": 0,
+        "PARENT": null
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 29,
+        "X": 0,
+        "Y": 0,
+        "WIDTH": 600,
+        "HEIGHT": 1220,
+        "TYPE": -2,
+        "CUT": 1,
+        "PARENT": 28
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 30,
+        "X": 0,
+        "Y": 0,
+        "WIDTH": 600,
+        "HEIGHT": 400,
+        "TYPE": -2,
+        "CUT": 2,
+        "PARENT": 29
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 31,
+        "X": 0,
+        "Y": 0,
+        "WIDTH": 600,
+        "HEIGHT": 400,
+        "TYPE": 1,
+        "CUT": 3,
+        "PARENT": 30
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 32,
+        "X": 0,
+        "Y": 403,
+        "WIDTH": 600,
+        "HEIGHT": 400,
+        "TYPE": -2,
+        "CUT": 2,
+        "PARENT": 29
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 33,
+        "X": 0,
+        "Y": 403,
+        "WIDTH": 600,
+        "HEIGHT": 400,
+        "TYPE": 1,
+        "CUT": 3,
+        "PARENT": 32
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 34,
+        "X": 0,
+        "Y": 806,
+        "WIDTH": 600,
+        "HEIGHT": 400,
+        "TYPE": -2,
+        "CUT": 2,
+        "PARENT": 29
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 35,
+        "X": 0,
+        "Y": 806,
+        "WIDTH": 600,
+        "HEIGHT": 400,
+        "TYPE": 1,
+        "CUT": 3,
+        "PARENT": 34
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 36,
+        "X": 0,
+        "Y": 1209,
+        "WIDTH": 600,
+        "HEIGHT": 11,
+        "TYPE": -1,
+        "CUT": 2,
+        "PARENT": 29
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 37,
+        "X": 603,
+        "Y": 0,
+        "WIDTH": 1506,
+        "HEIGHT": 1220,
+        "TYPE": -2,
+        "CUT": 1,
+        "PARENT": 28
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 38,
+        "X": 603,
+        "Y": 0,
+        "WIDTH": 1506,
+        "HEIGHT": 300,
+        "TYPE": -2,
+        "CUT": 2,
+        "PARENT": 37
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 39,
+        "X": 603,
+        "Y": 0,
+        "WIDTH": 500,
+        "HEIGHT": 300,
+        "TYPE": 2,
+        "CUT": 3,
+        "PARENT": 38
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 40,
+        "X": 1106,
+        "Y": 0,
+        "WIDTH": 500,
+        "HEIGHT": 300,
+        "TYPE": 2,
+        "CUT": 3,
+        "PARENT": 38
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 41,
+        "X": 1609,
+        "Y": 0,
+        "WIDTH": 500,
+        "HEIGHT": 300,
+        "TYPE": 2,
+        "CUT": 3,
+        "PARENT": 38
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 42,
+        "X": 603,
+        "Y": 303,
+        "WIDTH": 1506,
+        "HEIGHT": 300,
+        "TYPE": -2,
+        "CUT": 2,
+        "PARENT": 37
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 43,
+        "X": 603,
+        "Y": 303,
+        "WIDTH": 500,
+        "HEIGHT": 300,
+        "TYPE": 2,
+        "CUT": 3,
+        "PARENT": 42
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 44,
+        "X": 1106,
+        "Y": 303,
+        "WIDTH": 500,
+        "HEIGHT": 300,
+        "TYPE": 2,
+        "CUT": 3,
+        "PARENT": 42
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 45,
+        "X": 1609,
+        "Y": 303,
+        "WIDTH": 500,
+        "HEIGHT": 300,
+        "TYPE": 2,
+        "CUT": 3,
+        "PARENT": 42
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 46,
+        "X": 603,
+        "Y": 606,
+        "WIDTH": 1506,
+        "HEIGHT": 250,
+        "TYPE": -2,
+        "CUT": 2,
+        "PARENT": 37
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 47,
+        "X": 603,
+        "Y": 606,
+        "WIDTH": 350,
+        "HEIGHT": 250,
+        "TYPE": 3,
+        "CUT": 3,
+        "PARENT": 46
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 48,
+        "X": 956,
+        "Y": 606,
+        "WIDTH": 350,
+        "HEIGHT": 250,
+        "TYPE": 3,
+        "CUT": 3,
+        "PARENT": 46
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 49,
+        "X": 1309,
+        "Y": 606,
+        "WIDTH": 350,
+        "HEIGHT": 250,
+        "TYPE": 3,
+        "CUT": 3,
+        "PARENT": 46
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 50,
+        "X": 1662,
+        "Y": 606,
+        "WIDTH": 350,
+        "HEIGHT": 250,
+        "TYPE": 3,
+        "CUT": 3,
+        "PARENT": 46
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 51,
+        "X": 2015,
+        "Y": 606,
+        "WIDTH": 94,
+        "HEIGHT": 250,
+        "TYPE": -1,
+        "CUT": 3,
+        "PARENT": 46
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 52,
+        "X": 603,
+        "Y": 859,
+        "WIDTH": 1506,
+        "HEIGHT": 361,
+        "TYPE": -1,
+        "CUT": 2,
+        "PARENT": 37
+      },
+      {
+        "PLATE_ID": 1,
+        "COPIES": 1,
+        "NODE_ID": 53,
+        "X": 2112,
+        "Y": 0,
+        "WIDTH": 328,
+        "HEIGHT": 1220,
+        "TYPE": -3,
+        "CUT": 1,
+        "PARENT": 28
+      }
+    ],
+    "validation": {
+      "pass": true,
+      "geometry_pass": true,
+      "full_demand": true,
+      "errors": [],
+      "placed_counts": {
+        "0": 4,
+        "1": 6,
+        "2": 6,
+        "3": 8
+      },
+      "required_counts": {
+        "0": 4,
+        "1": 6,
+        "2": 6,
+        "3": 8
+      },
+      "minimum_item_clearance": 3,
+      "minimum_defect_clearance": null,
+      "coordinate_tolerance": 0.0000244,
+      "area_tolerance": "max(1e-8, original_piece_area * 1e-7)",
+      "checks": [
+        "source geometry",
+        "quantity",
+        "bounds",
+        "overlap",
+        "allowed angles",
+        "spacing",
+        "defects",
+        "parent containment",
+        "acyclic topology",
+        "alternating spanning cuts",
+        "three-stage depth",
+        "sibling kerf",
+        "leaf items",
+        "leaf-to-result correspondence"
+      ],
+      "scope": "独立几何校验；不等同于加工可制造性或全局最优证明。",
+      "cut_tree_validation": {
+        "pass": true,
+        "errors": [],
+        "nodes": 54,
+        "checks": [
+          "parent containment",
+          "acyclic topology",
+          "alternating spanning cuts",
+          "three-stage depth",
+          "sibling kerf",
+          "leaf items",
+          "leaf-to-result correspondence"
+        ]
+      }
+    }
+  }
+}

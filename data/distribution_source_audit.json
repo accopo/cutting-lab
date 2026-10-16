@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "distribution": "normalized ESICUP XML-derived inputs and explicitly synthetic scenarios",
+  "raw_sources_bundled": false,
+  "historical_manifest": "data/download_manifest.json",
+  "historical_manifest_role": "Source retrieval receipt only; raw relative paths are not files shipped in this release.",
+  "browser_bundle": {
+    "path": "static/vendor/browser-data.json",
+    "sha256": "be6521f2d8e1a6a1433a4f8278fc5074b88e24893a26d343de3eb4061dcfd0a2",
+    "bytes": 33346,
+    "counts": {
+      "public-benchmark": 5,
+      "synthetic": 10
+    }
+  },
+  "public_inputs": [
+    {
+      "id": "albano",
+      "distributed_normalized_path": "data/normalized/albano.json",
+      "distributed_normalized_sha256": "24932cdb189d6f54260afe29a1d2dc65b09371a24cf862247746b5a721ade72e",
+      "distributed_normalized_bytes": 6234,
+      "upstream_format": "ESICUP XML",
+      "upstream_commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "upstream_url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/albano/albano.xml",
+      "upstream_sha256": "d612f29754a5e6dced3112e2f15e30c7db93dd0f5d526451416632c68c4f05e1",
+      "upstream_raw_bundled": false,
+      "types": 8,
+      "required_pieces": 24,
+      "physical_unit": "unspecified benchmark coordinate units",
+      "variant": "ESICUP XML variant"
+    },
+    {
+      "id": "dagli",
+      "distributed_normalized_path": "data/normalized/dagli.json",
+      "distributed_normalized_sha256": "f580618de137afe98cb6315e7011ccc64f9e401504d508a0b6e7170201878fe8",
+      "distributed_normalized_bytes": 6769,
+      "upstream_format": "ESICUP XML",
+      "upstream_commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "upstream_url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/dagli/dagli.xml",
+      "upstream_sha256": "bd361007d63e249cba48bc972a37bdf123ce776d5bdf2d844eff100cf0eabfca",
+      "upstream_raw_bundled": false,
+      "types": 10,
+      "required_pieces": 30,
+      "physical_unit": "unspecified benchmark coordinate units",
+      "variant": "ESICUP XML variant"
+    },
+    {
+      "id": "shirts",
+      "distributed_normalized_path": "data/normalized/shirts.json",
+      "distributed_normalized_sha256": "3605cd69990aca8dec1709f533c6e7b3016f11106348a65307762448a05e789c",
+      "distributed_normalized_bytes": 5883,
+      "upstream_format": "ESICUP XML",
+      "upstream_commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "upstream_url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/shirts/shirts.xml",
+      "upstream_sha256": "c884de028b34c7788eb3b454660be74e919fa297a29394a35f9b3be13d1fc93d",
+      "upstream_raw_bundled": false,
+      "types": 8,
+      "required_pieces": 99,
+      "physical_unit": "unspecified benchmark coordinate units",
+      "variant": "ESICUP XML variant"
+    },
+    {
+      "id": "swim",
+      "distributed_normalized_path": "data/normalized/swim.json",
+      "distributed_normalized_sha256": "0c19bf8aaedd0c4f6145202d8f5c2338acf14e00493fd84df74a705099a3ff7e",
+      "distributed_normalized_bytes": 15568,
+      "upstream_format": "ESICUP XML",
+      "upstream_commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "upstream_url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/swim/swim.xml",
+      "upstream_sha256": "39cf44a3ca7f03a9f00c985628b01abc6a0eaa58f3582d055205a928d4a624da",
+      "upstream_raw_bundled": false,
+      "types": 10,
+      "required_pieces": 48,
+      "physical_unit": "unspecified benchmark coordinate units",
+      "variant": "XML integer coordinates"
+    },
+    {
+      "id": "trousers",
+      "distributed_normalized_path": "data/normalized/trousers.json",
+      "distributed_normalized_sha256": "390da29c34ab3c90da7b02fc63e38630bd3fb076255221e6e605b17d329ae810",
+      "distributed_normalized_bytes": 9708,
+      "upstream_format": "ESICUP XML",
+      "upstream_commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+      "upstream_url": "https://raw.githubusercontent.com/ESICUP/datasets/154a8f006a8e72f65d734f2d1e36777f678f31f8/2d_irregular/trousers/trousers.xml",
+      "upstream_sha256": "076b68e1d1e0cd02517204647a7f660ab075507b8bc5132f858214598e8eb9cd",
+      "upstream_raw_bundled": false,
+      "types": 17,
+      "required_pieces": 64,
+      "physical_unit": "unspecified benchmark coordinate units",
+      "variant": "ESICUP XML variant"
+    }
+  ],
+  "checks": {
+    "matches_current_catalog": true,
+    "source_receipts_match": true,
+    "geometry_demand_directions_preserved": true,
+    "user_jobs_in_sample_bundle": false
+  }
+}

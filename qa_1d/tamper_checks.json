@@ -1,0 +1,109 @@
+[
+  {
+    "name": "missing_cut",
+    "rejected": true,
+    "errors": [
+      "每件成品必须且只能对应一个尾部切口，包括末件与零宽切口。",
+      "一维切口位置、宽度或对应零件与输入锯缝模型不一致。"
+    ]
+  },
+  {
+    "name": "hidden_kerf",
+    "rejected": true,
+    "errors": [
+      "一维切口位置、宽度或对应零件与输入锯缝模型不一致。"
+    ]
+  },
+  {
+    "name": "wrong_cut_end",
+    "rejected": true,
+    "errors": [
+      "一维切口位置、宽度或对应零件与输入锯缝模型不一致。"
+    ]
+  },
+  {
+    "name": "different_model",
+    "rejected": true,
+    "errors": [
+      "一维切口位置、宽度或对应零件与输入锯缝模型不一致。"
+    ]
+  },
+  {
+    "name": "duplicate_cut_index",
+    "rejected": true,
+    "errors": [
+      "一维切口的零件索引缺失、重复或越界。",
+      "一维切口位置、宽度或对应零件与输入锯缝模型不一致。"
+    ]
+  },
+  {
+    "name": "wrong_cut_item",
+    "rejected": true,
+    "errors": [
+      "一维切口位置、宽度或对应零件与输入锯缝模型不一致。"
+    ]
+  },
+  {
+    "name": "changed_finished_shape",
+    "rejected": true,
+    "errors": [
+      "零件 0 形状与原始轮廓不符。"
+    ]
+  },
+  {
+    "name": "missing_quantity",
+    "rejected": true,
+    "errors": [
+      "每件成品必须且只能对应一个尾部切口，包括末件与零宽切口。",
+      "一维切口的零件索引缺失、重复或越界。",
+      "尚未放置全部需求零件。"
+    ]
+  },
+  {
+    "name": "extra_quantity",
+    "rejected": true,
+    "errors": [
+      "零件之间重叠或间距不足。",
+      "零件数量超过需求。",
+      "每件成品必须且只能对应一个尾部切口，包括末件与零宽切口。",
+      "一维切口位置、宽度或对应零件与输入锯缝模型不一致。",
+      "一维成品或尾部锯缝区间发生重叠。",
+      "尚未放置全部需求零件。"
+    ]
+  },
+  {
+    "name": "forbidden_angle",
+    "rejected": true,
+    "errors": [
+      "零件 0 方向不符合约束。"
+    ]
+  },
+  {
+    "name": "changed_stock",
+    "rejected": true,
+    "errors": [
+      "结果原料尺寸与输入不符。"
+    ]
+  },
+  {
+    "name": "pieces_touch_but_kerf_overlaps",
+    "rejected": true,
+    "errors": [
+      "一维成品或尾部锯缝区间发生重叠。"
+    ]
+  },
+  {
+    "name": "fractional_coordinate",
+    "rejected": true,
+    "errors": [
+      "一维成品证书必须使用整数坐标。"
+    ]
+  },
+  {
+    "name": "last_cut_outside_stock",
+    "rejected": true,
+    "errors": [
+      "一维成品及其尾部锯缝超出原料长度。"
+    ]
+  }
+]

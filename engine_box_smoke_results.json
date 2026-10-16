@@ -1,0 +1,211 @@
+{
+  "pass": true,
+  "runs": [
+    {
+      "name": "bins",
+      "pass": true,
+      "full": true,
+      "feasible": true,
+      "metrics": {
+        "required_pieces": 16,
+        "placed_pieces": 16,
+        "bin_count": 2,
+        "total_item_volume": 320000,
+        "total_stock_volume": 600000,
+        "total_item_weight": 0.0,
+        "utilization_percent": 53.333333333333336,
+        "profit": 40.0
+      },
+      "errors": []
+    },
+    {
+      "name": "no_rotation",
+      "pass": true,
+      "full": true,
+      "feasible": true,
+      "metrics": {
+        "required_pieces": 16,
+        "placed_pieces": 16,
+        "bin_count": 2,
+        "total_item_volume": 320000,
+        "total_stock_volume": 600000,
+        "total_item_weight": 0.0,
+        "utilization_percent": 53.333333333333336,
+        "profit": 40.0
+      },
+      "errors": []
+    },
+    {
+      "name": "knapsack",
+      "pass": true,
+      "full": false,
+      "feasible": true,
+      "metrics": {
+        "required_pieces": 16,
+        "placed_pieces": 2,
+        "bin_count": 1,
+        "total_item_volume": 48000,
+        "total_stock_volume": 60000,
+        "total_item_weight": 0.0,
+        "utilization_percent": 80.0,
+        "profit": 6.0
+      },
+      "errors": []
+    },
+    {
+      "name": "rotation_required",
+      "pass": true,
+      "full": true,
+      "feasible": true,
+      "metrics": {
+        "required_pieces": 1,
+        "placed_pieces": 1,
+        "bin_count": 1,
+        "total_item_volume": 84000,
+        "total_stock_volume": 84000,
+        "total_item_weight": 0.0,
+        "utilization_percent": 100.0,
+        "profit": 1.0
+      },
+      "errors": []
+    },
+    {
+      "name": "repeated_containers",
+      "pass": true,
+      "full": true,
+      "feasible": true,
+      "metrics": {
+        "required_pieces": 48,
+        "placed_pieces": 48,
+        "bin_count": 4,
+        "total_item_volume": 1152000,
+        "total_stock_volume": 1200000,
+        "total_item_weight": 0.0,
+        "utilization_percent": 96.0,
+        "profit": 144.0
+      },
+      "errors": []
+    },
+    {
+      "name": "per_item_orientation",
+      "pass": true,
+      "full": true,
+      "feasible": true,
+      "metrics": {
+        "required_pieces": 12,
+        "placed_pieces": 12,
+        "bin_count": 2,
+        "total_item_volume": 288000,
+        "total_stock_volume": 600000,
+        "total_item_weight": 0.0,
+        "utilization_percent": 48.0,
+        "profit": 36.0
+      },
+      "errors": []
+    }
+  ],
+  "negative_gates": [
+    {
+      "name": "continuous_rotation",
+      "pass": true
+    },
+    {
+      "name": "positive_spacing",
+      "pass": true
+    },
+    {
+      "name": "positive_edge",
+      "pass": true
+    },
+    {
+      "name": "positive_kerf",
+      "pass": true
+    },
+    {
+      "name": "defects",
+      "pass": true
+    },
+    {
+      "name": "fractional_size",
+      "pass": true
+    },
+    {
+      "name": "2d_polygon",
+      "pass": true
+    },
+    {
+      "name": "wrong_rotations",
+      "pass": true
+    },
+    {
+      "name": "over_quantity",
+      "pass": true
+    },
+    {
+      "name": "stock_depth_missing",
+      "pass": true
+    },
+    {
+      "name": "weights",
+      "pass": true
+    },
+    {
+      "name": "conflicting_rotations",
+      "pass": true
+    }
+  ],
+  "validator_sabotage": [
+    {
+      "name": "overlap",
+      "pass": true,
+      "errors": [
+        "箱体存在正体积重叠。"
+      ]
+    },
+    {
+      "name": "out_of_bounds",
+      "pass": true,
+      "errors": [
+        "箱体 0 超出容器边界。"
+      ]
+    },
+    {
+      "name": "false_rotation",
+      "pass": true,
+      "errors": [
+        "箱体 0 朝向不符合约束。"
+      ]
+    },
+    {
+      "name": "wrong_dimensions",
+      "pass": true,
+      "errors": [
+        "箱体 0 尺寸与原尺寸轴置换不符。",
+        "箱体存在正体积重叠。"
+      ]
+    },
+    {
+      "name": "over_quantity",
+      "pass": true,
+      "errors": [
+        "箱体存在正体积重叠。",
+        "箱体放置数量超过需求。",
+        "尚未装入全部需求箱体。"
+      ]
+    },
+    {
+      "name": "nonfinite",
+      "pass": true,
+      "errors": [
+        "箱体位置或尺寸不是有限数字。"
+      ]
+    },
+    {
+      "name": "missing_demand",
+      "pass": true,
+      "errors": [
+        "尚未装入全部需求箱体。"
+      ]
+    }
+  ]
+}

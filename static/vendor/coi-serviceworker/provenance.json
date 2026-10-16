@@ -1,0 +1,10 @@
+{
+  "name": "coi-serviceworker",
+  "version": "0.1.7",
+  "upstream": "https://github.com/gzuidhof/coi-serviceworker",
+  "commit": "7b1d2a092d0d2dd2b7270b6f12f13605de26f214",
+  "file": "../../coi-serviceworker.js",
+  "license": "MIT",
+  "retrieved_on": "2026-10-16",
+  "modifications": "None; registration preferences supplied in separate coi-config.js."
+}

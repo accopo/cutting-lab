@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-16",
+  "official_commit": "649fd65233ee93f50b69871f197779ace46db9f5",
+  "native_wasm_cases": 11,
+  "session_cancel_test": "passed, real callbacks and retained checked candidate",
+  "baseline_python_oracle_cases": 44,
+  "baseline_coordinate_tolerance": 1e-08,
+  "runtime_cases": 20,
+  "geometry_checks": 78,
+  "browser_acceptance_reported_by_parent": {
+    "origin": "http://127.0.0.1:8768/?runtime=browser",
+    "method": "CUA actual browser",
+    "case": "Shirts",
+    "budget_seconds": 10,
+    "placed": 99,
+    "required": 99,
+    "engine_events": 21,
+    "polled_layouts": 6,
+    "approx_objective_start": 68.33,
+    "approx_objective_end": 63.87,
+    "console_errors_warnings": 0
+  },
+  "publication_boundary": "Public origin verification belongs to release task; no deployment claimed by these Node tests."
+}

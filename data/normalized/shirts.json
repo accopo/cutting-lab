@@ -1,0 +1,344 @@
+{
+  "schema_version": 1,
+  "name": "shirts",
+  "source_format": "ESICUP XML",
+  "source_path": "raw/esicup/2d_irregular/shirts/shirts.xml",
+  "source_sha256": "c884de028b34c7788eb3b454660be74e919fa297a29394a35f9b3be13d1fc93d",
+  "source_commit": "154a8f006a8e72f65d734f2d1e36777f678f31f8",
+  "source_coordinates_origin": "up-left",
+  "source_vertices_orientation": "clockwise",
+  "source_description": "Data set from the textile industry, instance initially used in Dowsland K. A., Dowsland W. B. and Bennell J. A., 1998, \"Jostling for position: local improvement for irregular cutting patterns\", Journal of the Operational Research Society 49, 647-658, coordinates stated in Oliveira J. F., Gomes A. M. and Ferreira S., 2000, \"A new constructive algorithm for nesting problems\", OR Spectrum 22 (2), 263-284.",
+  "units": "benchmark coordinates; physical unit unspecified",
+  "objective": "minimize occupied x length with fixed y strip width",
+  "strip_width": 40.0,
+  "source_length_limit": 1000.0,
+  "item_spacing": 0,
+  "edge_spacing": 0,
+  "spacing_note": "Mathematical benchmark assumption; no machine kerf or clearance specified.",
+  "items": [
+    {
+      "id": 0,
+      "source_piece_id": "piece0",
+      "polygon_id": "polygon1",
+      "demand": 8,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          7.0,
+          1.0
+        ],
+        [
+          7.0,
+          5.0
+        ],
+        [
+          0.0,
+          7.0
+        ],
+        [
+          -1.0,
+          5.0
+        ],
+        [
+          -1.0,
+          4.0
+        ],
+        [
+          -2.0,
+          3.0
+        ],
+        [
+          -1.0,
+          2.0
+        ]
+      ],
+      "area": 44.5
+    },
+    {
+      "id": 1,
+      "source_piece_id": "piece1",
+      "polygon_id": "polygon2",
+      "demand": 8,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          11.0,
+          0.0
+        ],
+        [
+          12.0,
+          2.0
+        ],
+        [
+          11.0,
+          3.0
+        ],
+        [
+          11.0,
+          5.0
+        ],
+        [
+          10.0,
+          6.0
+        ],
+        [
+          6.0,
+          5.0
+        ],
+        [
+          3.0,
+          6.0
+        ],
+        [
+          0.0,
+          5.0
+        ],
+        [
+          -1.0,
+          3.0
+        ]
+      ],
+      "area": 64.5
+    },
+    {
+      "id": 2,
+      "source_piece_id": "piece2",
+      "polygon_id": "polygon3",
+      "demand": 8,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          3.0,
+          0.0
+        ],
+        [
+          3.0,
+          -1.0
+        ],
+        [
+          5.0,
+          0.0
+        ],
+        [
+          8.0,
+          0.0
+        ],
+        [
+          11.0,
+          -1.0
+        ],
+        [
+          12.0,
+          4.0
+        ],
+        [
+          11.0,
+          8.0
+        ],
+        [
+          7.0,
+          7.0
+        ],
+        [
+          0.0,
+          7.0
+        ]
+      ],
+      "area": 86.0
+    },
+    {
+      "id": 3,
+      "source_piece_id": "piece3",
+      "polygon_id": "polygon4",
+      "demand": 15,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          4.0,
+          2.0
+        ],
+        [
+          3.0,
+          3.0
+        ],
+        [
+          0.0,
+          3.0
+        ]
+      ],
+      "area": 11.5
+    },
+    {
+      "id": 4,
+      "source_piece_id": "piece4",
+      "polygon_id": "polygon5",
+      "demand": 15,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          8.0,
+          0.0
+        ],
+        [
+          7.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      "area": 7.0
+    },
+    {
+      "id": 5,
+      "source_piece_id": "piece5",
+      "polygon_id": "polygon6",
+      "demand": 15,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          4.0,
+          1.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "area": 4.0
+    },
+    {
+      "id": 6,
+      "source_piece_id": "piece6",
+      "polygon_id": "polygon7",
+      "demand": 15,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          3.0,
+          0.0
+        ],
+        [
+          3.0,
+          1.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "area": 3.0
+    },
+    {
+      "id": 7,
+      "source_piece_id": "piece7",
+      "polygon_id": "polygon8",
+      "demand": 15,
+      "allowed_rotations_deg": [
+        0.0,
+        180.0
+      ],
+      "allow_mirror": false,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          8.0,
+          0.0
+        ],
+        [
+          8.0,
+          2.0
+        ],
+        [
+          6.0,
+          2.0
+        ],
+        [
+          4.0,
+          1.0
+        ],
+        [
+          3.0,
+          1.0
+        ],
+        [
+          2.0,
+          2.0
+        ],
+        [
+          -1.0,
+          2.0
+        ]
+      ],
+      "area": 14.5
+    }
+  ]
+}
