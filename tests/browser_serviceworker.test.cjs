@@ -206,7 +206,7 @@ function page(options = {}) {
         location: { href: scope }, document: { currentScript: { src: scope + 'coi-serviceworker.js?v=20261016-load1' } },
         sessionStorage: { getItem: key => storage.get(key) || null, setItem: (key, value) => storage.set(key, value), removeItem: key => storage.delete(key) },
         crossOriginIsolated: options.isolated !== false, isSecureContext: true,
-        coi: { shouldRegister: () => options.register !== false, coepDegrade: () => false, quiet: true, doReload: () => { reloads++; } },
+        coi: { shouldRegister: () => options.register !== false, coepDegrade: () => options.degrade === true, quiet: true, doReload: () => { reloads++; } },
     };
     vm.runInNewContext(source, { window, navigator: { serviceWorker }, URL, console });
     return { handlers, registrations, messages, serviceWorker, storage, get reloads() { return reloads; } };
@@ -218,6 +218,14 @@ test('an already isolated returning visitor registers the new own-worker version
     assert.deepEqual(p.registrations, [scope + 'coi-serviceworker.js?v=20261016-load1']);
     p.handlers.get('controllerchange')();
     assert.equal(p.reloads, 0);
+});
+
+test('a degradation reload cannot race registration and overwrite its reload marker', async () => {
+    const p = page({ isolated: false, degrade: true });
+    await Promise.resolve();
+    assert.equal(p.reloads, 1);
+    assert.equal(p.registrations.length, 0);
+    assert.equal(p.storage.get('coiReloadedBySelf'), 'coepdegrade');
 });
 
 test('first visit reloads once only after control arrives; repeated events do not loop', async () => {

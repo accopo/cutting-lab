@@ -215,6 +215,7 @@ if (typeof window === 'undefined') {
                 !coi.quiet && console.log("Reloading page to degrade COEP.");
                 window.sessionStorage.setItem("coiReloadedBySelf", "coepdegrade");
                 coi.doReload("coepdegrade");
+                return;
             }
 
             if (coi.shouldDeregister()) {
