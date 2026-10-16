@@ -16,6 +16,7 @@ qa/*_output/
 dist/
 *.tgz
 static/vendor/*/package/
+static/vendor/**/package/
 engine_box_smoke_output/
 HANDOFF.md
 PUBLICATION_PLAN.md
